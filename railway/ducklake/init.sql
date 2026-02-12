@@ -1,6 +1,3 @@
-CREATE DATABASE IF NOT EXISTS techstore;
-USE techstore;
-
 CREATE TABLE clientes (
     cliente_id INT PRIMARY KEY,
     nombre VARCHAR(100),
