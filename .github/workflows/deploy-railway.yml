@@ -1,33 +1,26 @@
-name: Deploy to Railway
+name: Sync pipeline files
 
 on:
   push:
     branches: [main]
     paths:
-      - 'railway/**'
       - 'docker/ducklake/pipeline_ecommerce.py'
       - 'docker/mysql/init.sql'
       - 'docker/sftp/data/**'
-      - '.github/workflows/deploy-railway.yml'
 
   workflow_dispatch:
 
 jobs:
   sync-files:
-    name: Sync files to railway/
+    name: Sync docker files to railway/
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Sync pipeline and data to railway/
         run: |
-          # Copiar pipeline actualizado
           cp docker/ducklake/pipeline_ecommerce.py railway/ducklake/pipeline_ecommerce.py
-
-          # Copiar init.sql actualizado
           cp docker/mysql/init.sql railway/ducklake/init.sql
-
-          # Copiar archivos SFTP actualizados
           cp docker/sftp/data/* railway/sftp/data/
 
       - name: Check for changes
@@ -43,48 +36,3 @@ jobs:
           git add railway/
           git commit -m "chore: sync pipeline files to railway/"
           git push
-
-  deploy-sftp:
-    name: Deploy SFTP service
-    needs: sync-files
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
-
-      - name: Deploy SFTP
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: cd railway/sftp && railway up --service sftp
-
-  deploy-ducklake:
-    name: Deploy DuckLake pipeline
-    needs: [sync-files, deploy-sftp]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
-
-      - name: Deploy DuckLake
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: cd railway/ducklake && railway up --service ducklake
-
-  deploy-dashboard:
-    name: Deploy Dashboard
-    needs: sync-files
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
-
-      - name: Deploy Dashboard
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: cd railway/dashboard && railway up --service dashboard
