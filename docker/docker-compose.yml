@@ -1,0 +1,62 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: techstore-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: techstore123
+      MYSQL_DATABASE: techstore
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  sftp:
+    image: atmoz/sftp
+    container_name: techstore-sftp
+    ports:
+      - "2222:22"
+    volumes:
+      - ./sftp/data:/home/techstore/upload
+    command: techstore:techstore123:1001
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: techstore-postgres
+    environment:
+      POSTGRES_USER: techstore
+      POSTGRES_PASSWORD: techstore123
+      POSTGRES_DB: techstore_lake
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  ducklake:
+    build:
+      context: ./ducklake
+      dockerfile: Dockerfile
+    container_name: techstore-ducklake
+    depends_on:
+      - mysql
+      - sftp
+      - postgres
+    volumes:
+      - ./output:/app/output
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: techstore123
+      MYSQL_DATABASE: techstore
+      SFTP_HOST: sftp
+      SFTP_PORT: 22
+      SFTP_USER: techstore
+      SFTP_PASSWORD: techstore123
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_USER: techstore
+      PG_PASSWORD: techstore123
+      PG_DATABASE: techstore_lake
+
+volumes:
+  pgdata:

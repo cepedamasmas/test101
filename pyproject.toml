@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "ducklake"
+version = "0.1.0"
+description = "Data Lake Framework con DuckDB - Alternativa eficiente a soluciones cloud sobredimensionadas"
+authors = ["DuckLake Team"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "ducklake"}]
+
+[tool.poetry.scripts]
+ducklake = "ducklake.cli.main:cli"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+duckdb = "^1.0"
+pyarrow = ">=14.0"
+pyyaml = "^6.0"
+loguru = "^0.7"
+pydantic = "^2.0"
+pydantic-settings = "^2.0"
+click = "^8.1"
+pymysql = "^1.1"
+python-dotenv = "^1.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+pytest-cov = "^5.0"
+black = "^24.0"
+mypy = "^1.8"
+pre-commit = "^3.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"

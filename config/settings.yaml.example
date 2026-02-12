@@ -1,0 +1,15 @@
+# DuckLake - Configuración General
+# Copiar a settings.yaml y ajustar
+
+settings:
+  # Paths
+  data_path: ./data
+  config_path: ./config
+
+  # Logging
+  log_level: INFO            # DEBUG, INFO, WARNING, ERROR
+  log_file: logs/ducklake.log  # null para solo consola
+
+  # DuckDB
+  duckdb_memory_limit: 4GB   # Ajustar según RAM disponible
+  duckdb_threads: 4           # Ajustar según CPUs

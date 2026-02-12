@@ -1,0 +1,10 @@
+duckdb==1.2.2
+pyarrow>=14.0.0
+pymysql>=1.1.0
+paramiko>=3.4.0
+pandas>=2.0.0
+openpyxl>=3.1.0
+lxml>=5.0.0
+requests>=2.31.0
+psycopg2-binary>=2.9.0
+sqlalchemy>=2.0.0

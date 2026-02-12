@@ -1,0 +1,51 @@
+# DuckLake - Configuración de Fuentes de Datos
+# Copiar a sources.yaml y ajustar según tu entorno
+
+sources:
+  # --- MySQL ---
+  - name: mysql_ventas
+    type: mysql
+    enabled: true
+    connection:
+      host: ${MYSQL_HOST}
+      port: 3306
+      database: ventas
+      user: ${MYSQL_USER}
+      password: ${MYSQL_PASSWORD}
+    tables:
+      - clientes
+      - pedidos
+      - facturas
+    extract:
+      mode: incremental
+      key_column: updated_at
+      batch_size: 10000
+
+  # --- CSV ---
+  - name: csv_reportes
+    type: csv
+    enabled: true
+    path: "/data/input/reportes/*.csv"
+    connection:
+      delimiter: ","
+      encoding: utf-8
+      header: true
+      skip_rows: 0
+    tables:
+      - reporte_ventas
+    extract:
+      mode: full
+
+  # --- CSV con múltiples archivos ---
+  - name: csv_inventario
+    type: csv
+    enabled: false
+    path: "/data/input/inventario/stock_*.csv"
+    connection:
+      delimiter: ";"
+      encoding: latin-1
+      header: true
+    tables:
+      - stock
+    extract:
+      mode: full

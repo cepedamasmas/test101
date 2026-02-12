@@ -1,0 +1,90 @@
+# DuckLake - Configuración de Pipelines
+# Copiar a pipelines.yaml y ajustar según tu caso de uso
+
+pipelines:
+  # --- RAW a STAGING: Limpieza de clientes ---
+  - name: ventas_clientes_staging
+    description: "Pipeline de clientes: RAW -> STAGING con limpieza"
+    source:
+      layer: raw
+      domain: mysql_ventas
+      table: clientes
+    destination:
+      layer: staging
+      domain: ventas
+      table: clientes
+    transforms:
+      - type: rename
+        columns:
+          cli_id: cliente_id
+          cli_nom: nombre
+          cli_email: email
+          cli_tel: telefono
+      - type: cast
+        columns:
+          fecha_alta: DATE
+          activo: BOOLEAN
+      - type: filter
+        condition: "estado != 'DELETED'"
+      - type: deduplicate
+        keys: [cliente_id]
+    quality_checks:
+      - type: not_null
+        columns: [cliente_id, nombre]
+      - type: unique
+        columns: [cliente_id]
+      - type: valid_values
+        column: estado
+        values: [ACTIVO, INACTIVO, PENDIENTE]
+
+  # --- RAW a STAGING: Pedidos ---
+  - name: ventas_pedidos_staging
+    description: "Pipeline de pedidos: RAW -> STAGING"
+    source:
+      layer: raw
+      domain: mysql_ventas
+      table: pedidos
+    destination:
+      layer: staging
+      domain: ventas
+      table: pedidos
+    transforms:
+      - type: cast
+        columns:
+          fecha_pedido: TIMESTAMP
+          total: DOUBLE
+      - type: filter
+        condition: "total > 0"
+      - type: deduplicate
+        keys: [pedido_id]
+    quality_checks:
+      - type: not_null
+        columns: [pedido_id, cliente_id, total]
+      - type: range
+        column: total
+        min_value: 0
+        max_value: 1000000
+
+  # --- STAGING a CONSUME: Resumen de ventas para BI ---
+  - name: bi_resumen_ventas
+    description: "Agregación de ventas por mes para dashboards"
+    source:
+      layer: staging
+      domain: ventas
+      table: pedidos
+    destination:
+      layer: consume
+      domain: bi
+      table: resumen_ventas_mensual
+    transforms:
+      - type: custom_sql
+        sql: >
+          SELECT
+            DATE_TRUNC('month', fecha_pedido) AS mes,
+            COUNT(*) AS total_pedidos,
+            SUM(total) AS monto_total,
+            AVG(total) AS ticket_promedio,
+            COUNT(DISTINCT cliente_id) AS clientes_unicos
+          FROM __INPUT__
+          GROUP BY DATE_TRUNC('month', fecha_pedido)
+          ORDER BY mes
