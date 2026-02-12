@@ -57,7 +57,7 @@ jobs:
       - name: Deploy SFTP
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up --service sftp --directory railway/sftp
+        run: railway up --service sftp railway/sftp
 
   deploy-ducklake:
     name: Deploy DuckLake pipeline
@@ -72,7 +72,7 @@ jobs:
       - name: Deploy DuckLake
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up --service ducklake --directory railway/ducklake
+        run: railway up --service ducklake railway/ducklake
 
   deploy-dashboard:
     name: Deploy Dashboard
@@ -87,4 +87,4 @@ jobs:
       - name: Deploy Dashboard
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up --service dashboard --directory railway/dashboard
+        run: railway up --service dashboard railway/dashboard
