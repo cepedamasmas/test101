@@ -2,13 +2,12 @@
 
 Cada asset representa un paso del pipeline:
   1. raw_ingestion: Extrae datos de MySQL, SFTP, APIs -> Parquet RAW
-  2. dbt_models: Ejecuta dbt (staging + consume) sobre DuckDB
-  3. duckdb_catalog: Crea vistas RAW en DuckDB
+  2. duckdb_catalog: Crea vistas RAW en DuckDB
+  3. dbt_models: Ejecuta dbt (staging + consume) sobre DuckDB
   4. postgres_export: Replica todo a PostgreSQL
 """
 
 import subprocess
-from pathlib import Path
 
 import duckdb
 from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataValue
@@ -16,25 +15,12 @@ from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataVal
 from config import (
     MYSQL_CONFIG, SFTP_CONFIG, PG_CONFIG, API_SOURCES,
     MYSQL_TABLES, SFTP_FILES, DATA, DUCKDB_PATH, DBT_PROJECT_DIR, OUTPUT,
+    get_raw_tables,
 )
 from connectors import MySQLConnector, SFTPConnector, APIConnector
 from layers import RawLayer
 from exporters import DuckDBExporter, PostgresExporter
 from reporter import Reporter
-
-
-# --- Mapeo de tablas RAW para vistas DuckDB ---
-RAW_TABLES = {
-    "clientes": ("mysql", "clientes"),
-    "productos": ("mysql", "productos"),
-    "pedidos": ("mysql", "pedidos"),
-    "detalle_pedidos": ("mysql", "detalle_pedidos"),
-    "pagos_banco": ("sftp", "pagos_banco"),
-    "envios_courier": ("sftp", "envios_courier"),
-    "catalogo_proveedor": ("sftp", "catalogo_proveedor"),
-    "liquidacion_mp": ("sftp", "liquidacion_mp"),
-    "reclamos": ("sftp", "reclamos"),
-}
 
 
 @asset(group_name="ingestion", description="Extrae datos de MySQL, SFTP y APIs a RAW parquet")
@@ -74,12 +60,6 @@ def raw_ingestion(context: AssetExecutionContext) -> MaterializeResult:
         total_rows[f"api.{table}"] = n
         context.log.info(f"  RAW: {table:<20} -> {n:>5} rows")
 
-    # Agregar APIs al mapa de tablas RAW
-    for api_table in ["dolar", "feriados"]:
-        matches = list(DATA.glob(f"raw/api/{api_table}/*/*/*/data.parquet"))
-        if matches:
-            RAW_TABLES[api_table] = ("api", api_table)
-
     return MaterializeResult(
         metadata={
             "total_sources": MetadataValue.int(len(total_rows)),
@@ -96,16 +76,12 @@ def raw_ingestion(context: AssetExecutionContext) -> MaterializeResult:
 )
 def duckdb_catalog(context: AssetExecutionContext) -> MaterializeResult:
     """Paso 2: Registra RAW parquets como vistas en DuckDB."""
-    # Detectar APIs disponibles
-    for api_table in ["dolar", "feriados"]:
-        matches = list(DATA.glob(f"raw/api/{api_table}/*/*/*/data.parquet"))
-        if matches:
-            RAW_TABLES[api_table] = ("api", api_table)
+    raw_tables = get_raw_tables(DATA)
 
     conn = duckdb.connect(str(DUCKDB_PATH))
     try:
         exporter = DuckDBExporter(conn, DATA)
-        count = exporter.export_raw_views(RAW_TABLES)
+        count = exporter.export_raw_views(raw_tables)
         context.log.info(f"{count} vistas RAW creadas en DuckDB")
     finally:
         conn.close()

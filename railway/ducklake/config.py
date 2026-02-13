@@ -59,3 +59,26 @@ API_SOURCES = {
         "timeout": 10,
     },
 }
+
+# --- Tablas RAW base (MySQL + SFTP) ---
+BASE_RAW_TABLES: dict[str, tuple[str, str]] = {
+    "clientes": ("mysql", "clientes"),
+    "productos": ("mysql", "productos"),
+    "pedidos": ("mysql", "pedidos"),
+    "detalle_pedidos": ("mysql", "detalle_pedidos"),
+    "pagos_banco": ("sftp", "pagos_banco"),
+    "envios_courier": ("sftp", "envios_courier"),
+    "catalogo_proveedor": ("sftp", "catalogo_proveedor"),
+    "liquidacion_mp": ("sftp", "liquidacion_mp"),
+    "reclamos": ("sftp", "reclamos"),
+}
+
+
+def get_raw_tables(data_dir: Path) -> dict[str, tuple[str, str]]:
+    """Retorna todas las tablas RAW disponibles (base + APIs detectadas en disco)."""
+    tables = dict(BASE_RAW_TABLES)
+    for api_table in API_SOURCES:
+        matches = list(data_dir.glob(f"raw/api/{api_table}/*/*/*/data.parquet"))
+        if matches:
+            tables[api_table] = ("api", api_table)
+    return tables

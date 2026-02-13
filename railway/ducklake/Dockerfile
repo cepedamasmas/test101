@@ -23,7 +23,4 @@ COPY init.sql .
 COPY start.sh .
 RUN chmod +x start.sh
 
-# Mantener pipeline_ecommerce.py como backup
-COPY pipeline_ecommerce.py pipeline_ecommerce_legacy.py
-
 CMD ["./start.sh"]

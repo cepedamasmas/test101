@@ -3,15 +3,56 @@ version: 2
 models:
   - name: revenue_mensual
     description: "Revenue agregado por mes"
+    columns:
+      - name: mes
+        tests: [not_null]
+      - name: revenue
+        tests: [not_null]
+      - name: pedidos
+        tests: [not_null]
+
   - name: top_clientes
     description: "Top 20 clientes por total gastado"
+    columns:
+      - name: cliente
+        tests: [not_null]
+      - name: total_gastado
+        tests: [not_null]
+
   - name: ventas_por_categoria
     description: "Ventas agregadas por categoria de producto"
+    columns:
+      - name: categoria
+        tests: [not_null, unique]
+      - name: revenue
+        tests: [not_null]
+
   - name: conciliacion_pagos
     description: "Conciliacion entre pedidos, banco y MercadoPago"
+    columns:
+      - name: metodo_pago
+        tests: [not_null, unique]
+
   - name: performance_envios
     description: "Metricas de performance por courier"
+    columns:
+      - name: courier
+        tests: [not_null, unique]
+      - name: envios
+        tests: [not_null]
+
   - name: analisis_reclamos
     description: "Analisis de reclamos por tipo y prioridad"
+    columns:
+      - name: tipo
+        tests: [not_null]
+      - name: cantidad
+        tests: [not_null]
+
   - name: alertas_stock
     description: "Productos con stock critico o bajo"
+    columns:
+      - name: producto_id
+        tests: [not_null, unique]
+      - name: alerta_stock
+        tests: [not_null]

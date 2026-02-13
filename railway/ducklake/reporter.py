@@ -7,10 +7,10 @@ import pandas as pd
 class Reporter:
     """Genera reportes en consola desde las tablas CONSUME de DuckDB."""
 
-    def __init__(self, conn: duckdb.DuckDBPyConnection):
+    def __init__(self, conn: duckdb.DuckDBPyConnection) -> None:
         self.conn = conn
 
-    def print_all(self):
+    def print_all(self) -> None:
         print(f"\n{'=' * 70}")
         print("  REPORTES FINALES (desde CONSUME layer)")
         print(f"{'=' * 70}")
@@ -22,7 +22,7 @@ class Reporter:
         self._alertas_stock()
         self._analisis_reclamos()
 
-    def _revenue_mensual(self):
+    def _revenue_mensual(self) -> None:
         print(f"\n  REVENUE MENSUAL:")
         print(f"  {'Mes':<12} {'Pedidos':>8} {'Revenue':>14} {'Ticket Prom':>12} {'Clientes':>9}")
         print(f"  {'-'*55}")
@@ -32,7 +32,7 @@ class Reporter:
             print(f"  {mes:<12} {int(row['pedidos']):>8} ${int(row['revenue']):>12,} "
                   f"{int(row['ticket_promedio']):>11,} {int(row['clientes_unicos']):>9}")
 
-    def _top_clientes(self):
+    def _top_clientes(self) -> None:
         print(f"\n  TOP 10 CLIENTES:")
         print(f"  {'Cliente':<25} {'Ciudad':<16} {'Compras':>8} {'Total Gastado':>14}")
         print(f"  {'-'*63}")
@@ -41,7 +41,7 @@ class Reporter:
             print(f"  {str(row['cliente'])[:24]:<25} {str(row['ciudad'])[:15]:<16} "
                   f"{int(row['compras']):>8} ${int(row['total_gastado']):>12,}")
 
-    def _ventas_por_categoria(self):
+    def _ventas_por_categoria(self) -> None:
         print(f"\n  VENTAS POR CATEGORIA:")
         print(f"  {'Categoria':<16} {'Pedidos':>8} {'Unidades':>9} {'Revenue':>14} {'Margen%':>8}")
         print(f"  {'-'*55}")
@@ -51,7 +51,7 @@ class Reporter:
                   f"{int(row['unidades']):>9} ${int(row['revenue']):>12,} "
                   f"{row['margen_promedio_pct']:>7.1f}%")
 
-    def _conciliacion_pagos(self):
+    def _conciliacion_pagos(self) -> None:
         print(f"\n  CONCILIACION DE PAGOS:")
         print(f"  {'Metodo':<18} {'Txns':>6} {'Monto Pedidos':>14} {'Conciliado%':>12}")
         print(f"  {'-'*50}")
@@ -60,7 +60,7 @@ class Reporter:
             print(f"  {str(row['metodo_pago'])[:17]:<18} {int(row['transacciones']):>6} "
                   f"${int(row['monto_pedidos']):>12,} {row['pct_conciliado']:>11.1f}%")
 
-    def _performance_envios(self):
+    def _performance_envios(self) -> None:
         print(f"\n  PERFORMANCE ENVIOS:")
         print(f"  {'Courier':<18} {'Envios':>7} {'Costo Prom':>11} {'Entregados':>11} "
               f"{'Devueltos':>10} {'Dev%':>6}")
@@ -71,7 +71,7 @@ class Reporter:
                   f"${int(row['costo_promedio']):>9,} {int(row['entregados']):>11} "
                   f"{int(row['devueltos']):>10} {row['pct_devolucion']:>5.1f}%")
 
-    def _alertas_stock(self):
+    def _alertas_stock(self) -> None:
         print(f"\n  ALERTAS DE STOCK:")
         df = self.conn.execute("SELECT * FROM consume.alertas_stock").fetchdf()
         sin_stock = len(df[df["alerta_stock"] == "SIN_STOCK"])
@@ -79,7 +79,7 @@ class Reporter:
         bajo = len(df[df["alerta_stock"] == "BAJO"])
         print(f"  SIN STOCK: {sin_stock} productos | CRITICO (<10): {critico} | BAJO (<30): {bajo}")
 
-    def _analisis_reclamos(self):
+    def _analisis_reclamos(self) -> None:
         print(f"\n  ANALISIS RECLAMOS:")
         print(f"  {'Tipo':<20} {'Cantidad':>9} {'Resueltos':>10} {'Abiertos':>9} {'Resolucion%':>12}")
         print(f"  {'-'*60}")
