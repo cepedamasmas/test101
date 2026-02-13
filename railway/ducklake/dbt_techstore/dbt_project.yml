@@ -1,0 +1,16 @@
+name: dbt_techstore
+version: "1.0.0"
+config-version: 2
+
+profile: techstore
+
+model-paths: ["models"]
+
+models:
+  dbt_techstore:
+    staging:
+      +materialized: table
+      +schema: staging
+    consume:
+      +materialized: table
+      +schema: consume

@@ -84,8 +84,8 @@ else
 fi
 
 echo ""
-echo "Ejecutando pipeline DuckLake..."
-python pipeline_ecommerce.py
+echo "Ejecutando pipeline DuckLake (dbt + Dagster)..."
+python pipeline.py
 EXIT_CODE=$?
 
 if [ $EXIT_CODE -eq 0 ]; then

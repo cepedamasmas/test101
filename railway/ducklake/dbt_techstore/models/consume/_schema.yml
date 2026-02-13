@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: revenue_mensual
+    description: "Revenue agregado por mes"
+  - name: top_clientes
+    description: "Top 20 clientes por total gastado"
+  - name: ventas_por_categoria
+    description: "Ventas agregadas por categoria de producto"
+  - name: conciliacion_pagos
+    description: "Conciliacion entre pedidos, banco y MercadoPago"
+  - name: performance_envios
+    description: "Metricas de performance por courier"
+  - name: analisis_reclamos
+    description: "Analisis de reclamos por tipo y prioridad"
+  - name: alertas_stock
+    description: "Productos con stock critico o bajo"

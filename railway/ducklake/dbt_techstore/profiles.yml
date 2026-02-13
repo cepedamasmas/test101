@@ -1,0 +1,7 @@
+techstore:
+  target: prod
+  outputs:
+    prod:
+      type: duckdb
+      path: /app/output/techstore.duckdb
+      threads: 4

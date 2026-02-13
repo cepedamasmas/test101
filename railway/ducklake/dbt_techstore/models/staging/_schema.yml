@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: stg_clientes
+    description: "Clientes activos con flag de email duplicado"
+    columns:
+      - name: cliente_id
+        tests: [not_null, unique]
+      - name: email
+        tests: [not_null]
+
+  - name: stg_productos
+    description: "Productos con margen calculado"
+    columns:
+      - name: producto_id
+        tests: [not_null, unique]
+
+  - name: stg_pedidos
+    description: "Pedidos con fecha casteada"
+    columns:
+      - name: pedido_id
+        tests: [not_null, unique]
+      - name: cliente_id
+        tests: [not_null]
+
+  - name: stg_detalle_pedidos
+    description: "Detalle de pedidos (qty > 0)"
+    columns:
+      - name: detalle_id
+        tests: [not_null, unique]
+
+  - name: stg_pagos_banco
+    description: "Pagos bancarios con tipos casteados"
+    columns:
+      - name: pago_id
+        tests: [not_null]
+
+  - name: stg_envios
+    description: "Envios de couriers"
+    columns:
+      - name: envio_id
+        tests: [not_null]
+
+  - name: stg_catalogo_proveedor
+    description: "Catalogo de productos del proveedor"
+    columns:
+      - name: codigo
+        tests: [not_null]
+
+  - name: stg_liquidacion_mp
+    description: "Liquidaciones de MercadoPago"
+    columns:
+      - name: operacion_mp
+        tests: [not_null]
+
+  - name: stg_reclamos
+    description: "Reclamos de clientes"
+    columns:
+      - name: reclamo_id
+        tests: [not_null]
