@@ -14,7 +14,7 @@ from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataVal
 
 from config import (
     MYSQL_CONFIG, SFTP_CONFIG, PG_CONFIG, API_SOURCES,
-    MYSQL_TABLES, SFTP_FILES, DATA, DUCKDB_PATH, DBT_PROJECT_DIR, OUTPUT,
+    MYSQL_TABLES, SFTP_FILES, SFTP_FOLDERS, DATA, DUCKDB_PATH, DBT_PROJECT_DIR, OUTPUT,
     get_raw_tables,
 )
 from connectors import MySQLConnector, SFTPConnector, APIConnector
@@ -41,9 +41,9 @@ def raw_ingestion(context: AssetExecutionContext) -> MaterializeResult:
     finally:
         mysql.close()
 
-    # SFTP
+    # SFTP (archivos individuales + carpetas de JSONs)
     context.log.info(f"Extrayendo SFTP ({SFTP_CONFIG['host']}:{SFTP_CONFIG['port']})")
-    sftp = SFTPConnector(SFTP_CONFIG, SFTP_FILES)
+    sftp = SFTPConnector(SFTP_CONFIG, SFTP_FILES, folders=SFTP_FOLDERS)
     try:
         for table, df in sftp.extract().items():
             n = raw.save(df, "sftp", table)

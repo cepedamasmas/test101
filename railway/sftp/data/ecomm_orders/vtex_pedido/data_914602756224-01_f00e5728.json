@@ -1,0 +1,1543 @@
+{
+  "orderId": "914602756224-01",
+  "sequence": "648441",
+  "marketplaceOrderId": "",
+  "marketplaceServicesEndpoint": "http://oms.vtexinternal.com.br/api/oms?an=grid0",
+  "sellerOrderId": "00-914602756224-01",
+  "origin": "Marketplace",
+  "affiliateId": "",
+  "salesChannel": "3",
+  "merchantName": null,
+  "status": "ready-for-handling",
+  "statusDescription": "Pronto para o manuseio",
+  "value": 451500,
+  "creationDate": "2019-03-02T19:45:57.4495935+00:00",
+  "lastChange": "2019-03-02T20:16:27.2346388+00:00",
+  "orderGroup": "914602756224",
+  "totals": [
+    {
+      "id": "Items",
+      "name": "Total de los items",
+      "value": 451500
+    },
+    {
+      "id": "Discounts",
+      "name": "Total de descuentos",
+      "value": 0
+    },
+    {
+      "id": "Shipping",
+      "name": "Costo total del envío",
+      "value": 0
+    },
+    {
+      "id": "Tax",
+      "name": "Costo total del cambio",
+      "value": 0
+    }
+  ],
+  "items": [
+    {
+      "uniqueId": "747B92126C764B71BC14D4B01E94C107",
+      "id": "248",
+      "productId": "84",
+      "ean": null,
+      "lockId": "00-914602756224-01",
+      "itemAttachment": {
+        "content": {},
+        "name": null
+      },
+      "attachments": [],
+      "quantity": 1,
+      "seller": "1",
+      "name": "SHORT NIKE VINTAGE 304-3733-XS",
+      "refId": "304-3733-XS",
+      "price": 89900,
+      "listPrice": 128000,
+      "manualPrice": null,
+      "priceTags": [
+        {
+          "name": "discount@shipping-36cc375a-af31-4d15-ab89-19fd040cf7f2#e75a6255-92a5-4aa2-9edf-c0cf49dbb1a5",
+          "value": -4038,
+          "isPercentual": false,
+          "identifier": "36cc375a-af31-4d15-ab89-19fd040cf7f2",
+          "rawValue": -40.38
+        }
+      ],
+      "imageUrl": "http://essential.vteximg.com.br/arquivos/ids/156008-99-86/04481_01.jpg?v=636596449202670000",
+      "detailUrl": "/short-nike-sportswear-vintage-moda-mujer-3043733/p",
+      "components": [],
+      "bundleItems": [],
+      "params": [],
+      "offerings": [],
+      "sellerSku": "248",
+      "priceValidUntil": null,
+      "commission": 0,
+      "tax": 0,
+      "preSaleDate": null,
+      "additionalInfo": {
+        "brandName": "Nike Sportswear",
+        "brandId": "2000001",
+        "categoriesIds": "/6/12/",
+        "productClusterId": "143,145,146,147,153,162,174",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 0.84,
+          "height": 6,
+          "length": 32,
+          "weight": 130,
+          "width": 21
+        },
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "sellingPrice": 89900,
+      "isGift": false,
+      "shippingPrice": null,
+      "rewardValue": 0,
+      "freightCommission": 0,
+      "priceDefinitions": null,
+      "taxCode": "",
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "callCenterOperator": null
+    },
+    {
+      "uniqueId": "8529F1B27F204400BA16486FB2253AAE",
+      "id": "20492",
+      "productId": "3298",
+      "ean": null,
+      "lockId": "00-914602756224-01",
+      "itemAttachment": {
+        "content": {},
+        "name": null
+      },
+      "attachments": [],
+      "quantity": 1,
+      "seller": "1",
+      "name": "SHORT NIKE NEWSPRINT 304-6286-XS",
+      "refId": "304-6286-XS",
+      "price": 89900,
+      "listPrice": 140000,
+      "manualPrice": null,
+      "priceTags": [
+        {
+          "name": "discount@shipping-36cc375a-af31-4d15-ab89-19fd040cf7f2#e75a6255-92a5-4aa2-9edf-c0cf49dbb1a5",
+          "value": -13,
+          "isPercentual": false,
+          "identifier": "36cc375a-af31-4d15-ab89-19fd040cf7f2",
+          "rawValue": -0.13
+        }
+      ],
+      "imageUrl": "http://essential.vteximg.com.br/arquivos/ids/189790-99-86/304-6286_1.jpg?v=636735529129000000",
+      "detailUrl": "/short-nike-newsprint-moda-mujer-304-6286/p",
+      "components": [],
+      "bundleItems": [],
+      "params": [],
+      "offerings": [],
+      "sellerSku": "20492",
+      "priceValidUntil": null,
+      "commission": 0,
+      "tax": 0,
+      "preSaleDate": null,
+      "additionalInfo": {
+        "brandName": "Nike Sportswear",
+        "brandId": "2000001",
+        "categoriesIds": "/6/12/",
+        "productClusterId": "143,145,146,147,153,174",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 0.84,
+          "height": 6,
+          "length": 32,
+          "weight": 0.4,
+          "width": 21
+        },
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "sellingPrice": 89900,
+      "isGift": false,
+      "shippingPrice": null,
+      "rewardValue": 0,
+      "freightCommission": 0,
+      "priceDefinitions": null,
+      "taxCode": "",
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "callCenterOperator": null
+    },
+    {
+      "uniqueId": "245D0457B64B4A96951CEB9D6E0F65B9",
+      "id": "17151",
+      "productId": "2691",
+      "ean": null,
+      "lockId": "00-914602756224-01",
+      "itemAttachment": {
+        "content": {},
+        "name": null
+      },
+      "attachments": [],
+      "quantity": 1,
+      "seller": "1",
+      "name": "SHORTS ADIDAS M10 262-9557-S",
+      "refId": "262-9557-S",
+      "price": 79900,
+      "listPrice": 101900,
+      "manualPrice": null,
+      "priceTags": [
+        {
+          "name": "discount@shipping-36cc375a-af31-4d15-ab89-19fd040cf7f2#e75a6255-92a5-4aa2-9edf-c0cf49dbb1a5",
+          "value": -12,
+          "isPercentual": false,
+          "identifier": "36cc375a-af31-4d15-ab89-19fd040cf7f2",
+          "rawValue": -0.12
+        }
+      ],
+      "imageUrl": "http://essential.vteximg.com.br/arquivos/ids/186149-99-86/262-9557_1.jpg?v=636716527447200000",
+      "detailUrl": "/shorts-adidas-m10-running-mujer-262-9557/p",
+      "components": [],
+      "bundleItems": [],
+      "params": [],
+      "offerings": [],
+      "sellerSku": "17151",
+      "priceValidUntil": null,
+      "commission": 0,
+      "tax": 0,
+      "preSaleDate": null,
+      "additionalInfo": {
+        "brandName": "Adidas Performance",
+        "brandId": "2000002",
+        "categoriesIds": "/6/12/",
+        "productClusterId": "144,145,146,147,153",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 0.84,
+          "height": 6,
+          "length": 32,
+          "weight": 0.4,
+          "width": 21
+        },
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "sellingPrice": 79900,
+      "isGift": false,
+      "shippingPrice": null,
+      "rewardValue": 0,
+      "freightCommission": 0,
+      "priceDefinitions": null,
+      "taxCode": null,
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "callCenterOperator": null
+    },
+    {
+      "uniqueId": "2757AA348BA4453F861B783547B1A9F5",
+      "id": "4164",
+      "productId": "500",
+      "ean": null,
+      "lockId": "00-914602756224-01",
+      "itemAttachment": {
+        "content": {},
+        "name": null
+      },
+      "attachments": [],
+      "quantity": 1,
+      "seller": "1",
+      "name": "JOGGING ADIDAS ORIGINALS REGULAR TP OH 262-4208-S",
+      "refId": "262-4208-S",
+      "price": 111900,
+      "listPrice": 152400,
+      "manualPrice": null,
+      "priceTags": [
+        {
+          "name": "discount@shipping-36cc375a-af31-4d15-ab89-19fd040cf7f2#e75a6255-92a5-4aa2-9edf-c0cf49dbb1a5",
+          "value": -12425,
+          "isPercentual": false,
+          "identifier": "36cc375a-af31-4d15-ab89-19fd040cf7f2",
+          "rawValue": -124.25
+        }
+      ],
+      "imageUrl": "http://essential.vteximg.com.br/arquivos/ids/157183-99-86/03585_01.jpg?v=636606886914730000",
+      "detailUrl": "/pantalon-adidas-originals-regular-tp-oh-moda-mujer-2624208/p",
+      "components": [],
+      "bundleItems": [],
+      "params": [],
+      "offerings": [],
+      "sellerSku": "4164",
+      "priceValidUntil": null,
+      "commission": 0,
+      "tax": 0,
+      "preSaleDate": null,
+      "additionalInfo": {
+        "brandName": "Adidas Originals",
+        "brandId": "2000003",
+        "categoriesIds": "/6/15/",
+        "productClusterId": "144,145,146,147,153,162,179",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 0.84,
+          "height": 6,
+          "length": 32,
+          "weight": 400,
+          "width": 21
+        },
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "sellingPrice": 111900,
+      "isGift": false,
+      "shippingPrice": null,
+      "rewardValue": 0,
+      "freightCommission": 0,
+      "priceDefinitions": null,
+      "taxCode": "",
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "callCenterOperator": null
+    },
+    {
+      "uniqueId": "66E32179810440BAAC319B60F755F6C8",
+      "id": "22816",
+      "productId": "3701",
+      "ean": null,
+      "lockId": "00-914602756224-01",
+      "itemAttachment": {
+        "content": {},
+        "name": null
+      },
+      "attachments": [],
+      "quantity": 1,
+      "seller": "1",
+      "name": "MUSCULOSA NIKE AIR 304-1143-M",
+      "refId": "304-1143-M",
+      "price": 79900,
+      "listPrice": 132900,
+      "manualPrice": null,
+      "priceTags": [
+        {
+          "name": "discount@shipping-36cc375a-af31-4d15-ab89-19fd040cf7f2#e75a6255-92a5-4aa2-9edf-c0cf49dbb1a5",
+          "value": -12,
+          "isPercentual": false,
+          "identifier": "36cc375a-af31-4d15-ab89-19fd040cf7f2",
+          "rawValue": -0.12
+        }
+      ],
+      "imageUrl": "http://essential.vteximg.com.br/arquivos/ids/195785-99-86/304-1143_1.jpg?v=636752884852730000",
+      "detailUrl": "/musculosa-nike-air-moda-mujer-304-1143/p",
+      "components": [],
+      "bundleItems": [],
+      "params": [],
+      "offerings": [],
+      "sellerSku": "22816",
+      "priceValidUntil": null,
+      "commission": 0,
+      "tax": 0,
+      "preSaleDate": null,
+      "additionalInfo": {
+        "brandName": "Nike Sportswear",
+        "brandId": "2000001",
+        "categoriesIds": "/6/7/",
+        "productClusterId": "143,145,146,147,153,174",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 0.84,
+          "height": 6,
+          "length": 32,
+          "weight": 0.4,
+          "width": 21
+        },
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "sellingPrice": 79900,
+      "isGift": false,
+      "shippingPrice": null,
+      "rewardValue": 0,
+      "freightCommission": 0,
+      "priceDefinitions": null,
+      "taxCode": null,
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "callCenterOperator": null
+    }
+  ],
+  "marketplaceItems": [],
+  "clientProfileData": {
+    "id": "clientProfileData",
+    "email": "68b78320c57c482abe237c665b654454@ct.vtex.com.br",
+    "firstName": "Micaela",
+    "lastName": "Benitez",
+    "documentType": "dni",
+    "document": "38992450",
+    "phone": "+5491132633763",
+    "corporateName": null,
+    "tradeName": null,
+    "corporateDocument": null,
+    "stateInscription": null,
+    "corporatePhone": null,
+    "isCorporate": false,
+    "userProfileId": "3ea68612-2697-4843-b7f2-8cba8aaf76c8",
+    "customerClass": null
+  },
+  "giftRegistryData": null,
+  "marketingData": null,
+  "ratesAndBenefitsData": {
+    "id": "ratesAndBenefitsData",
+    "rateAndBenefitsIdentifiers": [
+      {
+        "description": null,
+        "featured": false,
+        "id": "36cc375a-af31-4d15-ab89-19fd040cf7f2",
+        "name": "GRID Envío Gratis",
+        "matchedParameters": {
+          "slaIds": "andreani envío a domicilio ,nuestras sucursales",
+          "category@CatalogSystem": "1,6,9|inclusive"
+        },
+        "additionalInfo": null
+      }
+    ]
+  },
+  "shippingData": {
+    "id": "shippingData",
+    "address": {
+      "addressType": "residential",
+      "receiverName": "Micaela Benitez",
+      "addressId": "41978e64640b44258996b5b3cd6cbbff",
+      "postalCode": "1214",
+      "city": "Ciudad Autónoma Buenos Aires",
+      "state": "CIUDAD AUTÓNOMA DE BUENOS AIRES",
+      "country": "ARG",
+      "street": "Ecuador",
+      "number": "428",
+      "neighborhood": null,
+      "complement": "Pb b ",
+      "reference": null,
+      "geoCoordinates": []
+    },
+    "logisticsInfo": [
+      {
+        "itemIndex": 0,
+        "selectedSla": "Andreani Envío a domicilio ",
+        "lockTTL": "11d",
+        "price": 0,
+        "listPrice": 4038,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": "Andreani Envio a Domicilio",
+        "shippingEstimate": "4bd",
+        "shippingEstimateDate": "2019-03-11T19:46:37.7559245+00:00",
+        "slas": [
+          {
+            "id": "Andreani Envío a domicilio ",
+            "name": "Andreani Envío a domicilio ",
+            "shippingEstimate": "4bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Envío a Domicilio Urgente",
+            "name": "Envío a Domicilio Urgente",
+            "shippingEstimate": "2bd",
+            "deliveryWindow": null,
+            "price": 5873,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Nuestras sucursales (15db581)",
+            "name": "Nuestras sucursales (15db581)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "15db581",
+                "postalCode": "1060",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Av. Santa Fe 1616. CAPITAL FEDERAL",
+                "number": "(G01)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D y Feriados 09:30 a 21:00",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.3902,
+                  -34.5957756
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID RECOLETA, Av. Santa Fe 1616 (G01)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (11a9e86)",
+            "name": "Nuestras sucursales (11a9e86)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "11a9e86",
+                "postalCode": "1903",
+                "city": "Abasto",
+                "state": "Buenos Aires",
+                "country": "ARG",
+                "street": "Av. Corrientes 3247, 1er subsuelo ",
+                "number": "(G18)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D 10:00hs a 22:00hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.4108429,
+                  -34.6031265
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID ABASTO (G18)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1aac091)",
+            "name": "Nuestras sucursales (1aac091)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1aac091",
+                "postalCode": "1430",
+                "city": "CABA",
+                "state": "CABA",
+                "country": "ARG",
+                "street": "Vedia 3600",
+                "number": "(G19)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D de 10 a 22hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.488341,
+                  -34.545737
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID DOT (G19)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1298525)",
+            "name": "Nuestras sucursales (1298525)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1298525",
+                "postalCode": "1431",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Walmart Constituyentes",
+                "number": "(G04)",
+                "neighborhood": "Tienda Grid",
+                "complement": "Todos los dias de 9:00 a 21:00 hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.50778,
+                  -34.5725441
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID CONSTITUYENTES, Walmart (G04)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          }
+        ],
+        "shipsTo": [
+          "ARG"
+        ],
+        "deliveryIds": [
+          {
+            "courierId": "GRID-ANDREANI-DELIVERY",
+            "courierName": "Andreani Envio a Domicilio",
+            "dockId": "3",
+            "quantity": 1,
+            "warehouseId": "2"
+          }
+        ],
+        "deliveryChannel": "delivery",
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "41978e64640b44258996b5b3cd6cbbff",
+        "polygonName": null
+      },
+      {
+        "itemIndex": 1,
+        "selectedSla": "Andreani Envío a domicilio ",
+        "lockTTL": "11d",
+        "price": 0,
+        "listPrice": 13,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": "Andreani Envio a Domicilio",
+        "shippingEstimate": "4bd",
+        "shippingEstimateDate": "2019-03-11T19:46:37.7559245+00:00",
+        "slas": [
+          {
+            "id": "Andreani Envío a domicilio ",
+            "name": "Andreani Envío a domicilio ",
+            "shippingEstimate": "4bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Envío a Domicilio Urgente",
+            "name": "Envío a Domicilio Urgente",
+            "shippingEstimate": "2bd",
+            "deliveryWindow": null,
+            "price": 19,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Nuestras sucursales (15db581)",
+            "name": "Nuestras sucursales (15db581)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "15db581",
+                "postalCode": "1060",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Av. Santa Fe 1616. CAPITAL FEDERAL",
+                "number": "(G01)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D y Feriados 09:30 a 21:00",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.3902,
+                  -34.5957756
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID RECOLETA, Av. Santa Fe 1616 (G01)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (11a9e86)",
+            "name": "Nuestras sucursales (11a9e86)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "11a9e86",
+                "postalCode": "1903",
+                "city": "Abasto",
+                "state": "Buenos Aires",
+                "country": "ARG",
+                "street": "Av. Corrientes 3247, 1er subsuelo ",
+                "number": "(G18)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D 10:00hs a 22:00hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.4108429,
+                  -34.6031265
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID ABASTO (G18)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1aac091)",
+            "name": "Nuestras sucursales (1aac091)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1aac091",
+                "postalCode": "1430",
+                "city": "CABA",
+                "state": "CABA",
+                "country": "ARG",
+                "street": "Vedia 3600",
+                "number": "(G19)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D de 10 a 22hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.488341,
+                  -34.545737
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID DOT (G19)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1298525)",
+            "name": "Nuestras sucursales (1298525)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1298525",
+                "postalCode": "1431",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Walmart Constituyentes",
+                "number": "(G04)",
+                "neighborhood": "Tienda Grid",
+                "complement": "Todos los dias de 9:00 a 21:00 hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.50778,
+                  -34.5725441
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID CONSTITUYENTES, Walmart (G04)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          }
+        ],
+        "shipsTo": [
+          "ARG"
+        ],
+        "deliveryIds": [
+          {
+            "courierId": "GRID-ANDREANI-DELIVERY",
+            "courierName": "Andreani Envio a Domicilio",
+            "dockId": "3",
+            "quantity": 1,
+            "warehouseId": "2"
+          }
+        ],
+        "deliveryChannel": "delivery",
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "41978e64640b44258996b5b3cd6cbbff",
+        "polygonName": null
+      },
+      {
+        "itemIndex": 2,
+        "selectedSla": "Andreani Envío a domicilio ",
+        "lockTTL": "11d",
+        "price": 0,
+        "listPrice": 12,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": "Andreani Envio a Domicilio",
+        "shippingEstimate": "4bd",
+        "shippingEstimateDate": "2019-03-11T19:46:37.7559245+00:00",
+        "slas": [
+          {
+            "id": "Andreani Envío a domicilio ",
+            "name": "Andreani Envío a domicilio ",
+            "shippingEstimate": "4bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Envío a Domicilio Urgente",
+            "name": "Envío a Domicilio Urgente",
+            "shippingEstimate": "2bd",
+            "deliveryWindow": null,
+            "price": 18,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Nuestras sucursales (15db581)",
+            "name": "Nuestras sucursales (15db581)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "15db581",
+                "postalCode": "1060",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Av. Santa Fe 1616. CAPITAL FEDERAL",
+                "number": "(G01)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D y Feriados 09:30 a 21:00",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.3902,
+                  -34.5957756
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID RECOLETA, Av. Santa Fe 1616 (G01)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (11a9e86)",
+            "name": "Nuestras sucursales (11a9e86)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "11a9e86",
+                "postalCode": "1903",
+                "city": "Abasto",
+                "state": "Buenos Aires",
+                "country": "ARG",
+                "street": "Av. Corrientes 3247, 1er subsuelo ",
+                "number": "(G18)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D 10:00hs a 22:00hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.4108429,
+                  -34.6031265
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID ABASTO (G18)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1aac091)",
+            "name": "Nuestras sucursales (1aac091)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1aac091",
+                "postalCode": "1430",
+                "city": "CABA",
+                "state": "CABA",
+                "country": "ARG",
+                "street": "Vedia 3600",
+                "number": "(G19)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D de 10 a 22hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.488341,
+                  -34.545737
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID DOT (G19)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1298525)",
+            "name": "Nuestras sucursales (1298525)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1298525",
+                "postalCode": "1431",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Walmart Constituyentes",
+                "number": "(G04)",
+                "neighborhood": "Tienda Grid",
+                "complement": "Todos los dias de 9:00 a 21:00 hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.50778,
+                  -34.5725441
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID CONSTITUYENTES, Walmart (G04)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          }
+        ],
+        "shipsTo": [
+          "ARG"
+        ],
+        "deliveryIds": [
+          {
+            "courierId": "GRID-ANDREANI-DELIVERY",
+            "courierName": "Andreani Envio a Domicilio",
+            "dockId": "3",
+            "quantity": 1,
+            "warehouseId": "2"
+          }
+        ],
+        "deliveryChannel": "delivery",
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "41978e64640b44258996b5b3cd6cbbff",
+        "polygonName": null
+      },
+      {
+        "itemIndex": 3,
+        "selectedSla": "Andreani Envío a domicilio ",
+        "lockTTL": "11d",
+        "price": 0,
+        "listPrice": 12425,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": "Andreani Envio a Domicilio",
+        "shippingEstimate": "4bd",
+        "shippingEstimateDate": "2019-03-11T19:46:37.7559245+00:00",
+        "slas": [
+          {
+            "id": "Andreani Envío a domicilio ",
+            "name": "Andreani Envío a domicilio ",
+            "shippingEstimate": "4bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Envío a Domicilio Urgente",
+            "name": "Envío a Domicilio Urgente",
+            "shippingEstimate": "2bd",
+            "deliveryWindow": null,
+            "price": 18072,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Nuestras sucursales (15db581)",
+            "name": "Nuestras sucursales (15db581)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "15db581",
+                "postalCode": "1060",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Av. Santa Fe 1616. CAPITAL FEDERAL",
+                "number": "(G01)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D y Feriados 09:30 a 21:00",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.3902,
+                  -34.5957756
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID RECOLETA, Av. Santa Fe 1616 (G01)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (11a9e86)",
+            "name": "Nuestras sucursales (11a9e86)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "11a9e86",
+                "postalCode": "1903",
+                "city": "Abasto",
+                "state": "Buenos Aires",
+                "country": "ARG",
+                "street": "Av. Corrientes 3247, 1er subsuelo ",
+                "number": "(G18)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D 10:00hs a 22:00hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.4108429,
+                  -34.6031265
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID ABASTO (G18)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1aac091)",
+            "name": "Nuestras sucursales (1aac091)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1aac091",
+                "postalCode": "1430",
+                "city": "CABA",
+                "state": "CABA",
+                "country": "ARG",
+                "street": "Vedia 3600",
+                "number": "(G19)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D de 10 a 22hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.488341,
+                  -34.545737
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID DOT (G19)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1298525)",
+            "name": "Nuestras sucursales (1298525)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1298525",
+                "postalCode": "1431",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Walmart Constituyentes",
+                "number": "(G04)",
+                "neighborhood": "Tienda Grid",
+                "complement": "Todos los dias de 9:00 a 21:00 hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.50778,
+                  -34.5725441
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID CONSTITUYENTES, Walmart (G04)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          }
+        ],
+        "shipsTo": [
+          "ARG"
+        ],
+        "deliveryIds": [
+          {
+            "courierId": "GRID-ANDREANI-DELIVERY",
+            "courierName": "Andreani Envio a Domicilio",
+            "dockId": "3",
+            "quantity": 1,
+            "warehouseId": "2"
+          }
+        ],
+        "deliveryChannel": "delivery",
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "41978e64640b44258996b5b3cd6cbbff",
+        "polygonName": null
+      },
+      {
+        "itemIndex": 4,
+        "selectedSla": "Andreani Envío a domicilio ",
+        "lockTTL": "11d",
+        "price": 0,
+        "listPrice": 12,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": "Andreani Envio a Domicilio",
+        "shippingEstimate": "4bd",
+        "shippingEstimateDate": "2019-03-11T19:46:37.7559245+00:00",
+        "slas": [
+          {
+            "id": "Andreani Envío a domicilio ",
+            "name": "Andreani Envío a domicilio ",
+            "shippingEstimate": "4bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Envío a Domicilio Urgente",
+            "name": "Envío a Domicilio Urgente",
+            "shippingEstimate": "2bd",
+            "deliveryWindow": null,
+            "price": 18,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Nuestras sucursales (15db581)",
+            "name": "Nuestras sucursales (15db581)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "15db581",
+                "postalCode": "1060",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Av. Santa Fe 1616. CAPITAL FEDERAL",
+                "number": "(G01)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D y Feriados 09:30 a 21:00",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.3902,
+                  -34.5957756
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID RECOLETA, Av. Santa Fe 1616 (G01)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (11a9e86)",
+            "name": "Nuestras sucursales (11a9e86)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "11a9e86",
+                "postalCode": "1903",
+                "city": "Abasto",
+                "state": "Buenos Aires",
+                "country": "ARG",
+                "street": "Av. Corrientes 3247, 1er subsuelo ",
+                "number": "(G18)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D 10:00hs a 22:00hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.4108429,
+                  -34.6031265
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID ABASTO (G18)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1aac091)",
+            "name": "Nuestras sucursales (1aac091)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1aac091",
+                "postalCode": "1430",
+                "city": "CABA",
+                "state": "CABA",
+                "country": "ARG",
+                "street": "Vedia 3600",
+                "number": "(G19)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D de 10 a 22hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.488341,
+                  -34.545737
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID DOT (G19)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1298525)",
+            "name": "Nuestras sucursales (1298525)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1298525",
+                "postalCode": "1431",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Walmart Constituyentes",
+                "number": "(G04)",
+                "neighborhood": "Tienda Grid",
+                "complement": "Todos los dias de 9:00 a 21:00 hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.50778,
+                  -34.5725441
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID CONSTITUYENTES, Walmart (G04)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          }
+        ],
+        "shipsTo": [
+          "ARG"
+        ],
+        "deliveryIds": [
+          {
+            "courierId": "GRID-ANDREANI-DELIVERY",
+            "courierName": "Andreani Envio a Domicilio",
+            "dockId": "3",
+            "quantity": 1,
+            "warehouseId": "2"
+          }
+        ],
+        "deliveryChannel": "delivery",
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "41978e64640b44258996b5b3cd6cbbff",
+        "polygonName": null
+      }
+    ],
+    "trackingHints": null,
+    "selectedAddresses": [
+      {
+        "addressId": "41978e64640b44258996b5b3cd6cbbff",
+        "addressType": "residential",
+        "receiverName": "Micaela Benitez",
+        "street": "Ecuador",
+        "number": "428",
+        "complement": "Pb b ",
+        "neighborhood": null,
+        "postalCode": "1214",
+        "city": "Ciudad Autónoma Buenos Aires",
+        "state": "CIUDAD AUTÓNOMA DE BUENOS AIRES",
+        "country": "ARG",
+        "reference": null,
+        "geoCoordinates": []
+      }
+    ]
+  },
+  "paymentData": {
+    "transactions": [
+      {
+        "isActive": true,
+        "transactionId": "ED1C105B1B634716AF9BD40FFEBFD31F",
+        "merchantName": "GRID0",
+        "payments": [
+          {
+            "id": "231F4798AEF242E597F2A9D72FB5ED01",
+            "paymentSystem": "2",
+            "paymentSystemName": "Visa",
+            "value": 451500,
+            "installments": 6,
+            "referenceValue": 451500,
+            "cardHolder": null,
+            "cardNumber": null,
+            "firstDigits": "454075",
+            "lastDigits": "5454",
+            "cvv2": null,
+            "expireMonth": null,
+            "expireYear": null,
+            "url": null,
+            "giftCardId": null,
+            "giftCardName": null,
+            "giftCardCaption": null,
+            "redemptionCode": null,
+            "group": "creditCard",
+            "tid": "4560195771",
+            "dueDate": null,
+            "connectorResponses": {
+              "Tid": "4560195771",
+              "ReturnCode": null,
+              "Message": null,
+              "authId": "4560195771",
+              "acquirer": "MercadoPagoV1",
+              "message": "pending_capture"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "packageAttachment": {
+    "packages": []
+  },
+  "sellers": [
+    {
+      "id": "1",
+      "name": "GRID",
+      "logo": ""
+    }
+  ],
+  "callCenterOperatorData": null,
+  "followUpEmail": "e52e2badbd424899b63283ded5335165@ct.vtex.com.br",
+  "lastMessage": null,
+  "hostname": "grid0",
+  "invoiceData": null,
+  "changesAttachment": null,
+  "openTextField": null,
+  "roundingError": 0,
+  "orderFormId": "929742b392c742e48edd8deca33ce5ec",
+  "commercialConditionData": null,
+  "isCompleted": true,
+  "customData": null,
+  "storePreferencesData": {
+    "countryCode": "ARG",
+    "currencyCode": "ARS",
+    "currencyFormatInfo": {
+      "CurrencyDecimalDigits": 2,
+      "CurrencyDecimalSeparator": ",",
+      "CurrencyGroupSeparator": ".",
+      "CurrencyGroupSize": 3,
+      "StartsWithCurrencySymbol": true
+    },
+    "currencyLocale": 11274,
+    "currencySymbol": "$",
+    "timeZone": "Argentina Standard Time"
+  },
+  "allowCancellation": true,
+  "allowEdition": false,
+  "isCheckedIn": false,
+  "marketplace": {
+    "baseURL": "http://oms.vtexinternal.com.br/api/oms?an=grid0",
+    "isCertified": null,
+    "name": "grid0"
+  },
+  "authorizedDate": "2019-03-02T19:46:08.1332846+00:00",
+  "invoicedDate": null
+}

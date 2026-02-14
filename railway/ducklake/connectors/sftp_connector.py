@@ -15,9 +15,10 @@ class SFTPConnector(BaseConnector):
 
     source_name = "sftp"
 
-    def __init__(self, config: dict, files: dict):
+    def __init__(self, config: dict, files: dict, folders: dict | None = None):
         self.config = config
         self.files = files
+        self.folders = folders or {}
         self._transport = None
         self._sftp = None
 
@@ -71,12 +72,44 @@ class SFTPConnector(BaseConnector):
                     row[key] = json.dumps(val)
         return pd.DataFrame(data)
 
+    def _extract_folder(self, remote_dir: str) -> pd.DataFrame:
+        """Lee todos los JSONs de una carpeta remota y los concatena en un DataFrame.
+
+        Cada archivo JSON es un objeto individual (una orden).
+        Se aplanan campos nested como strings para formato tabular.
+        """
+        filenames = [f for f in self._sftp.listdir(remote_dir) if f.endswith(".json")]
+        rows = []
+        for filename in filenames:
+            remote_path = f"{remote_dir}/{filename}"
+            with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
+                tmp_path = tmp.name
+            try:
+                self._sftp.get(remote_path, tmp_path)
+                with open(tmp_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                # Si es lista (ej: meli_shipping), la guardamos como está
+                if isinstance(data, list):
+                    row = {"_payload": json.dumps(data)}
+                else:
+                    row = {}
+                    for key, val in data.items():
+                        row[key] = json.dumps(val) if isinstance(val, (list, dict)) else val
+                row["_source_file"] = filename
+                rows.append(row)
+            finally:
+                os.unlink(tmp_path)
+        return pd.DataFrame(rows)
+
     def extract(self) -> dict[str, pd.DataFrame]:
         self._connect()
         results = {}
         for table_name, file_cfg in self.files.items():
             opts = file_cfg.get("opts", {})
             df = self._download_and_read(file_cfg["remote"], file_cfg["format"], opts)
+            results[table_name] = df
+        for table_name, folder_cfg in self.folders.items():
+            df = self._extract_folder(folder_cfg["remote"])
             results[table_name] = df
         return results
 

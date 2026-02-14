@@ -1,0 +1,66 @@
+{
+  "id": 225487,
+  "cart_id": 36218019,
+  "created": "2020-01-25",
+  "company": {
+    "id": 469,
+    "legalName": "Annex S.A.",
+    "collector": false
+  },
+  "bill_note_identifier": null,
+  "credit_note_identifier": null,
+  "shipping_type": "Pick Up",
+  "billing_address": "Huiliches 6316, San Carlos de Bariloche, Río Negro, Argentina",
+  "type": "SALE_MARKETPLACE",
+  "reference_sale": null,
+  "customer": {
+    "name": "Urciuolo, Beatriz Marta",
+    "type_value": "3978273",
+    "type_id": "DNI",
+    "first_name": "Beatriz Marta",
+    "last_name": "Urciuolo"
+  },
+  "billing_address_details": {
+    "zip_code": "8400",
+    "city_id": 20074,
+    "street_number": "6316",
+    "street_name": "Huiliches",
+    "phone": "+542944249059",
+    "city_name": "San Carlos de Bariloche",
+    "state_name": "Río Negro",
+    "building_floor": null,
+    "building_room": null
+  },
+  "status": "READY_TO_BILL",
+  "pickup_info": {
+    "pickupStore": 142,
+    "city": "San Carlos de Bariloche (Bariloche), Río Negro",
+    "pickupName": "Bariloche",
+    "pickupDate": "2020-02-05"
+  },
+  "totals_sale": {
+    "sale_total_price_amount": 1899,
+    "sale_total_commissions_amount": 265.86,
+    "sale_total_shipping_cost_seller_amount": 109
+  },
+  "sold_items": [
+    {
+      "sale_data": {
+        "cart_id": 36218019,
+        "description": "Zapatillas Topper Lady Move Negro 36 ",
+        "quantity": 1,
+        "unit_price": 1899,
+        "total_price": 1899,
+        "sku_garbarino": "281924",
+        "sku_seller": "181-7954-36",
+        "warehousing": false
+      },
+      "seller_data": {
+        "seller_shipping_cost": 109,
+        "seller_shipping_cost_unit": 109,
+        "commission_amount": 265.86,
+        "commission_cost_unit": 265.86
+      }
+    }
+  ]
+}

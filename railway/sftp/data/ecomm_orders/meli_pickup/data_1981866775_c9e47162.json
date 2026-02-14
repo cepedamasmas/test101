@@ -1,0 +1,43 @@
+{
+  "id": "13610935",
+  "store_id": 13057014,
+  "order_id": 1981866775,
+  "purchase_id": null,
+  "item_id": "MLA752037208",
+  "items_id": [
+    {
+      "ItemID": "MLA752037208",
+      "VariationID": null
+    }
+  ],
+  "buyer_id": 79771454,
+  "date_created": "2019-04-06T14:58:33Z",
+  "date_ready": "2019-04-11T11:58:34-03:00",
+  "availability": 96,
+  "status": "active",
+  "store_info": {
+    "id": "13057014",
+    "user_id": "177433927",
+    "description": "Sucursal GRID RECOLETA",
+    "date_creation": "2019-03-29T15:21:38.328Z",
+    "open_hours": "Lunes a domingos y feriados de 09:30 a 21:00 hs.",
+    "status": "active",
+    "tags": [
+      "pickup"
+    ],
+    "phone": {
+      "area_code": "011",
+      "number": "4811-2918"
+    },
+    "location": {
+      "address_line": "Av. Santa Fe 1616 - Recoleta - CABA",
+      "latitude": -34.5956111,
+      "longitude": -58.39019444444445,
+      "id": "AR-C",
+      "type": "state"
+    }
+  },
+  "pickup_person": {
+    "full_name": "pablo alejandro sanchez"
+  }
+}

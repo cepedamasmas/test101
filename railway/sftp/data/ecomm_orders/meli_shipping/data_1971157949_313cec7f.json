@@ -1,0 +1,20 @@
+[
+  {
+    "item_id": "MLA752038740",
+    "variation_id": 28424111876,
+    "description": "Zapatillas Nike Air Max Sequent 2 Mujer",
+    "quantity": 1,
+    "dimensions": {
+      "height": 10,
+      "width": 17,
+      "length": 24,
+      "weight": 700
+    },
+    "dimensions_source": {
+      "id": "MLA752038740",
+      "origin": "conciliation"
+    },
+    "order_id": "1971157949",
+    "sender_id": 177433927
+  }
+]

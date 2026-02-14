@@ -1,0 +1,43 @@
+{
+  "id": "13608054",
+  "store_id": 13056103,
+  "order_id": 1979996002,
+  "purchase_id": null,
+  "item_id": "MLA751772469",
+  "items_id": [
+    {
+      "ItemID": "MLA751772469",
+      "VariationID": null
+    }
+  ],
+  "buyer_id": 144445512,
+  "date_created": "2019-04-04T12:32:25Z",
+  "date_ready": "2019-04-09T09:32:28-03:00",
+  "availability": 96,
+  "status": "active",
+  "store_info": {
+    "id": "13056103",
+    "user_id": "177433927",
+    "description": "Sucursal Mark MARTINEZ",
+    "date_creation": "2019-03-29T15:25:03.523Z",
+    "open_hours": "Lunes a sábados de 09:30 a 21 hs. - Domingo y feriados de 10 a 21 hs.",
+    "status": "active",
+    "tags": [
+      "pickup"
+    ],
+    "phone": {
+      "area_code": "011",
+      "number": "4793-0073/4793-0567"
+    },
+    "location": {
+      "address_line": "Av.Panamericana 535 Esq. Edison - Martínez - GBA",
+      "latitude": -34.507116,
+      "longitude": -58.530839,
+      "id": "TUxBQ1NBTjg4ZmJk",
+      "type": "city"
+    }
+  },
+  "pickup_person": {
+    "full_name": "Santiago Di Paolo"
+  }
+}

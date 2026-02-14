@@ -1,0 +1,43 @@
+{
+  "id": "13607896",
+  "store_id": 13056103,
+  "order_id": 1980701725,
+  "purchase_id": null,
+  "item_id": "MLA767841192",
+  "items_id": [
+    {
+      "ItemID": "MLA767841192",
+      "VariationID": null
+    }
+  ],
+  "buyer_id": 189451446,
+  "date_created": "2019-04-05T00:41:23Z",
+  "date_ready": "2019-04-09T21:41:26-03:00",
+  "availability": 96,
+  "status": "active",
+  "store_info": {
+    "id": "13056103",
+    "user_id": "177433927",
+    "description": "Sucursal Mark MARTINEZ",
+    "date_creation": "2019-03-29T15:25:03.523Z",
+    "open_hours": "Lunes a sábados de 09:30 a 21 hs. - Domingo y feriados de 10 a 21 hs.",
+    "status": "active",
+    "tags": [
+      "pickup"
+    ],
+    "phone": {
+      "area_code": "011",
+      "number": "4793-0073/4793-0567"
+    },
+    "location": {
+      "address_line": "Av.Panamericana 535 Esq. Edison - Martínez - GBA",
+      "latitude": -34.507116,
+      "longitude": -58.530839,
+      "id": "TUxBQ1NBTjg4ZmJk",
+      "type": "city"
+    }
+  },
+  "pickup_person": {
+    "full_name": "Martina Rodríguez Laborde "
+  }
+}

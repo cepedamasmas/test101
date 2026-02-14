@@ -1,0 +1,504 @@
+{
+  "orderId": "914591295930-01",
+  "sequence": "648423",
+  "marketplaceOrderId": "",
+  "marketplaceServicesEndpoint": "http://oms.vtexinternal.com.br/api/oms?an=grid0",
+  "sellerOrderId": "00-914591295930-01",
+  "origin": "Marketplace",
+  "affiliateId": "",
+  "salesChannel": "3",
+  "merchantName": null,
+  "status": "handling",
+  "statusDescription": "Preparando Entrega",
+  "value": 299900,
+  "creationDate": "2019-03-02T19:21:35.4226783+00:00",
+  "lastChange": "2019-03-02T19:56:25.4637497+00:00",
+  "orderGroup": "914591295930",
+  "totals": [
+    {
+      "id": "Items",
+      "name": "Total de los items",
+      "value": 299900
+    },
+    {
+      "id": "Discounts",
+      "name": "Total de descuentos",
+      "value": 0
+    },
+    {
+      "id": "Shipping",
+      "name": "Costo total del envío",
+      "value": 0
+    },
+    {
+      "id": "Tax",
+      "name": "Costo total del cambio",
+      "value": 0
+    }
+  ],
+  "items": [
+    {
+      "uniqueId": "33AEB63167A243CB8841BED7ECD0F97E",
+      "id": "19755",
+      "productId": "3181",
+      "ean": null,
+      "lockId": "00-914591295930-01",
+      "itemAttachment": {
+        "content": {},
+        "name": null
+      },
+      "attachments": [],
+      "quantity": 1,
+      "seller": "1",
+      "name": "ZAPATILLAS JORDAN AIR FIRST CLASS 306-7463-09.0",
+      "refId": "306-7463-09.0",
+      "price": 299900,
+      "listPrice": 379500,
+      "manualPrice": null,
+      "priceTags": [
+        {
+          "name": "discount@shipping-36cc375a-af31-4d15-ab89-19fd040cf7f2#f8d5a0ab-8cc9-44cd-bfe5-47c8f1c469b7",
+          "value": -16500,
+          "isPercentual": false,
+          "identifier": "36cc375a-af31-4d15-ab89-19fd040cf7f2",
+          "rawValue": -165
+        }
+      ],
+      "imageUrl": "http://essential.vteximg.com.br/arquivos/ids/183586-99-86/306-7463_1.png?v=636710690958000000",
+      "detailUrl": "/zapatillas-jordan-air-first-class-moda-hombre-306-7463/p",
+      "components": [],
+      "bundleItems": [],
+      "params": [],
+      "offerings": [],
+      "sellerSku": "19755",
+      "priceValidUntil": null,
+      "commission": 0,
+      "tax": 0,
+      "preSaleDate": null,
+      "additionalInfo": {
+        "brandName": "Jordan",
+        "brandId": "2000022",
+        "categoriesIds": "/1/2/",
+        "productClusterId": "145,146,147,152,153",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 1.68,
+          "height": 12,
+          "length": 32,
+          "weight": 1,
+          "width": 21
+        },
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "sellingPrice": 299900,
+      "isGift": false,
+      "shippingPrice": null,
+      "rewardValue": 0,
+      "freightCommission": 0,
+      "priceDefinitions": null,
+      "taxCode": "",
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "callCenterOperator": null
+    }
+  ],
+  "marketplaceItems": [],
+  "clientProfileData": {
+    "id": "clientProfileData",
+    "email": "0ec636b026c546579feb849e8a3530c1@ct.vtex.com.br",
+    "firstName": "nicolas",
+    "lastName": "foresi",
+    "documentType": "dni",
+    "document": "39830952",
+    "phone": "+541168913631",
+    "corporateName": null,
+    "tradeName": null,
+    "corporateDocument": null,
+    "stateInscription": null,
+    "corporatePhone": null,
+    "isCorporate": false,
+    "userProfileId": "71dad942-f4aa-4171-a2ab-5a010d0bbce9",
+    "customerClass": null
+  },
+  "giftRegistryData": null,
+  "marketingData": null,
+  "ratesAndBenefitsData": {
+    "id": "ratesAndBenefitsData",
+    "rateAndBenefitsIdentifiers": [
+      {
+        "description": null,
+        "featured": false,
+        "id": "36cc375a-af31-4d15-ab89-19fd040cf7f2",
+        "name": "GRID Envío Gratis",
+        "matchedParameters": {
+          "slaIds": "andreani envío a domicilio ,nuestras sucursales",
+          "category@CatalogSystem": "1,6,9|inclusive"
+        },
+        "additionalInfo": null
+      }
+    ]
+  },
+  "shippingData": {
+    "id": "shippingData",
+    "address": {
+      "addressType": "residential",
+      "receiverName": "nicolas foresi",
+      "addressId": "da416b38d5b646f8aad958a37e3c5953",
+      "postalCode": "1678",
+      "city": "Caseros",
+      "state": "BUENOS AIRES",
+      "country": "ARG",
+      "street": "alberdi",
+      "number": "4448",
+      "neighborhood": null,
+      "complement": null,
+      "reference": null,
+      "geoCoordinates": []
+    },
+    "logisticsInfo": [
+      {
+        "itemIndex": 0,
+        "selectedSla": "Andreani Envío a domicilio ",
+        "lockTTL": "11d",
+        "price": 0,
+        "listPrice": 16500,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": "Andreani Envio a Domicilio",
+        "shippingEstimate": "9bd",
+        "shippingEstimateDate": "2019-03-18T19:22:09.7068346+00:00",
+        "slas": [
+          {
+            "id": "Andreani Envío a domicilio ",
+            "name": "Andreani Envío a domicilio ",
+            "shippingEstimate": "9bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Envío a Domicilio Urgente",
+            "name": "Envío a Domicilio Urgente",
+            "shippingEstimate": "2bd",
+            "deliveryWindow": null,
+            "price": 23000,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Nuestras sucursales (17f1927)",
+            "name": "Nuestras sucursales (17f1927)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "17f1927",
+                "postalCode": "1650",
+                "city": "BSAS GBA",
+                "state": "BSAS GBA",
+                "country": "ARG",
+                "street": "BELGRANO 3607",
+                "number": "(A04)",
+                "neighborhood": "Local Dash",
+                "complement": "L a S 09:00 a 20:30",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.5362434,
+                  -34.5767326
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal dash SAN MARTIN (A04)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1298525)",
+            "name": "Nuestras sucursales (1298525)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1298525",
+                "postalCode": "1431",
+                "city": "CAP FED",
+                "state": "CAP FED",
+                "country": "ARG",
+                "street": "Walmart Constituyentes",
+                "number": "(G04)",
+                "neighborhood": "Tienda Grid",
+                "complement": "Todos los dias de 9:00 a 21:00 hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.50778,
+                  -34.5725441
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID CONSTITUYENTES, Walmart (G04)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (11e4f73)",
+            "name": "Nuestras sucursales (11e4f73)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "11e4f73",
+                "postalCode": "1708",
+                "city": "Castelar",
+                "state": "Castelar",
+                "country": "ARG",
+                "street": "Av. Brig. Gral. Juan Manuel de Rosas 658",
+                "number": "(G21)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D de 10 a 22hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.6293856,
+                  -34.6338405
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID PLAZA OESTE (G21)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1cfe9ed)",
+            "name": "Nuestras sucursales (1cfe9ed)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1cfe9ed",
+                "postalCode": "1708",
+                "city": "BSAS GBA",
+                "state": "BSAS GBA",
+                "country": "ARG",
+                "street": "AV RIVADAVIA 18276",
+                "number": "(G08)",
+                "neighborhood": "Tienda Grid ",
+                "complement": "L a S 09:00 a 20:30",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.6206779,
+                  -34.64903
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID MORÓN, Av. Rivadavia 18276 (G08)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1abd270)",
+            "name": "Nuestras sucursales (1abd270)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1abd270",
+                "postalCode": "1754",
+                "city": "BSAS GBA",
+                "state": "BSAS GBA",
+                "country": "ARG",
+                "street": "Brig. Gral. Juan Manuel de Rosas 3910 Planta baja",
+                "number": "(G06)",
+                "neighborhood": "Tienda Grid",
+                "complement": "Todos los dias de 10:00 a 22:00 hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.55766,
+                  -34.68466
+                ]
+              },
+              "dockId": "3",
+              "friendlyName": "Retiro en sucursal GRID SAN JUSTO SHOPPING (G06)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          }
+        ],
+        "shipsTo": [
+          "ARG"
+        ],
+        "deliveryIds": [
+          {
+            "courierId": "GRID-ANDREANI-DELIVERY",
+            "courierName": "Andreani Envio a Domicilio",
+            "dockId": "3",
+            "quantity": 1,
+            "warehouseId": "2"
+          }
+        ],
+        "deliveryChannel": "delivery",
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "da416b38d5b646f8aad958a37e3c5953",
+        "polygonName": null
+      }
+    ],
+    "trackingHints": null,
+    "selectedAddresses": [
+      {
+        "addressId": "da416b38d5b646f8aad958a37e3c5953",
+        "addressType": "residential",
+        "receiverName": "nicolas foresi",
+        "street": "alberdi",
+        "number": "4448",
+        "complement": null,
+        "neighborhood": null,
+        "postalCode": "1678",
+        "city": "Caseros",
+        "state": "BUENOS AIRES",
+        "country": "ARG",
+        "reference": null,
+        "geoCoordinates": []
+      }
+    ]
+  },
+  "paymentData": {
+    "transactions": [
+      {
+        "isActive": true,
+        "transactionId": "72A5068F1AEB46F29AEC888B1E8FBD10",
+        "merchantName": "GRID0",
+        "payments": [
+          {
+            "id": "2B86618A604149A486B71D44B33B758D",
+            "paymentSystem": "2",
+            "paymentSystemName": "Visa",
+            "value": 299900,
+            "installments": 1,
+            "referenceValue": 299900,
+            "cardHolder": null,
+            "cardNumber": null,
+            "firstDigits": "493763",
+            "lastDigits": "5365",
+            "cvv2": null,
+            "expireMonth": null,
+            "expireYear": null,
+            "url": null,
+            "giftCardId": null,
+            "giftCardName": null,
+            "giftCardCaption": null,
+            "redemptionCode": null,
+            "group": "creditCard",
+            "tid": "4559989010",
+            "dueDate": null,
+            "connectorResponses": {
+              "Tid": "4559989010",
+              "ReturnCode": null,
+              "Message": null,
+              "authId": "4559989010",
+              "acquirer": "MercadoPagoV1",
+              "message": "pending_capture"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "packageAttachment": {
+    "packages": []
+  },
+  "sellers": [
+    {
+      "id": "1",
+      "name": "GRID",
+      "logo": ""
+    }
+  ],
+  "callCenterOperatorData": null,
+  "followUpEmail": "5ef4361aa5004abd9e346148eb32f083@ct.vtex.com.br",
+  "lastMessage": null,
+  "hostname": "grid0",
+  "invoiceData": null,
+  "changesAttachment": null,
+  "openTextField": null,
+  "roundingError": 0,
+  "orderFormId": "cecbc96e3a0b488280ef6d9f8b4e51fa",
+  "commercialConditionData": null,
+  "isCompleted": true,
+  "customData": null,
+  "storePreferencesData": {
+    "countryCode": "ARG",
+    "currencyCode": "ARS",
+    "currencyFormatInfo": {
+      "CurrencyDecimalDigits": 2,
+      "CurrencyDecimalSeparator": ",",
+      "CurrencyGroupSeparator": ".",
+      "CurrencyGroupSize": 3,
+      "StartsWithCurrencySymbol": true
+    },
+    "currencyLocale": 11274,
+    "currencySymbol": "$",
+    "timeZone": "Argentina Standard Time"
+  },
+  "allowCancellation": true,
+  "allowEdition": false,
+  "isCheckedIn": false,
+  "marketplace": {
+    "baseURL": "http://oms.vtexinternal.com.br/api/oms?an=grid0",
+    "isCertified": null,
+    "name": "grid0"
+  },
+  "authorizedDate": "2019-03-02T19:21:46.6036980+00:00",
+  "invoicedDate": null
+}

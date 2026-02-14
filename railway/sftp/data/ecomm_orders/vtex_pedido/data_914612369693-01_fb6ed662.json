@@ -1,0 +1,504 @@
+{
+  "orderId": "914612369693-01",
+  "sequence": "648456",
+  "marketplaceOrderId": "",
+  "marketplaceServicesEndpoint": "http://oms.vtexinternal.com.br/api/oms?an=dash",
+  "sellerOrderId": "00-914612369693-01",
+  "origin": "Marketplace",
+  "affiliateId": "",
+  "salesChannel": "2",
+  "merchantName": null,
+  "status": "ready-for-handling",
+  "statusDescription": "Pronto para o manuseio",
+  "value": 19900,
+  "creationDate": "2019-03-02T20:39:31.2381541+00:00",
+  "lastChange": "2019-03-02T21:10:14.2475078+00:00",
+  "orderGroup": "914612369693",
+  "totals": [
+    {
+      "id": "Items",
+      "name": "Total de los items",
+      "value": 19900
+    },
+    {
+      "id": "Discounts",
+      "name": "Total de descuentos",
+      "value": 0
+    },
+    {
+      "id": "Shipping",
+      "name": "Costo total del envío",
+      "value": 0
+    },
+    {
+      "id": "Tax",
+      "name": "Costo total del cambio",
+      "value": 0
+    }
+  ],
+  "items": [
+    {
+      "uniqueId": "2715C1F0B0AD428CB7A20765F085E6E6",
+      "id": "28720",
+      "productId": "4719",
+      "ean": null,
+      "lockId": "00-914612369693-01",
+      "itemAttachment": {
+        "content": {},
+        "name": null
+      },
+      "attachments": [],
+      "quantity": 1,
+      "seller": "1",
+      "name": "OJOTAS IPANEMA CLASSICA 241-7009-40",
+      "refId": "241-7009-40",
+      "price": 19900,
+      "listPrice": 25700,
+      "manualPrice": null,
+      "priceTags": [],
+      "imageUrl": "http://essential.vteximg.com.br/arquivos/ids/215874-99-86/241-7009_1.jpg?v=636837789552670000",
+      "detailUrl": "/ojotas-ipanema-classica-natacion-mujer-2417009/p",
+      "components": [],
+      "bundleItems": [],
+      "params": [],
+      "offerings": [],
+      "sellerSku": "28720",
+      "priceValidUntil": null,
+      "commission": 0,
+      "tax": 0,
+      "preSaleDate": null,
+      "additionalInfo": {
+        "brandName": "Ipanema",
+        "brandId": "2000045",
+        "categoriesIds": "/1/4/",
+        "productClusterId": "145,146,147,153",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 1.68,
+          "height": 12,
+          "length": 32,
+          "weight": 0.7,
+          "width": 21
+        },
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "sellingPrice": 19900,
+      "isGift": false,
+      "shippingPrice": null,
+      "rewardValue": 0,
+      "freightCommission": 0,
+      "priceDefinitions": null,
+      "taxCode": null,
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "callCenterOperator": null
+    }
+  ],
+  "marketplaceItems": [],
+  "clientProfileData": {
+    "id": "clientProfileData",
+    "email": "9e09f2c8444443ec9ac943184adfecac@ct.vtex.com.br",
+    "firstName": "Yanina",
+    "lastName": "Chaves",
+    "documentType": "dni",
+    "document": "31008594",
+    "phone": "+541130499443",
+    "corporateName": null,
+    "tradeName": null,
+    "corporateDocument": null,
+    "stateInscription": null,
+    "corporatePhone": null,
+    "isCorporate": false,
+    "userProfileId": "b8803eef-45d3-4830-884e-638eefd699f5",
+    "customerClass": null
+  },
+  "giftRegistryData": null,
+  "marketingData": null,
+  "ratesAndBenefitsData": {
+    "id": "ratesAndBenefitsData",
+    "rateAndBenefitsIdentifiers": []
+  },
+  "shippingData": {
+    "id": "shippingData",
+    "address": {
+      "addressType": "pickup",
+      "receiverName": "Yanina Chaves",
+      "addressId": "11e4f73",
+      "postalCode": "1708",
+      "city": "Castelar",
+      "state": "Castelar",
+      "country": "ARG",
+      "street": "Av. Brig. Gral. Juan Manuel de Rosas 658",
+      "number": "(G21)",
+      "neighborhood": "Tienda Grid",
+      "complement": "L a D de 10 a 22hs",
+      "reference": null,
+      "geoCoordinates": [
+        -58.6293856,
+        -34.6338405
+      ]
+    },
+    "logisticsInfo": [
+      {
+        "itemIndex": 0,
+        "selectedSla": "Nuestras sucursales (11e4f73)",
+        "lockTTL": "11d",
+        "price": 0,
+        "listPrice": 0,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": "Transporte interno Essential ",
+        "shippingEstimate": "10bd",
+        "shippingEstimateDate": "2019-03-19T20:40:25.7214121+00:00",
+        "slas": [
+          {
+            "id": "Andreani Envío a domicilio ",
+            "name": "Andreani Envío a domicilio ",
+            "shippingEstimate": "9bd",
+            "deliveryWindow": null,
+            "price": 16500,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Envío a Domicilio Urgente",
+            "name": "Envío a Domicilio Urgente",
+            "shippingEstimate": "2bd",
+            "deliveryWindow": null,
+            "price": 23000,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null
+          },
+          {
+            "id": "Nuestras sucursales (11e4f73)",
+            "name": "Nuestras sucursales (11e4f73)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "11e4f73",
+                "postalCode": "1708",
+                "city": "Castelar",
+                "state": "Castelar",
+                "country": "ARG",
+                "street": "Av. Brig. Gral. Juan Manuel de Rosas 658",
+                "number": "(G21)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a D de 10 a 22hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.6293856,
+                  -34.6338405
+                ]
+              },
+              "dockId": "2",
+              "friendlyName": "Retiro en sucursal GRID PLAZA OESTE (G21)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1cfe9ed)",
+            "name": "Nuestras sucursales (1cfe9ed)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1cfe9ed",
+                "postalCode": "1708",
+                "city": "BSAS GBA",
+                "state": "BSAS GBA",
+                "country": "ARG",
+                "street": "AV RIVADAVIA 18276",
+                "number": "(G08)",
+                "neighborhood": "Tienda Grid ",
+                "complement": "L a S 09:00 a 20:30",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.6206779,
+                  -34.64903
+                ]
+              },
+              "dockId": "2",
+              "friendlyName": "Retiro en sucursal GRID MORÓN, Av. Rivadavia 18276 (G08)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1abd270)",
+            "name": "Nuestras sucursales (1abd270)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1abd270",
+                "postalCode": "1754",
+                "city": "BSAS GBA",
+                "state": "BSAS GBA",
+                "country": "ARG",
+                "street": "Brig. Gral. Juan Manuel de Rosas 3910 Planta baja",
+                "number": "(G06)",
+                "neighborhood": "Tienda Grid",
+                "complement": "Todos los dias de 10:00 a 22:00 hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.55766,
+                  -34.68466
+                ]
+              },
+              "dockId": "2",
+              "friendlyName": "Retiro en sucursal GRID SAN JUSTO SHOPPING (G06)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (b8dde3b5-5552-4fee-a978-dcdcabf42402)",
+            "name": "Nuestras sucursales (b8dde3b5-5552-4fee-a978-dcdcabf42402)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "b8dde3b5-5552-4fee-a978-dcdcabf42402",
+                "postalCode": "1754",
+                "city": null,
+                "state": "Buenos Aires",
+                "country": "ARG",
+                "street": "Brig. Gral. Juan Manuel de Rosas 3910",
+                "number": "(M03)",
+                "neighborhood": null,
+                "complement": "Todos los dias de 10:00 a 22:00 hs",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.55764799999997,
+                  -34.684898
+                ]
+              },
+              "dockId": "2",
+              "friendlyName": "Retiro en sucursal MARK SAN JUSTO SHOPPING (M03)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          },
+          {
+            "id": "Nuestras sucursales (1b3e6e4)",
+            "name": "Nuestras sucursales (1b3e6e4)",
+            "shippingEstimate": "10bd",
+            "deliveryWindow": null,
+            "price": 0,
+            "deliveryChannel": "pickup-in-point",
+            "pickupStoreInfo": {
+              "additionalInfo": "Retiro en sucursal",
+              "address": {
+                "addressType": "pickup",
+                "receiverName": null,
+                "addressId": "1b3e6e4",
+                "postalCode": "1663",
+                "city": "BSAS GBA",
+                "state": "BSAS GBA",
+                "country": "ARG",
+                "street": "Avenida Presidente Perón 1320",
+                "number": "(G15)",
+                "neighborhood": "Tienda Grid",
+                "complement": "L a S 9:00 a 20:30",
+                "reference": null,
+                "geoCoordinates": [
+                  -58.7089043,
+                  -34.5440636
+                ]
+              },
+              "dockId": "2",
+              "friendlyName": "Retiro en sucursal GRID SAN MIGUEL, Av. Presidente Perón 1320 (G15)",
+              "isPickupStore": true
+            },
+            "polygonName": "Argentina"
+          }
+        ],
+        "shipsTo": [
+          "ARG"
+        ],
+        "deliveryIds": [
+          {
+            "courierId": "3",
+            "courierName": "Transporte interno Essential ",
+            "dockId": "2",
+            "quantity": 1,
+            "warehouseId": "2"
+          }
+        ],
+        "deliveryChannel": "pickup-in-point",
+        "pickupStoreInfo": {
+          "additionalInfo": "Retiro en sucursal",
+          "address": {
+            "addressType": "pickup",
+            "receiverName": null,
+            "addressId": "11e4f73",
+            "postalCode": "1708",
+            "city": "Castelar",
+            "state": "Castelar",
+            "country": "ARG",
+            "street": "Av. Brig. Gral. Juan Manuel de Rosas 658",
+            "number": "(G21)",
+            "neighborhood": "Tienda Grid",
+            "complement": "L a D de 10 a 22hs",
+            "reference": null,
+            "geoCoordinates": [
+              -58.6293856,
+              -34.6338405
+            ]
+          },
+          "dockId": "2",
+          "friendlyName": "Retiro en sucursal GRID PLAZA OESTE (G21)",
+          "isPickupStore": true
+        },
+        "addressId": "11e4f73",
+        "polygonName": "Argentina"
+      }
+    ],
+    "trackingHints": null,
+    "selectedAddresses": [
+      {
+        "addressId": "11e4f73",
+        "addressType": "pickup",
+        "receiverName": "Yanina Chaves",
+        "street": "Av. Brig. Gral. Juan Manuel de Rosas 658",
+        "number": "(G21)",
+        "complement": "L a D de 10 a 22hs",
+        "neighborhood": "Tienda Grid",
+        "postalCode": "1708",
+        "city": "Castelar",
+        "state": "Castelar",
+        "country": "ARG",
+        "reference": null,
+        "geoCoordinates": [
+          -58.6293856,
+          -34.6338405
+        ]
+      }
+    ]
+  },
+  "paymentData": {
+    "transactions": [
+      {
+        "isActive": true,
+        "transactionId": "12EBD5EECCEF480AAA94B0D1D49EB425",
+        "merchantName": "DASH",
+        "payments": [
+          {
+            "id": "338D1629E0384EBBB149883F9040D4A6",
+            "paymentSystem": "18",
+            "paymentSystemName": "Mercado Pago",
+            "value": 19900,
+            "installments": 1,
+            "referenceValue": 19900,
+            "cardHolder": null,
+            "cardNumber": null,
+            "firstDigits": null,
+            "lastDigits": null,
+            "cvv2": null,
+            "expireMonth": null,
+            "expireYear": null,
+            "url": null,
+            "giftCardId": null,
+            "giftCardName": null,
+            "giftCardCaption": null,
+            "redemptionCode": null,
+            "group": "MercadoPago",
+            "tid": "4560230607",
+            "dueDate": null,
+            "connectorResponses": {
+              "Tid": "4560230607",
+              "ReturnCode": "approved",
+              "Message": "OJOTAS IPANEMA CLASSICA 241-7009-40"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "packageAttachment": {
+    "packages": []
+  },
+  "sellers": [
+    {
+      "id": "1",
+      "name": "dash",
+      "logo": ""
+    }
+  ],
+  "callCenterOperatorData": null,
+  "followUpEmail": "b8373e6d76f447f1afae65e120d763a1@ct.vtex.com.br",
+  "lastMessage": null,
+  "hostname": "dash",
+  "invoiceData": null,
+  "changesAttachment": null,
+  "openTextField": null,
+  "roundingError": 0,
+  "orderFormId": "a58508e1db5b4e8c9c063f3ff3a6d087",
+  "commercialConditionData": null,
+  "isCompleted": true,
+  "customData": null,
+  "storePreferencesData": {
+    "countryCode": "ARG",
+    "currencyCode": "ARS",
+    "currencyFormatInfo": {
+      "CurrencyDecimalDigits": 2,
+      "CurrencyDecimalSeparator": ",",
+      "CurrencyGroupSeparator": ".",
+      "CurrencyGroupSize": 3,
+      "StartsWithCurrencySymbol": true
+    },
+    "currencyLocale": 11274,
+    "currencySymbol": "$",
+    "timeZone": "Argentina Standard Time"
+  },
+  "allowCancellation": true,
+  "allowEdition": false,
+  "isCheckedIn": false,
+  "marketplace": {
+    "baseURL": "http://oms.vtexinternal.com.br/api/oms?an=dash",
+    "isCertified": null,
+    "name": "dash"
+  },
+  "authorizedDate": "2019-03-02T20:39:59.0000000+00:00",
+  "invoicedDate": null
+}

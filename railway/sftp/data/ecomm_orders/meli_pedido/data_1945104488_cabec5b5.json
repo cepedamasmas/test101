@@ -1,0 +1,158 @@
+{
+  "id": 1945104488,
+  "date_created": "2019-02-21T19:29:45.000-04:00",
+  "date_closed": "2019-02-21T19:29:48.000-04:00",
+  "last_updated": "2019-02-26T06:03:14.000-04:00",
+  "manufacturing_ending_date": null,
+  "feedback": {
+    "sale": null,
+    "purchase": null
+  },
+  "mediations": [],
+  "comments": null,
+  "pack_id": null,
+  "pickup_id": null,
+  "order_request": {
+    "return": null,
+    "change": null
+  },
+  "fulfilled": true,
+  "total_amount": 1599,
+  "paid_amount": 1599,
+  "coupon": {
+    "id": null,
+    "amount": 0
+  },
+  "expiration_date": "2019-03-21T19:29:48.000-04:00",
+  "order_items": [
+    {
+      "item": {
+        "id": "MLA753905760",
+        "title": "Botines Nike Tiempox Rio Iv Tf Niño",
+        "category_id": "MLA3090",
+        "variation_id": 28833127244,
+        "seller_custom_field": null,
+        "variation_attributes": [
+          {
+            "id": "SIZE",
+            "name": "Talle",
+            "value_id": "4608574",
+            "value_name": "35"
+          },
+          {
+            "id": "COLOR",
+            "name": "Color",
+            "value_id": "51993",
+            "value_name": "Rojo"
+          }
+        ],
+        "warranty": "6 Meses - Contra Defecto de Fábrica",
+        "condition": "new",
+        "seller_sku": null
+      },
+      "quantity": 1,
+      "unit_price": 1599,
+      "full_unit_price": 1817,
+      "currency_id": "ARS",
+      "manufacturing_days": null
+    }
+  ],
+  "currency_id": "ARS",
+  "payments": [
+    {
+      "id": 4534665375,
+      "order_id": 1945104488,
+      "payer_id": 139223136,
+      "collector": {
+        "id": 177433927
+      },
+      "card_id": 293260204,
+      "site_id": "MLA",
+      "reason": "Botines Nike Tiempox Rio Iv Tf Niño",
+      "payment_method_id": "master",
+      "currency_id": "ARS",
+      "installments": 3,
+      "issuer_id": "1016",
+      "atm_transfer_reference": {
+        "company_id": null,
+        "transaction_id": null
+      },
+      "coupon_id": null,
+      "activation_uri": null,
+      "operation_type": "regular_payment",
+      "payment_type": "credit_card",
+      "available_actions": [
+        "refund"
+      ],
+      "status": "approved",
+      "status_code": null,
+      "status_detail": "accredited",
+      "transaction_amount": 1599,
+      "taxes_amount": 0,
+      "shipping_cost": 0,
+      "coupon_amount": 0,
+      "overpaid_amount": 0,
+      "total_paid_amount": 1599,
+      "installment_amount": 533,
+      "deferred_period": null,
+      "date_approved": "2019-02-21T19:29:48.000-04:00",
+      "authorization_code": "697793",
+      "transaction_order_id": null,
+      "date_created": "2019-02-21T19:29:46.000-04:00",
+      "date_last_modified": "2019-02-21T19:29:48.000-04:00"
+    }
+  ],
+  "shipping": {
+    "id": 27868195791
+  },
+  "status": "paid",
+  "status_detail": null,
+  "tags": [
+    "delivered",
+    "paid"
+  ],
+  "buyer": {
+    "id": 139223136,
+    "nickname": "ELIASABDANNA",
+    "email": "abypas.54ypf6+2-oge4tinjrga2dkmjy@mail.mercadolibre.com",
+    "phone": {
+      "area_code": null,
+      "extension": "",
+      "number": "42602872",
+      "verified": false
+    },
+    "alternative_phone": {
+      "area_code": "",
+      "extension": "",
+      "number": ""
+    },
+    "first_name": "Abdanna",
+    "last_name": "Elias",
+    "billing_info": {
+      "doc_type": "DNI",
+      "doc_number": "92886537"
+    }
+  },
+  "seller": {
+    "id": 177433927,
+    "nickname": "GRIDANNEXSA",
+    "email": "gannexs.pgrqjy+2-oge4tinjrga2dkmzr@mail.mercadolibre.com",
+    "phone": {
+      "area_code": null,
+      "extension": "",
+      "number": "32202121",
+      "verified": false
+    },
+    "alternative_phone": {
+      "area_code": "",
+      "extension": "",
+      "number": ""
+    },
+    "first_name": "Grid",
+    "last_name": "Annex s.a"
+  },
+  "taxes": {
+    "amount": null,
+    "currency_id": null
+  }
+}

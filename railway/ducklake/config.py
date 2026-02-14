@@ -48,6 +48,15 @@ SFTP_FILES = {
     "reclamos": {"remote": "/upload/reclamos.txt", "format": "csv", "opts": {"sep": "|"}},
 }
 
+# --- SFTP folders (carpetas con JSONs individuales) ---
+SFTP_FOLDERS = {
+    "ecomm_vtex_pedido": {"remote": "/upload/ecomm_orders/vtex_pedido", "format": "json"},
+    "ecomm_meli_pedido": {"remote": "/upload/ecomm_orders/meli_pedido", "format": "json"},
+    "ecomm_meli_shipping": {"remote": "/upload/ecomm_orders/meli_shipping", "format": "json"},
+    "ecomm_meli_pickup": {"remote": "/upload/ecomm_orders/meli_pickup", "format": "json"},
+    "ecomm_garbarino_pedido": {"remote": "/upload/ecomm_orders/garbarino_pedido", "format": "json"},
+}
+
 # --- APIs ---
 API_SOURCES = {
     "dolar": {
@@ -71,6 +80,11 @@ BASE_RAW_TABLES: dict[str, tuple[str, str]] = {
     "catalogo_proveedor": ("sftp", "catalogo_proveedor"),
     "liquidacion_mp": ("sftp", "liquidacion_mp"),
     "reclamos": ("sftp", "reclamos"),
+    "ecomm_vtex_pedido": ("sftp", "ecomm_vtex_pedido"),
+    "ecomm_meli_pedido": ("sftp", "ecomm_meli_pedido"),
+    "ecomm_meli_shipping": ("sftp", "ecomm_meli_shipping"),
+    "ecomm_meli_pickup": ("sftp", "ecomm_meli_pickup"),
+    "ecomm_garbarino_pedido": ("sftp", "ecomm_garbarino_pedido"),
 }
 
 

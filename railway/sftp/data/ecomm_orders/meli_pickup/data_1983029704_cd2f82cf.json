@@ -1,0 +1,40 @@
+{
+  "id": "13611890",
+  "store_id": 13057015,
+  "order_id": 1983029704,
+  "purchase_id": null,
+  "item_id": "MLA744309849",
+  "items_id": [
+    {
+      "ItemID": "MLA744309849",
+      "VariationID": null
+    }
+  ],
+  "buyer_id": 167916500,
+  "date_created": "2019-04-08T04:10:10Z",
+  "date_ready": "2019-04-12T01:10:13-03:00",
+  "availability": 96,
+  "status": "active",
+  "store_info": {
+    "id": "13057015",
+    "user_id": "177433927",
+    "description": "Sucursal GRID ALTO AVELLANEDA",
+    "date_creation": "2019-03-29T15:25:01.684Z",
+    "open_hours": "Lunes a domingos y feriados de 10 a 22 hs.",
+    "status": "active",
+    "tags": [
+      "pickup"
+    ],
+    "phone": null,
+    "location": {
+      "address_line": "Gral. Güemes 897 | Local 121 - Avellaneda - GBA",
+      "latitude": -34.6767689,
+      "longitude": -58.3703172,
+      "id": "TUxBQ0FWRTc5OTQ1",
+      "type": "city"
+    }
+  },
+  "pickup_person": {
+    "full_name": "pedro faggiano"
+  }
+}
