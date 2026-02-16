@@ -11,4 +11,5 @@ sqlalchemy==2.0.37
 dbt-core==1.9.4
 dbt-duckdb==1.9.1
 dagster==1.9.13
+dagster-dbt==0.25.13
 dagster-webserver==1.9.13

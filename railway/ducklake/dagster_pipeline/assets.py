@@ -3,14 +3,15 @@
 Cada asset representa un paso del pipeline:
   1. raw_ingestion: Extrae datos de MySQL, SFTP, APIs -> Parquet RAW
   2. duckdb_catalog: Crea vistas RAW en DuckDB
-  3. dbt_models: Ejecuta dbt (staging + consume) sobre DuckDB
+  3. dbt_techstore_assets: Cada modelo dbt como asset individual (staging + consume)
   4. postgres_export: Replica todo a PostgreSQL
 """
 
-import subprocess
+from pathlib import Path
 
 import duckdb
 from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataValue
+from dagster_dbt import DbtCliResource, dbt_assets, DbtProject
 
 from config import (
     MYSQL_CONFIG, SFTP_CONFIG, PG_CONFIG, API_SOURCES,
@@ -21,6 +22,10 @@ from connectors import MySQLConnector, SFTPConnector, APIConnector
 from layers import RawLayer
 from exporters import DuckDBExporter, PostgresExporter
 from reporter import Reporter
+
+# --- dbt project para dagster-dbt ---
+dbt_project = DbtProject(project_dir=DBT_PROJECT_DIR)
+dbt_project.prepare_if_dev()
 
 
 @asset(group_name="ingestion", description="Extrae datos de MySQL, SFTP y APIs a RAW parquet")
@@ -91,56 +96,18 @@ def duckdb_catalog(context: AssetExecutionContext) -> MaterializeResult:
     )
 
 
-@asset(
-    group_name="transform",
-    deps=[duckdb_catalog],
-    description="Ejecuta dbt: RAW -> STAGING -> CONSUME",
+@dbt_assets(
+    manifest=dbt_project.manifest_path,
+    dagster_dbt_translator=None,
 )
-def dbt_models(context: AssetExecutionContext) -> MaterializeResult:
-    """Paso 3: Ejecuta dbt run + dbt test sobre DuckDB."""
-    dbt_dir = str(DBT_PROJECT_DIR)
-
-    # dbt run
-    context.log.info("Ejecutando dbt run...")
-    result = subprocess.run(
-        ["dbt", "run", "--project-dir", dbt_dir, "--profiles-dir", dbt_dir],
-        capture_output=True, text=True,
-    )
-    context.log.info(result.stdout)
-    if result.returncode != 0:
-        context.log.error(result.stderr)
-        raise Exception(f"dbt run falló: {result.stderr}")
-
-    # dbt test
-    context.log.info("Ejecutando dbt test...")
-    test_result = subprocess.run(
-        ["dbt", "test", "--project-dir", dbt_dir, "--profiles-dir", dbt_dir],
-        capture_output=True, text=True,
-    )
-    context.log.info(test_result.stdout)
-    if test_result.returncode != 0:
-        context.log.warning(f"Algunos tests fallaron: {test_result.stderr}")
-
-    # Verificar tablas creadas
-    conn = duckdb.connect(str(DUCKDB_PATH))
-    try:
-        exporter = DuckDBExporter(conn, DATA)
-        counts = exporter.verify_dbt_tables()
-    finally:
-        conn.close()
-
-    return MaterializeResult(
-        metadata={
-            "staging_tables": MetadataValue.int(counts.get("staging", 0)),
-            "consume_tables": MetadataValue.int(counts.get("consume", 0)),
-            "dbt_test_passed": MetadataValue.bool(test_result.returncode == 0),
-        }
-    )
+def dbt_techstore_assets(context: AssetExecutionContext, dbt: DbtCliResource):
+    """Paso 3: Cada modelo dbt como asset individual con linaje."""
+    yield from dbt.cli(["build"], context=context).stream()
 
 
 @asset(
     group_name="export",
-    deps=[dbt_models],
+    deps=[dbt_techstore_assets],
     description="Exporta DuckDB a PostgreSQL para acceso remoto",
 )
 def postgres_export(context: AssetExecutionContext) -> MaterializeResult:

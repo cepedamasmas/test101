@@ -10,7 +10,7 @@ from datetime import datetime
 
 from dagster import materialize
 
-from dagster_pipeline.assets import raw_ingestion, duckdb_catalog, dbt_models, postgres_export
+from dagster_pipeline.definitions import defs
 
 
 def main():
@@ -21,7 +21,8 @@ def main():
     print("=" * 70)
 
     result = materialize(
-        assets=[raw_ingestion, duckdb_catalog, dbt_models, postgres_export],
+        assets=list(defs.get_asset_graph().assets_defs),
+        resources=defs.get_resource_defs(),
     )
 
     if result.success:
