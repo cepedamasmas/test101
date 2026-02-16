@@ -58,3 +58,11 @@ models:
     columns:
       - name: reclamo_id
         tests: [not_null]
+
+  - name: stg_proveedores_a
+    description: "Productos de proveedores cuyo nombre empieza con 'A'"
+    columns:
+      - name: codigo
+        tests: [not_null, unique]
+      - name: proveedor
+        tests: [not_null]
