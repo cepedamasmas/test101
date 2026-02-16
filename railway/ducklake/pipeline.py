@@ -8,7 +8,7 @@ Puede ejecutarse de 2 formas:
 import sys
 from datetime import datetime
 
-from dagster import materialize
+from dagster import materialize, in_process_executor
 
 from dagster_pipeline.definitions import defs
 
@@ -23,6 +23,7 @@ def main():
     result = materialize(
         assets=list(defs.get_asset_graph().assets_defs),
         resources=defs.get_resource_defs(),
+        executor_def=in_process_executor,
     )
 
     if result.success:
