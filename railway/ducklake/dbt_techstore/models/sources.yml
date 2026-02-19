@@ -15,8 +15,3 @@ sources:
       - name: reclamos
       - name: dolar
       - name: feriados
-      - name: ecomm_vtex_pedido
-      - name: ecomm_meli_pedido
-      - name: ecomm_meli_shipping
-      - name: ecomm_meli_pickup
-      - name: ecomm_garbarino_pedido
