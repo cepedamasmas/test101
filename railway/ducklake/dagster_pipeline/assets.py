@@ -99,6 +99,7 @@ def duckdb_catalog(context: AssetExecutionContext) -> MaterializeResult:
 @dbt_assets(
     manifest=dbt_project.manifest_path,
     dagster_dbt_translator=None,
+    deps=[duckdb_catalog],
 )
 def dbt_techstore_assets(context: AssetExecutionContext, dbt: DbtCliResource):
     """Paso 3: Cada modelo dbt como asset individual con linaje."""
