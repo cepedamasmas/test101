@@ -10,7 +10,7 @@ from datetime import datetime
 
 from dagster import materialize, in_process_executor
 
-from dagster_pipeline.definitions import defs
+from dagster_pipeline.definitions import all_assets, resources
 
 
 def main():
@@ -21,8 +21,8 @@ def main():
     print("=" * 70)
 
     result = materialize(
-        assets=list(defs.get_asset_graph().assets_defs),
-        resources=defs.get_resource_defs(),
+        assets=all_assets,
+        resources=resources,
         executor_def=in_process_executor,
     )
 

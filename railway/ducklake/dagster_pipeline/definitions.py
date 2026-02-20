@@ -8,16 +8,18 @@ from . import assets
 
 all_assets = load_assets_from_modules([assets])
 
+resources = {
+    "dbt": DbtCliResource(
+        project_dir=DBT_PROJECT_DIR,
+        profiles_dir=DBT_PROJECT_DIR,
+    ),
+}
+
 defs = Definitions(
     assets=all_assets,
     jobs=[
         define_asset_job("full_pipeline", selection="*", executor_def=in_process_executor),
     ],
-    resources={
-        "dbt": DbtCliResource(
-            project_dir=DBT_PROJECT_DIR,
-            profiles_dir=DBT_PROJECT_DIR,
-        ),
-    },
+    resources=resources,
     executor=in_process_executor,
 )
