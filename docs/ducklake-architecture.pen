@@ -1,5 +1,5 @@
 {
-  "version": "2.7",
+  "version": "2.8",
   "children": [
     {
       "type": "frame",
@@ -62,7 +62,7 @@
               "id": "z1DBP",
               "name": "subtitle",
               "fill": "#52525B",
-              "content": "Data Lake Framework  //  DuckDB + Parquet  //  Config-Driven",
+              "content": "Data Lake Framework  //  DuckDB + dbt + Dagster  //  Config-Driven",
               "fontFamily": "Roboto Mono",
               "fontSize": 14,
               "fontWeight": "500"
@@ -74,7 +74,8 @@
               "fill": "#71717A",
               "content": "Alternativa ligera a Snowflake/Databricks para 100GB-10TB",
               "fontFamily": "Inter",
-              "fontSize": 16
+              "fontSize": 16,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -165,7 +166,8 @@
                       "content": "Datos crudos 1:1 desde las fuentes.\nAppend-only, nunca se borran.\nParticionado por fecha de ingesta.",
                       "lineHeight": 1.5,
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -233,7 +235,8 @@
                       "content": "Limpieza, deduplicación, validación.\nCasts de tipos, filtros, quality checks.\nUna sola versión limpia por tabla.",
                       "lineHeight": 1.5,
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -301,7 +304,8 @@
                       "content": "Tablas agregadas listas para BI/ML.\nJoins, métricas, KPIs calculados.\nOptimizadas para consulta directa.",
                       "lineHeight": 1.5,
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -340,7 +344,7 @@
               "id": "WGSUn",
               "name": "flowLabel",
               "fill": "#71717A",
-              "content": "// DATA_FLOW  —  PIPELINE_ECOMMERCE",
+              "content": "// PIPELINE_FLOW  —  4_DAGSTER_ASSETS",
               "fontFamily": "Roboto Mono",
               "fontSize": 11,
               "fontWeight": "600"
@@ -453,7 +457,7 @@
                       "fill": "#52525B",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Parquet\nAppend-only\nHive partitions",
+                      "content": "Parquet\nAppend-only\nParticionado",
                       "textAlign": "center",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 9,
@@ -507,7 +511,7 @@
                       "fill": "#52525B",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Clean + Dedup\nCast types\nQuality checks",
+                      "content": "dbt SQL models\n10 stg_* con tests\nRef dependencies",
                       "textAlign": "center",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 9,
@@ -561,7 +565,7 @@
                       "fill": "#52525B",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Aggregations\nJoins + KPIs\nBI-ready",
+                      "content": "dbt SQL models\n7 KPIs & métricas\nBI-ready",
                       "textAlign": "center",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 9,
@@ -625,13 +629,32 @@
                       "fill": "#52525B",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "DBeaver\nPostgreSQL\nBI Tools",
+                      "content": "PostgreSQL\nDashboard\nBI Tools",
                       "textAlign": "center",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 9,
                       "fontWeight": "500"
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "IcxmJ",
+              "name": "dagRow",
+              "width": "fill_container",
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "E8h24",
+                  "name": "dagTxt",
+                  "fill": "#52525B",
+                  "content": "raw_ingestion  >>>  duckdb_catalog  >>>  dbt_techstore_assets (×17)  >>>  postgres_export",
+                  "fontFamily": "Roboto Mono",
+                  "fontSize": 11,
+                  "fontWeight": "500"
                 }
               ]
             }
@@ -665,7 +688,7 @@
                   "id": "yTfSE",
                   "name": "stackLabel",
                   "fill": "#71717A",
-                  "content": "// TECH_STACK",
+                  "content": "// TECH_STACK  —  HERRAMIENTAS_Y_ROLES",
                   "fontFamily": "Roboto Mono",
                   "fontSize": 11,
                   "fontWeight": "600"
@@ -705,7 +728,7 @@
                           "id": "zPjmU",
                           "name": "b1t",
                           "fill": "#F4F4F5",
-                          "content": "DuckDB 1.0+",
+                          "content": "DuckDB 1.2",
                           "fontFamily": "Roboto Mono",
                           "fontSize": 10,
                           "fontWeight": "600"
@@ -809,7 +832,7 @@
                           "id": "9im0t",
                           "name": "b4t",
                           "fill": "#F4F4F5",
-                          "content": "Pydantic v2",
+                          "content": "dbt-duckdb",
                           "fontFamily": "Roboto Mono",
                           "fontSize": 10,
                           "fontWeight": "600"
@@ -834,7 +857,7 @@
                           "id": "w7Tvg",
                           "name": "b5t",
                           "fill": "#F4F4F5",
-                          "content": "Click CLI",
+                          "content": "Dagster 1.9",
                           "fontFamily": "Roboto Mono",
                           "fontSize": 10,
                           "fontWeight": "600"
@@ -859,7 +882,7 @@
                           "id": "DXcfX",
                           "name": "b6t",
                           "fill": "#F4F4F5",
-                          "content": "Loguru",
+                          "content": "dagster-dbt",
                           "fontFamily": "Roboto Mono",
                           "fontSize": 10,
                           "fontWeight": "600"
@@ -884,7 +907,7 @@
                           "id": "roSkF",
                           "name": "b7t",
                           "fill": "#F4F4F5",
-                          "content": "PyYAML",
+                          "content": "Pandas",
                           "fontFamily": "Roboto Mono",
                           "fontSize": 10,
                           "fontWeight": "600"
@@ -909,7 +932,7 @@
                           "id": "gRaWq",
                           "name": "b8t",
                           "fill": "#F4F4F5",
-                          "content": "Docker",
+                          "content": "Railway",
                           "fontFamily": "Roboto Mono",
                           "fontSize": 10,
                           "fontWeight": "600"
@@ -933,7 +956,7 @@
                   "id": "3q5Ye",
                   "name": "structLabel",
                   "fill": "#71717A",
-                  "content": "// PROJECT_STRUCTURE",
+                  "content": "// PROJECT_STRUCTURE  —  RAILWAY_DEPLOY",
                   "fontFamily": "Roboto Mono",
                   "fontSize": 11,
                   "fontWeight": "600"
@@ -958,7 +981,7 @@
                       "id": "sISwi",
                       "name": "s1",
                       "fill": "#22C55E",
-                      "content": "ducklake/",
+                      "content": "railway/ducklake/",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 11,
                       "fontWeight": "700"
@@ -968,7 +991,7 @@
                       "id": "KcXAv",
                       "name": "s2",
                       "fill": "#A1A1AA",
-                      "content": "  core/        config, catalog, orchestrator, quality",
+                      "content": "  config.py          configuración centralizada (env vars)",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
@@ -978,7 +1001,7 @@
                       "id": "INo7U",
                       "name": "s3",
                       "fill": "#A1A1AA",
-                      "content": "  connectors/  MySQL, CSV (heredan BaseConnector)",
+                      "content": "  connectors/        MySQL, SFTP, API (heredan BaseConnector)",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
@@ -988,7 +1011,7 @@
                       "id": "oNiMH",
                       "name": "s4",
                       "fill": "#A1A1AA",
-                      "content": "  layers/      RawLayer, StagingLayer, ConsumeLayer",
+                      "content": "  layers/raw.py      RawLayer.save() append-only, particionado",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
@@ -998,7 +1021,7 @@
                       "id": "P3Rza",
                       "name": "s5",
                       "fill": "#A1A1AA",
-                      "content": "  transforms/  cleaning, validation, enrichment",
+                      "content": "  dbt_techstore/     17 modelos dbt (staging + consume)",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
@@ -1008,7 +1031,7 @@
                       "id": "kToZN",
                       "name": "s6",
                       "fill": "#A1A1AA",
-                      "content": "  cli/         init, extract, run, catalog, status",
+                      "content": "  dagster_pipeline/  4 Dagster assets con linaje visual",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
@@ -1018,7 +1041,7 @@
                       "id": "H6wPm",
                       "name": "s7",
                       "fill": "#A1A1AA",
-                      "content": "  utils/       logger, duckdb_helper, parquet_helper",
+                      "content": "  exporters/         DuckDB exporter + PostgreSQL exporter",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
@@ -1036,7 +1059,7 @@
                       "id": "auxpp",
                       "name": "s8",
                       "fill": "#71717A",
-                      "content": "config/        YAML configs (sources, pipelines, settings)",
+                      "content": "  pipeline.py        Dagster materialize() en 2 fases",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
@@ -1046,7 +1069,7 @@
                       "id": "kRynt",
                       "name": "s9",
                       "fill": "#71717A",
-                      "content": "docker/        Demo e-commerce completo",
+                      "content": "railway/sftp/        servidor SFTP (atmoz/sftp)",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
@@ -1056,7 +1079,7 @@
                       "id": "qLpwG",
                       "name": "s10",
                       "fill": "#71717A",
-                      "content": "tests/         pytest (unit + integration)",
+                      "content": "railway/dashboard/   FastAPI app (Railway service)",
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
@@ -1088,7 +1111,7 @@
               "id": "qeIrk",
               "name": "demoLabel",
               "fill": "#71717A",
-              "content": "// DOCKER_DEMO  —  TECHSTORE_ARGENTINA",
+              "content": "// INFRAESTRUCTURA  —  RAILWAY_DEPLOY",
               "fontFamily": "Roboto Mono",
               "fontSize": 11,
               "fontWeight": "600"
@@ -1137,7 +1160,7 @@
                           "id": "LJlyq",
                           "name": "demoTxt",
                           "fill": "#F4F4F5",
-                          "content": "Ejecutar",
+                          "content": "Auto-Deploy",
                           "fontFamily": "Space Grotesk",
                           "fontSize": 16,
                           "fontWeight": "700"
@@ -1160,7 +1183,7 @@
                           "id": "1uMgY",
                           "name": "cmdTxt",
                           "fill": "#22C55E",
-                          "content": ".\\run.bat",
+                          "content": "git push main",
                           "fontFamily": "Roboto Mono",
                           "fontSize": 14,
                           "fontWeight": "700"
@@ -1174,10 +1197,11 @@
                       "fill": "#A1A1AA",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Limpia data anterior, levanta MySQL +\nSFTP + PostgreSQL, ejecuta el pipeline\ncompleto con las 3 capas.",
+                      "content": "Cada push a main redeploya en Railway.\nGitHub Actions sincroniza init.sql\ny datos SFTP entre docker/ y railway/.",
                       "lineHeight": 1.5,
                       "fontFamily": "Inter",
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -1218,7 +1242,7 @@
                           "id": "L7KHm",
                           "name": "connTxt",
                           "fill": "#F4F4F5",
-                          "content": "Conexiones",
+                          "content": "Servicios Railway",
                           "fontFamily": "Space Grotesk",
                           "fontSize": 16,
                           "fontWeight": "700"
@@ -1232,7 +1256,7 @@
                       "fill": "#A1A1AA",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "DuckDB     localhost:techstore.duckdb\nPostgreSQL localhost:5433\n           user: techstore\n           pass: techstore123\n           db:   techstore_lake",
+                      "content": "ducklake   DuckDB + dbt + Dagster\nsftp       atmoz/sftp + volumen\nmysql      MySQL 8.0 (fuente)\npostgres   PostgreSQL (destino)\ndashboard  FastAPI app",
                       "lineHeight": 1.5,
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
@@ -1291,11 +1315,621 @@
                       "fill": "#A1A1AA",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "Config-driven (YAML)\nIdempotente\nIncremental por defecto\nRAW append-only\n100GB - 10TB",
+                      "content": "Config-driven: config.py + dbt YAML\nIdempotente: re-ejecutar sin duplicar\nRAW append-only: nunca sobrescribir\nSQL puro en transformaciones (dbt)\nEscala: 100GB - 10TB",
                       "lineHeight": 1.5,
                       "fontFamily": "Roboto Mono",
                       "fontSize": 10,
                       "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "AxCuM",
+      "x": 1300,
+      "y": 0,
+      "name": "TechStore Argentina",
+      "width": 1200,
+      "fill": "#16171B",
+      "layout": "vertical",
+      "gap": 48,
+      "padding": [
+        48,
+        60,
+        60,
+        60
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "vzH41",
+          "name": "tsHdr",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "wfqCc",
+              "name": "tsLogoRow",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "OfRdj",
+                  "name": "tsIco",
+                  "width": 40,
+                  "height": 40,
+                  "iconFontName": "shopping-bag",
+                  "iconFontFamily": "lucide",
+                  "fill": "#F59E0B"
+                },
+                {
+                  "type": "text",
+                  "id": "x5JzQ",
+                  "name": "tsLogoTxt",
+                  "fill": "#F4F4F5",
+                  "content": "TECHSTORE ARGENTINA",
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 42,
+                  "fontWeight": "700",
+                  "letterSpacing": -1
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "dv3lo",
+              "name": "tsSub",
+              "fill": "#52525B",
+              "content": "Implementación E-commerce  //  Multi-canal  //  sobre DuckLake",
+              "fontFamily": "Roboto Mono",
+              "fontSize": 14,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "bbAMA",
+              "name": "tsTag",
+              "fill": "#71717A",
+              "content": "MySQL + SFTP + APIs  →  17 modelos dbt  →  PostgreSQL + Dashboard",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "afA26",
+          "name": "tsDiv1",
+          "fill": "#2A2B30",
+          "width": "fill_container",
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "FiK5v",
+          "name": "tsSrcSec",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "isstM",
+              "name": "tsSrcLbl",
+              "fill": "#71717A",
+              "content": "// FUENTES_DE_DATOS",
+              "fontFamily": "Roboto Mono",
+              "fontSize": 11,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "MHKp7",
+              "name": "tsSrcRow",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "GIkhI",
+                  "name": "tsMySQL",
+                  "width": "fill_container",
+                  "fill": "#1E2026",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#22C55E"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "hvCiX",
+                      "name": "tsMySQLHdr",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "k1XjO",
+                          "name": "tsMySQLIco",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "database",
+                          "iconFontFamily": "lucide",
+                          "fill": "#22C55E"
+                        },
+                        {
+                          "type": "text",
+                          "id": "J1Git",
+                          "name": "tsMySQLTtl",
+                          "fill": "#22C55E",
+                          "content": "MySQL  (4 tablas)",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "3tsme",
+                      "name": "tsMySQLList",
+                      "fill": "#A1A1AA",
+                      "content": "clientes\npedidos\ndetalle_pedidos\nproductos",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "4fKiy",
+                  "name": "tsSFTP",
+                  "width": "fill_container",
+                  "fill": "#1E2026",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#F59E0B"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "R80Nf",
+                      "name": "tsSFTPHdr",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "cDJbP",
+                          "name": "tsSFTPIco",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "folder-open",
+                          "iconFontFamily": "lucide",
+                          "fill": "#F59E0B"
+                        },
+                        {
+                          "type": "text",
+                          "id": "YH9xy",
+                          "name": "tsSFTPTtl",
+                          "fill": "#F59E0B",
+                          "content": "SFTP  (5 archivos + 5 carpetas)",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "YBjzS",
+                      "name": "tsSFTPList",
+                      "fill": "#A1A1AA",
+                      "content": "envios_courier.csv\npagos_banco.xlsx\nliquidacion_mp.json\ncatalogo_proveedor.xml\nreclamos.txt\n──\necomm_orders/vtex_pedido/\necomm_orders/meli_pedido/\necomm_orders/meli_shipping/\necomm_orders/meli_pickup/\necomm_orders/garbarino_pedido/",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "aWI6c",
+                  "name": "tsAPI",
+                  "width": "fill_container",
+                  "fill": "#1E2026",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#818CF8"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "c5F8E",
+                      "name": "tsAPIHdr",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "CjmJs",
+                          "name": "tsAPIIco",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "globe",
+                          "iconFontFamily": "lucide",
+                          "fill": "#818CF8"
+                        },
+                        {
+                          "type": "text",
+                          "id": "6jhP5",
+                          "name": "tsAPITtl",
+                          "fill": "#818CF8",
+                          "content": "APIs  (2 endpoints)",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Rq8i4",
+                      "name": "tsAPIList",
+                      "fill": "#A1A1AA",
+                      "content": "Dólar Blue\n(bluelytics.com.ar)\n\nFeriados AR\n(argentinadatos.com)",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "1m1Kl",
+          "name": "tsDiv2",
+          "fill": "#2A2B30",
+          "width": "fill_container",
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "ZKSaM",
+          "name": "tsModels",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "69YE4",
+              "name": "tsModLbl",
+              "fill": "#71717A",
+              "content": "// DBT_MODELS  —  17_MODELOS_SQL",
+              "fontFamily": "Roboto Mono",
+              "fontSize": 11,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "Cvofe",
+              "name": "tsModRow",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "vfXgS",
+                  "name": "tsStg",
+                  "width": "fill_container",
+                  "fill": "#1E2026",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#F59E0B"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "CJHE9",
+                      "name": "tsStgHdr",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "iGCBp",
+                          "name": "tsStgIco",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "funnel",
+                          "iconFontFamily": "lucide",
+                          "fill": "#F59E0B"
+                        },
+                        {
+                          "type": "text",
+                          "id": "UP9Wm",
+                          "name": "tsStgTtl",
+                          "fill": "#F59E0B",
+                          "content": "STAGING  (10 modelos)",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "2sAZ1",
+                      "name": "tsStgDesc",
+                      "fill": "#52525B",
+                      "content": "Limpieza, dedup, validación por tabla fuente",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "8HYJG",
+                      "name": "tsStgList",
+                      "fill": "#A1A1AA",
+                      "content": "stg_clientes\nstg_pedidos\nstg_detalle_pedidos\nstg_productos\nstg_envios\nstg_pagos_banco\nstg_liquidacion_mp\nstg_catalogo_proveedor\nstg_reclamos\nstg_proveedores_a",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "2eH5X",
+                  "name": "tsCon",
+                  "width": "fill_container",
+                  "fill": "#1E2026",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#818CF8"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "DDMte",
+                      "name": "tsConHdr",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "boq0N",
+                          "name": "tsConIco",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "chart-bar",
+                          "iconFontFamily": "lucide",
+                          "fill": "#818CF8"
+                        },
+                        {
+                          "type": "text",
+                          "id": "cOsgD",
+                          "name": "tsConTtl",
+                          "fill": "#818CF8",
+                          "content": "CONSUME  (7 modelos)",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "wmTIs",
+                      "name": "tsConDesc",
+                      "fill": "#52525B",
+                      "content": "Agregaciones para BI — KPIs y métricas calculados",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lpscR",
+                      "name": "tsConList",
+                      "fill": "#A1A1AA",
+                      "content": "top_clientes\nrevenue_mensual\nventas_por_categoria\nconciliacion_pagos\nperformance_envios\nanalisis_reclamos\nalertas_stock",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "QCtXG",
+          "name": "tsDiv3",
+          "fill": "#2A2B30",
+          "width": "fill_container",
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "jWEzn",
+          "name": "tsOutSec",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "5beIl",
+              "name": "tsOutLbl",
+              "fill": "#71717A",
+              "content": "// DESTINOS_Y_ACCESO",
+              "fontFamily": "Roboto Mono",
+              "fontSize": 11,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "PqKYa",
+              "name": "tsOutRow",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "M97XZ",
+                  "name": "tsPG",
+                  "width": "fill_container",
+                  "fill": "#1E2026",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#22C55E"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "q2kBG",
+                      "name": "tsPGHdr",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "YAvxg",
+                          "name": "tsPGIco",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "database",
+                          "iconFontFamily": "lucide",
+                          "fill": "#22C55E"
+                        },
+                        {
+                          "type": "text",
+                          "id": "lkDdM",
+                          "name": "tsPGTtl",
+                          "fill": "#22C55E",
+                          "content": "PostgreSQL",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "zbdim",
+                      "name": "tsPGList",
+                      "fill": "#A1A1AA",
+                      "content": "schema raw      vistas de parquets\nschema staging  10 tablas limpias\nschema consume  7 tablas BI-ready\n\nConexión para Metabase / DBeaver",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bLVn6",
+                  "name": "tsDash",
+                  "width": "fill_container",
+                  "fill": "#1E2026",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#52525B"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "3UidN",
+                      "name": "tsDashHdr",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Vu272",
+                          "name": "tsDashIco",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "monitor",
+                          "iconFontFamily": "lucide",
+                          "fill": "#52525B"
+                        },
+                        {
+                          "type": "text",
+                          "id": "uBjas",
+                          "name": "tsDashTtl",
+                          "fill": "#F4F4F5",
+                          "content": "Dashboard FastAPI",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "eYkyY",
+                      "name": "tsDashList",
+                      "fill": "#A1A1AA",
+                      "content": "Web app deployada en Railway\nExpone métricas del lake\nAPI REST sobre PostgreSQL",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
