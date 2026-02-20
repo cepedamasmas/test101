@@ -21,6 +21,20 @@ models:
       - name: pedido_id
         tests: [not_null, unique]
       - name: cliente_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_clientes')
+              field: cliente_id
+      - name: fecha
+        tests: [not_null]
+      - name: estado
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['pendiente', 'enviado', 'entregado', 'cancelado']
+              severity: warn   # warn porque los valores exactos dependen de la fuente
+      - name: total
         tests: [not_null]
 
   - name: stg_detalle_pedidos
@@ -28,11 +42,23 @@ models:
     columns:
       - name: detalle_id
         tests: [not_null, unique]
-
-  - name: stg_pagos_banco
-    description: "Pagos bancarios con tipos casteados"
-    columns:
-      - name: pago_id
+      - name: pedido_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_pedidos')
+              field: pedido_id
+      - name: producto_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_productos')
+              field: producto_id
+      - name: cantidad
+        tests: [not_null]
+      - name: precio_unitario
+        tests: [not_null]
+      - name: subtotal
         tests: [not_null]
 
   - name: stg_envios
@@ -40,12 +66,61 @@ models:
     columns:
       - name: envio_id
         tests: [not_null]
-
-  - name: stg_catalogo_proveedor
-    description: "Catalogo de productos del proveedor"
-    columns:
-      - name: codigo
+      - name: pedido_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_pedidos')
+              field: pedido_id
+      - name: courier
         tests: [not_null]
+      - name: estado_actual
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['en_camino', 'entregado', 'devuelto', 'pendiente']
+              severity: warn
+
+  - name: stg_pagos_banco
+    description: "Pagos bancarios con tipos casteados"
+    columns:
+      - name: pago_id
+        tests: [not_null]
+      - name: pedido_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_pedidos')
+              field: pedido_id
+      - name: monto
+        tests: [not_null]
+      - name: fecha_pago
+        tests: [not_null]
+
+  - name: stg_reclamos
+    description: "Reclamos de clientes"
+    columns:
+      - name: reclamo_id
+        tests: [not_null]
+      - name: pedido_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_pedidos')
+              field: pedido_id
+      - name: cliente_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_clientes')
+              field: cliente_id
+      - name: fecha_reclamo
+        tests: [not_null]
+      - name: prioridad
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['alta', 'media', 'baja']
 
   - name: stg_liquidacion_mp
     description: "Liquidaciones de MercadoPago"
@@ -53,10 +128,10 @@ models:
       - name: operacion_mp
         tests: [not_null]
 
-  - name: stg_reclamos
-    description: "Reclamos de clientes"
+  - name: stg_catalogo_proveedor
+    description: "Catalogo de productos del proveedor"
     columns:
-      - name: reclamo_id
+      - name: codigo
         tests: [not_null]
 
   - name: stg_proveedores_a
