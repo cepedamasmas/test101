@@ -1,8 +1,9 @@
 #!/bin/bash
 
 mkdir -p /app/output
-mkdir -p /app/output/dagster_home
+mkdir -p "${DAGSTER_HOME:-/app/output/dagster_home}"
 chmod 777 /app/output
+chmod 777 "${DAGSTER_HOME:-/app/output/dagster_home}"
 
 # Pre-crear el archivo DuckDB para que dbt pueda conectarse desde el primer run
 python -c "import duckdb; duckdb.connect('/app/output/techstore.duckdb').close()" 2>/dev/null || true
