@@ -5,7 +5,6 @@ import os
 import tempfile
 from typing import Generator
 
-import pandas as pd
 import paramiko
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -32,54 +31,91 @@ class SFTPConnector(BaseConnector):
             )
             self._sftp = paramiko.SFTPClient.from_transport(self._transport)
 
-    def _extract_folder(self, remote_dir: str) -> pd.DataFrame:
-        """Lee todos los archivos Parquet de una carpeta remota y los concatena.
+    def _serialize_nested_fields(self, table: pa.Table) -> pa.Table:
+        """Convierte columnas nested (list/struct/map) a JSON strings para compatibilidad tabular."""
+        for i, field in enumerate(table.schema):
+            if (
+                pa.types.is_struct(field.type)
+                or pa.types.is_list(field.type)
+                or pa.types.is_large_list(field.type)
+                or pa.types.is_map(field.type)
+            ):
+                col = table.column(i)
+                json_strings = pa.array(
+                    [json.dumps(v.as_py()) if v.is_valid else None for v in col],
+                    type=pa.string(),
+                )
+                table = table.set_column(i, field.name, json_strings)
+        return table
 
-        Usa PyArrow para la concatenacion (mas compacto que Pandas por archivo).
-        Convierte campos nested (list/dict) a string JSON para compatibilidad tabular.
+    def _extract_folder(self, remote_dir: str) -> str | None:
+        """Lee todos los archivos Parquet de una carpeta remota y los escribe a un temp file.
+
+        Procesa un archivo a la vez para mantener el pico de RAM acotado a un
+        único archivo fuente, en lugar de acumular todos en memoria.
 
         Args:
             remote_dir: Ruta remota de la carpeta en el SFTP.
+
+        Returns:
+            Path al archivo parquet temporal con todos los datos concatenados,
+            o None si la carpeta está vacía.
         """
         filenames = [f for f in self._sftp.listdir(remote_dir) if f.endswith(".parquet")]
-        arrow_tables = []
-        for filename in filenames:
-            remote_path = f"{remote_dir}/{filename}"
-            with tempfile.NamedTemporaryFile(suffix=".parquet", delete=False) as tmp:
-                tmp_path = tmp.name
-            try:
-                self._sftp.get(remote_path, tmp_path)
-                table = pq.read_table(tmp_path)
-                # Agregar columna de origen antes de concat para mantener row counts correctos
-                table = table.append_column(
-                    "_source_file", pa.array([filename] * len(table), type=pa.string())
-                )
-                arrow_tables.append(table)
-            finally:
-                os.unlink(tmp_path)
+        if not filenames:
+            return None
 
-        if not arrow_tables:
-            return pd.DataFrame()
+        tmp_out = tempfile.NamedTemporaryFile(suffix=".parquet", delete=False)
+        tmp_out_path = tmp_out.name
+        tmp_out.close()
 
-        # Concatenar en PyArrow y convertir a Pandas una sola vez
-        combined = pa.concat_tables(arrow_tables, promote_options="default")
-        del arrow_tables
-        df = combined.to_pandas()
-        del combined
+        writer = None
+        try:
+            for filename in filenames:
+                remote_path = f"{remote_dir}/{filename}"
+                with tempfile.NamedTemporaryFile(suffix=".parquet", delete=False) as tmp:
+                    tmp_path = tmp.name
+                try:
+                    self._sftp.get(remote_path, tmp_path)
+                    table = pq.read_table(tmp_path)
+                    table = table.append_column(
+                        "_source_file", pa.array([filename] * len(table), type=pa.string())
+                    )
+                    table = self._serialize_nested_fields(table)
+                    if writer is None:
+                        writer = pq.ParquetWriter(tmp_out_path, table.schema)
+                    writer.write_table(table)
+                    del table
+                finally:
+                    os.unlink(tmp_path)
+        except Exception:
+            if writer:
+                writer.close()
+            os.unlink(tmp_out_path)
+            raise
 
-        # Serializar campos nested (list/dict) como string JSON
-        for col in df.select_dtypes(include="object").columns:
-            df[col] = df[col].apply(
-                lambda v: json.dumps(v) if isinstance(v, (list, dict)) else v
-            )
-        return df
+        if writer:
+            writer.close()
+        else:
+            os.unlink(tmp_out_path)
+            return None
 
-    def extract(self) -> Generator[tuple[str, pd.DataFrame], None, None]:
-        """Genera (table_name, df) de a una tabla a la vez para minimizar pico de RAM."""
+        return tmp_out_path
+
+    def extract(self) -> Generator[tuple[str, str], None, None]:
+        """Genera (table_name, tmp_parquet_path) de a una tabla a la vez.
+
+        El archivo temporal es eliminado automáticamente al avanzar el generador.
+        """
         self._connect()
         for table_name, folder_cfg in self.folders.items():
-            df = self._extract_folder(folder_cfg["remote"])
-            yield table_name, df
+            tmp_path = self._extract_folder(folder_cfg["remote"])
+            if tmp_path is None:
+                continue
+            try:
+                yield table_name, tmp_path
+            finally:
+                os.unlink(tmp_path)
 
     def close(self):
         if self._sftp:

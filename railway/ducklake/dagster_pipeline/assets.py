@@ -7,8 +7,6 @@ Cada asset representa un paso del pipeline:
   4. postgres_export: Replica todo a PostgreSQL
 """
 
-import gc
-
 import duckdb
 from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataValue
 from dagster_dbt import DbtCliResource, dbt_assets, DbtProject
@@ -39,12 +37,10 @@ def raw_ingestion(context: AssetExecutionContext) -> MaterializeResult:
     context.log.info(f"Extrayendo SFTP ecomm_parquet ({SFTP_CONFIG['host']}:{SFTP_CONFIG['port']})")
     sftp = SFTPConnector(SFTP_CONFIG, SFTP_FOLDERS)
     try:
-        for table, df in sftp.extract():
-            n = raw.save(df, "sftp", table)
+        for table, path in sftp.extract():
+            n = raw.save_from_path(path, "sftp", table)
             total_rows[f"sftp.{table}"] = n
             context.log.info(f"  RAW: {table:<20} -> {n:>5} rows")
-            del df
-            gc.collect()
     finally:
         sftp.close()
 
