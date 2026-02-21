@@ -9,7 +9,7 @@ Cada asset representa un paso del pipeline:
 
 import duckdb
 from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataValue
-from dagster_dbt import DbtCliResource, dbt_assets, DbtProject
+from dagster_dbt import DbtCliResource
 
 from config import (
     SFTP_CONFIG, PG_CONFIG,
@@ -20,10 +20,6 @@ from connectors import SFTPConnector
 from layers import RawLayer
 from exporters import DuckDBExporter, PostgresExporter
 from reporter import Reporter
-
-# --- dbt project para dagster-dbt ---
-dbt_project = DbtProject(project_dir=DBT_PROJECT_DIR)
-dbt_project.prepare_if_dev()
 
 
 @asset(group_name="ingestion", description="Extrae ecomm_parquet del SFTP a RAW parquet")
@@ -75,13 +71,14 @@ def duckdb_catalog(context: AssetExecutionContext) -> MaterializeResult:
     )
 
 
-@dbt_assets(
-    manifest=dbt_project.manifest_path,
-    dagster_dbt_translator=None,
+@asset(
+    group_name="transform",
+    deps=[duckdb_catalog],
+    description="Ejecuta modelos dbt (staging + consume)",
 )
 def dbt_techstore_assets(context: AssetExecutionContext, dbt: DbtCliResource):
-    """Paso 3: Cada modelo dbt como asset individual con linaje."""
-    yield from dbt.cli(["build"], context=context).stream()
+    """Paso 3: Transforma RAW a staging y consume via dbt."""
+    dbt.cli(["build"], context=context).wait()
 
 
 @asset(
