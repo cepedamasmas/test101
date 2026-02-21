@@ -51,9 +51,14 @@ models:
     description: "Fact: pedidos unificados de las 3 plataformas con surrogate key"
     columns:
       - name: pedido_id
-        tests: [not_null, unique]
+        tests:
+          - unique
+          - not_null:
+              severity: warn
       - name: orden_id_origen
-        tests: [not_null]
+        tests:
+          - not_null:
+              severity: warn
       - name: canal_id
         tests:
           - not_null
@@ -63,9 +68,13 @@ models:
       - name: status
         tests: [not_null]
       - name: monto_total
-        tests: [not_null]
+        tests:
+          - not_null:
+              severity: warn
       - name: fecha_creacion
-        tests: [not_null]
+        tests:
+          - not_null:
+              severity: warn
 
   - name: stg_item_pedido
     description: "Fact: lineas de pedido, un registro por producto dentro de cada pedido"

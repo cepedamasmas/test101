@@ -22,10 +22,10 @@ ingestion_job = define_asset_job(
     executor_def=in_process_executor,
 )
 
-# Fase 2: transformaciones dbt y export (requiere que ingestion_job haya corrido)
+# Fase 2: catalog + dbt + export (sin ingesta, asume RAW ya en volumen)
 dbt_export_job = define_asset_job(
-    "dbt_export_job",
-    selection=AssetSelection.assets(assets.dbt_techstore_assets, assets.postgres_export),
+    "transform_export_job",
+    selection=AssetSelection.assets(assets.duckdb_catalog, assets.dbt_techstore_assets, assets.postgres_export),
     executor_def=in_process_executor,
 )
 
