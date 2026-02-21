@@ -78,7 +78,7 @@ def duckdb_catalog(context: AssetExecutionContext) -> MaterializeResult:
 )
 def dbt_techstore_assets(context: AssetExecutionContext, dbt: DbtCliResource):
     """Paso 3: Transforma RAW a staging y consume via dbt."""
-    dbt.cli(["build"], context=context).wait()
+    dbt.cli(["build"]).wait()
 
 
 @asset(
