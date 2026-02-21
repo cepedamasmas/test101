@@ -1,6 +1,7 @@
 #!/bin/bash
 
 mkdir -p /app/output
+mkdir -p /app/output/dagster_home
 chmod 777 /app/output
 
 # Pre-crear el archivo DuckDB para que dbt pueda conectarse desde el primer run
