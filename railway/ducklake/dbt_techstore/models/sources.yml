@@ -4,18 +4,6 @@ sources:
   - name: raw
     schema: raw
     tables:
-      - name: clientes
-      - name: productos
-      - name: pedidos
-      - name: detalle_pedidos
-      - name: pagos_banco
-      - name: envios_courier
-      - name: catalogo_proveedor
-      - name: liquidacion_mp
-      - name: reclamos
-      - name: dolar
-      - name: feriados
-      # ecomm_parquet
       - name: vtex_pedido
         description: "Pedidos VTEX (~785k filas, diarios desde dic 2018)"
       - name: meli_pedido

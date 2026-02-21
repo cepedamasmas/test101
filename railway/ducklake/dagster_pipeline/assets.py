@@ -1,25 +1,24 @@
 """Dagster assets para el pipeline TechStore.
 
 Cada asset representa un paso del pipeline:
-  1. raw_ingestion: Extrae datos de MySQL, SFTP, APIs -> Parquet RAW
+  1. raw_ingestion: Extrae ecomm_parquet del SFTP -> Parquet RAW
   2. duckdb_catalog: Crea vistas RAW en DuckDB
   3. dbt_techstore_assets: Cada modelo dbt como asset individual (staging + consume)
   4. postgres_export: Replica todo a PostgreSQL
 """
 
 import gc
-from pathlib import Path
 
 import duckdb
 from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataValue
 from dagster_dbt import DbtCliResource, dbt_assets, DbtProject
 
 from config import (
-    MYSQL_CONFIG, SFTP_CONFIG, PG_CONFIG, API_SOURCES,
-    MYSQL_TABLES, SFTP_FILES, SFTP_FOLDERS, DATA, DUCKDB_PATH, DBT_PROJECT_DIR, OUTPUT,
+    SFTP_CONFIG, PG_CONFIG,
+    SFTP_FOLDERS, DATA, DUCKDB_PATH, DBT_PROJECT_DIR, OUTPUT,
     get_raw_tables,
 )
-from connectors import MySQLConnector, SFTPConnector, APIConnector
+from connectors import SFTPConnector
 from layers import RawLayer
 from exporters import DuckDBExporter, PostgresExporter
 from reporter import Reporter
@@ -29,28 +28,16 @@ dbt_project = DbtProject(project_dir=DBT_PROJECT_DIR)
 dbt_project.prepare_if_dev()
 
 
-@asset(group_name="ingestion", description="Extrae datos de MySQL, SFTP y APIs a RAW parquet")
+@asset(group_name="ingestion", description="Extrae ecomm_parquet del SFTP a RAW parquet")
 def raw_ingestion(context: AssetExecutionContext) -> MaterializeResult:
-    """Paso 1: Ingesta de todas las fuentes a la capa RAW."""
+    """Paso 1: Ingesta de ecomm_parquet SFTP a la capa RAW."""
     OUTPUT.mkdir(parents=True, exist_ok=True)
     raw = RawLayer(DATA)
     total_rows = {}
 
-    # MySQL
-    context.log.info(f"Extrayendo MySQL ({MYSQL_CONFIG['host']}:{MYSQL_CONFIG['port']})")
-    mysql = MySQLConnector(MYSQL_CONFIG, MYSQL_TABLES)
-    try:
-        for table, df in mysql.extract().items():
-            n = raw.save(df, "mysql", table)
-            total_rows[f"mysql.{table}"] = n
-            context.log.info(f"  RAW: {table:<20} -> {n:>5} rows")
-    finally:
-        mysql.close()
-
-    # SFTP (archivos individuales + carpetas de JSONs)
-    # Usa generator para procesar una tabla a la vez y liberar RAM entre tablas
-    context.log.info(f"Extrayendo SFTP ({SFTP_CONFIG['host']}:{SFTP_CONFIG['port']})")
-    sftp = SFTPConnector(SFTP_CONFIG, SFTP_FILES, folders=SFTP_FOLDERS)
+    # SFTP ecomm_parquet — generator: una tabla a la vez para minimizar pico de RAM
+    context.log.info(f"Extrayendo SFTP ecomm_parquet ({SFTP_CONFIG['host']}:{SFTP_CONFIG['port']})")
+    sftp = SFTPConnector(SFTP_CONFIG, SFTP_FOLDERS)
     try:
         for table, df in sftp.extract():
             n = raw.save(df, "sftp", table)
@@ -60,14 +47,6 @@ def raw_ingestion(context: AssetExecutionContext) -> MaterializeResult:
             gc.collect()
     finally:
         sftp.close()
-
-    # APIs
-    context.log.info("Extrayendo APIs")
-    api = APIConnector(API_SOURCES)
-    for table, df in api.extract().items():
-        n = raw.save(df, "api", table)
-        total_rows[f"api.{table}"] = n
-        context.log.info(f"  RAW: {table:<20} -> {n:>5} rows")
 
     return MaterializeResult(
         metadata={
