@@ -3,9 +3,12 @@
 import json
 import os
 import tempfile
+from typing import Generator
 
 import pandas as pd
 import paramiko
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 from .base import BaseConnector
 
@@ -84,24 +87,38 @@ class SFTPConnector(BaseConnector):
         """
         if fmt == "parquet":
             filenames = [f for f in self._sftp.listdir(remote_dir) if f.endswith(".parquet")]
-            dfs = []
+            # PyArrow accumulation: más compacto que Pandas por archivo
+            arrow_tables = []
             for filename in filenames:
                 remote_path = f"{remote_dir}/{filename}"
                 with tempfile.NamedTemporaryFile(suffix=".parquet", delete=False) as tmp:
                     tmp_path = tmp.name
                 try:
                     self._sftp.get(remote_path, tmp_path)
-                    df = pd.read_parquet(tmp_path)
-                    # Serializar campos nested (list/dict) como string JSON
-                    for col in df.columns:
-                        df[col] = df[col].apply(
-                            lambda v: json.dumps(v) if isinstance(v, (list, dict)) else v
-                        )
-                    df["_source_file"] = filename
-                    dfs.append(df)
+                    table = pq.read_table(tmp_path)
+                    # Agregar columna de origen en PyArrow (antes de concat)
+                    table = table.append_column(
+                        "_source_file", pa.array([filename] * len(table), type=pa.string())
+                    )
+                    arrow_tables.append(table)
                 finally:
                     os.unlink(tmp_path)
-            return pd.concat(dfs, ignore_index=True) if dfs else pd.DataFrame()
+
+            if not arrow_tables:
+                return pd.DataFrame()
+
+            # Concatenar en PyArrow y convertir a Pandas una sola vez
+            combined = pa.concat_tables(arrow_tables, promote_options="default")
+            del arrow_tables
+            df = combined.to_pandas()
+            del combined
+
+            # Serializar campos nested (list/dict) como string JSON
+            for col in df.select_dtypes(include="object").columns:
+                df[col] = df[col].apply(
+                    lambda v: json.dumps(v) if isinstance(v, (list, dict)) else v
+                )
+            return df
 
         # Formato JSON: un archivo por registro
         filenames = [f for f in self._sftp.listdir(remote_dir) if f.endswith(".json")]
@@ -127,17 +144,16 @@ class SFTPConnector(BaseConnector):
                 os.unlink(tmp_path)
         return pd.DataFrame(rows)
 
-    def extract(self) -> dict[str, pd.DataFrame]:
+    def extract(self) -> Generator[tuple[str, pd.DataFrame], None, None]:
+        """Genera (table_name, df) de a una tabla a la vez para minimizar pico de RAM."""
         self._connect()
-        results = {}
         for table_name, file_cfg in self.files.items():
             opts = file_cfg.get("opts", {})
             df = self._download_and_read(file_cfg["remote"], file_cfg["format"], opts)
-            results[table_name] = df
+            yield table_name, df
         for table_name, folder_cfg in self.folders.items():
             df = self._extract_folder(folder_cfg["remote"], folder_cfg.get("format", "json"))
-            results[table_name] = df
-        return results
+            yield table_name, df
 
     def close(self):
         if self._sftp:

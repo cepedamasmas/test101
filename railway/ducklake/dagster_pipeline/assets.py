@@ -7,6 +7,7 @@ Cada asset representa un paso del pipeline:
   4. postgres_export: Replica todo a PostgreSQL
 """
 
+import gc
 from pathlib import Path
 
 import duckdb
@@ -47,13 +48,16 @@ def raw_ingestion(context: AssetExecutionContext) -> MaterializeResult:
         mysql.close()
 
     # SFTP (archivos individuales + carpetas de JSONs)
+    # Usa generator para procesar una tabla a la vez y liberar RAM entre tablas
     context.log.info(f"Extrayendo SFTP ({SFTP_CONFIG['host']}:{SFTP_CONFIG['port']})")
     sftp = SFTPConnector(SFTP_CONFIG, SFTP_FILES, folders=SFTP_FOLDERS)
     try:
-        for table, df in sftp.extract().items():
+        for table, df in sftp.extract():
             n = raw.save(df, "sftp", table)
             total_rows[f"sftp.{table}"] = n
             context.log.info(f"  RAW: {table:<20} -> {n:>5} rows")
+            del df
+            gc.collect()
     finally:
         sftp.close()
 
