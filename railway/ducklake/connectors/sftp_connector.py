@@ -31,6 +31,41 @@ class SFTPConnector(BaseConnector):
             )
             self._sftp = paramiko.SFTPClient.from_transport(self._transport)
 
+    def _promote_type(self, t1: pa.DataType, t2: pa.DataType) -> pa.DataType:
+        """Devuelve el tipo más amplio entre t1 y t2."""
+        if t1 == t2:
+            return t1
+        if pa.types.is_null(t1):
+            return t2
+        if pa.types.is_null(t2):
+            return t1
+        # Numéricos en conflicto (ej: int64 vs double) → double
+        is_numeric = lambda t: pa.types.is_integer(t) or pa.types.is_floating(t)
+        if is_numeric(t1) and is_numeric(t2):
+            return pa.float64()
+        # Cualquier otro conflicto incompatible → string
+        return pa.string()
+
+    def _merge_schemas(self, schemas: list[pa.Schema]) -> pa.Schema:
+        """Merge leniente: promueve tipos numéricos, convierte conflictos irresolubles a string.
+
+        Reemplaza pa.unify_schemas() que falla con tipos como double vs int64.
+        """
+        field_types: dict[str, pa.DataType] = {}
+        field_order: list[str] = []
+
+        for schema in schemas:
+            for field in schema:
+                if field.name not in field_types:
+                    field_types[field.name] = field.type
+                    field_order.append(field.name)
+                else:
+                    field_types[field.name] = self._promote_type(
+                        field_types[field.name], field.type
+                    )
+
+        return pa.schema([pa.field(name, field_types[name]) for name in field_order])
+
     def _get_serialized_schema(self, schema: pa.Schema) -> pa.Schema:
         """Retorna el schema resultante después de serializar campos nested a string."""
         fields = []
@@ -114,7 +149,7 @@ class SFTPConnector(BaseConnector):
                 serialized = self._get_serialized_schema(raw_schema)
                 serialized = serialized.append(pa.field("_source_file", pa.string()))
                 schemas.append(serialized)
-            unified_schema = pa.unify_schemas(schemas)
+            unified_schema = self._merge_schemas(schemas)
 
             # Fase 2: procesar un archivo a la vez contra el schema unificado
             with tempfile.NamedTemporaryFile(suffix=".parquet", delete=False) as tmp_out:
