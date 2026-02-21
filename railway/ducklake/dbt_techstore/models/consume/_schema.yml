@@ -56,3 +56,53 @@ models:
         tests: [not_null, unique]
       - name: alerta_stock
         tests: [not_null]
+
+  # --- ecomm_parquet: modelos consume ---
+
+  - name: ventas_por_canal
+    description: "Revenue mensual por canal (VTEX, MeLi, Garbarino) con ticket promedio y clientes unicos"
+    columns:
+      - name: mes
+        tests: [not_null]
+      - name: canal
+        tests: [not_null]
+      - name: revenue
+        tests: [not_null]
+      - name: total_pedidos
+        tests: [not_null]
+
+  - name: fulfillment_meli
+    description: "Estado de envio para cada pedido MeLi: cruza stg_pedido con type_6"
+    columns:
+      - name: pedido_id
+        tests: [not_null]
+      - name: order_id
+        tests: [not_null]
+      - name: estado_fulfillment
+        tests: [not_null]
+
+  - name: conciliacion_pagos_meli
+    description: "Conciliacion MeLi: monto del pedido vs neto recibido, fees y metodo de pago"
+    columns:
+      - name: pedido_id
+        tests: [not_null]
+      - name: order_id
+        tests: [not_null]
+
+  - name: pickups_vs_envios_meli
+    description: "Comparativa de retiros en sucursal vs envios a domicilio en MeLi"
+    columns:
+      - name: tipo
+        tests: [not_null, unique]
+      - name: cantidad
+        tests: [not_null]
+
+  - name: tiempos_entrega
+    description: "Dias promedio entre creacion y cierre de pedido por canal y status"
+    columns:
+      - name: canal
+        tests: [not_null]
+      - name: status
+        tests: [not_null]
+      - name: dias_promedio
+        tests: [not_null]

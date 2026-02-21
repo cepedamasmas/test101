@@ -3,6 +3,10 @@
 mkdir -p /app/output
 chmod 777 /app/output
 
+# Pre-crear el archivo DuckDB para que dbt pueda conectarse aunque
+# duckdb_catalog no haya corrido todavia (necesario si se ejecuta desde el UI de Dagster)
+python -c "import duckdb; duckdb.connect('/app/output/techstore.duckdb').close()" 2>/dev/null || true
+
 echo "Esperando a que MySQL esté listo..."
 for i in $(seq 1 60); do
     if python -c "
