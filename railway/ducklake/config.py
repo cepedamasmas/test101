@@ -55,6 +55,15 @@ SFTP_FOLDERS = {
     "ecomm_meli_shipping": {"remote": "/upload/ecomm_orders/meli_shipping", "format": "json"},
     "ecomm_meli_pickup": {"remote": "/upload/ecomm_orders/meli_pickup", "format": "json"},
     "ecomm_garbarino_pedido": {"remote": "/upload/ecomm_orders/garbarino_pedido", "format": "json"},
+    # ecomm_parquet: archivos Parquet particionados por dia
+    "vtex_pedido": {"remote": "/upload/ecomm_parquet/vtex_pedido", "format": "parquet"},
+    "meli_pedido": {"remote": "/upload/ecomm_parquet/meli_pedido", "format": "parquet"},
+    "meli_pickup": {"remote": "/upload/ecomm_parquet/meli_pickup", "format": "parquet"},
+    "meli_shipping": {"remote": "/upload/ecomm_parquet/meli_shipping", "format": "parquet"},
+    "type_6": {"remote": "/upload/ecomm_parquet/type_6", "format": "parquet"},
+    "type_7": {"remote": "/upload/ecomm_parquet/type_7", "format": "parquet"},
+    "type_8": {"remote": "/upload/ecomm_parquet/type_8", "format": "parquet"},
+    "garbarino_pedido": {"remote": "/upload/ecomm_parquet/garbarino_pedido", "format": "parquet"},
 }
 
 # --- APIs ---
@@ -85,6 +94,15 @@ BASE_RAW_TABLES: dict[str, tuple[str, str]] = {
     "ecomm_meli_shipping": ("sftp", "ecomm_meli_shipping"),
     "ecomm_meli_pickup": ("sftp", "ecomm_meli_pickup"),
     "ecomm_garbarino_pedido": ("sftp", "ecomm_garbarino_pedido"),
+    # ecomm_parquet
+    "vtex_pedido": ("sftp", "vtex_pedido"),
+    "meli_pedido": ("sftp", "meli_pedido"),
+    "meli_pickup": ("sftp", "meli_pickup"),
+    "meli_shipping": ("sftp", "meli_shipping"),
+    "type_6": ("sftp", "type_6"),
+    "type_7": ("sftp", "type_7"),
+    "type_8": ("sftp", "type_8"),
+    "garbarino_pedido": ("sftp", "garbarino_pedido"),
 }
 
 

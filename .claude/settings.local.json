@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(pip install:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(docker info:*)",
+      "Bash(py:*)",
+      "Bash(where:*)",
+      "Bash(\"/c/Program Files/pgAdmin 4/python/python.exe\" -c \"import sys; print\\(sys.version\\)\")",
+      "Bash(\"/c/Program Files/pgAdmin 4/python/python.exe\" -c \"import paramiko, pandas; print\\(''ok''\\)\")"
     ]
   }
 }

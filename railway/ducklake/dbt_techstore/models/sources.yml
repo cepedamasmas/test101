@@ -15,3 +15,20 @@ sources:
       - name: reclamos
       - name: dolar
       - name: feriados
+      # ecomm_parquet
+      - name: vtex_pedido
+        description: "Pedidos VTEX (~785k filas, diarios desde dic 2018)"
+      - name: meli_pedido
+        description: "Pedidos MercadoLibre (~858k filas, diarios desde sep 2018)"
+      - name: meli_pickup
+        description: "Retiros en sucursal MeLi (~2k filas, abr 2019 - mar 2020)"
+      - name: meli_shipping
+        description: "Items de envios MeLi (~966k filas, archivo unico)"
+      - name: type_6
+        description: "Detalle logistico de envios MeLi (~658k filas, diarios desde jun 2021)"
+      - name: type_7
+        description: "Billing info MeLi (~664k filas, archivo unico, todo en un JSON)"
+      - name: type_8
+        description: "Pagos MercadoPago (~110k filas, diarios desde nov 2024)"
+      - name: garbarino_pedido
+        description: "Pedidos Garbarino (~43 filas, ene-mar 2020)"

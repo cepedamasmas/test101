@@ -72,12 +72,38 @@ class SFTPConnector(BaseConnector):
                     row[key] = json.dumps(val)
         return pd.DataFrame(data)
 
-    def _extract_folder(self, remote_dir: str) -> pd.DataFrame:
-        """Lee todos los JSONs de una carpeta remota y los concatena en un DataFrame.
+    def _extract_folder(self, remote_dir: str, fmt: str = "json") -> pd.DataFrame:
+        """Lee todos los archivos de una carpeta remota y los concatena en un DataFrame.
 
-        Cada archivo JSON es un objeto individual (una orden).
+        Soporta formato JSON (un objeto por archivo) y Parquet (tabla columnar).
         Se aplanan campos nested como strings para formato tabular.
+
+        Args:
+            remote_dir: Ruta remota de la carpeta en el SFTP.
+            fmt: Formato de los archivos ('json' o 'parquet').
         """
+        if fmt == "parquet":
+            filenames = [f for f in self._sftp.listdir(remote_dir) if f.endswith(".parquet")]
+            dfs = []
+            for filename in filenames:
+                remote_path = f"{remote_dir}/{filename}"
+                with tempfile.NamedTemporaryFile(suffix=".parquet", delete=False) as tmp:
+                    tmp_path = tmp.name
+                try:
+                    self._sftp.get(remote_path, tmp_path)
+                    df = pd.read_parquet(tmp_path)
+                    # Serializar campos nested (list/dict) como string JSON
+                    for col in df.columns:
+                        df[col] = df[col].apply(
+                            lambda v: json.dumps(v) if isinstance(v, (list, dict)) else v
+                        )
+                    df["_source_file"] = filename
+                    dfs.append(df)
+                finally:
+                    os.unlink(tmp_path)
+            return pd.concat(dfs, ignore_index=True) if dfs else pd.DataFrame()
+
+        # Formato JSON: un archivo por registro
         filenames = [f for f in self._sftp.listdir(remote_dir) if f.endswith(".json")]
         rows = []
         for filename in filenames:
@@ -109,7 +135,7 @@ class SFTPConnector(BaseConnector):
             df = self._download_and_read(file_cfg["remote"], file_cfg["format"], opts)
             results[table_name] = df
         for table_name, folder_cfg in self.folders.items():
-            df = self._extract_folder(folder_cfg["remote"])
+            df = self._extract_folder(folder_cfg["remote"], folder_cfg.get("format", "json"))
             results[table_name] = df
         return results
 

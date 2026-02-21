@@ -141,3 +141,153 @@ models:
         tests: [not_null, unique]
       - name: proveedor
         tests: [not_null]
+
+  # --- ecomm_parquet: modelos dimensionales y de hechos ---
+
+  - name: stg_canal
+    description: "Dimension: canales de venta (VTEX, MercadoLibre, Garbarino)"
+    columns:
+      - name: canal_id
+        tests: [not_null, unique]
+      - name: canal
+        tests:
+          - not_null
+          - unique
+          - accepted_values:
+              values: ['vtex', 'mercadolibre', 'garbarino']
+
+  - name: stg_cliente
+    description: "Dimension: clientes unicos por canal extraidos de buyer/clientProfileData/customer"
+    columns:
+      - name: cliente_id
+        tests: [not_null, unique]
+      - name: canal
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['vtex', 'mercadolibre', 'garbarino']
+              severity: warn
+      - name: cliente_id_origen
+        tests: [not_null]
+
+  - name: stg_ubicacion_geo
+    description: "Dimension: ubicaciones geograficas unicas de entrega"
+    columns:
+      - name: ubicacion_id
+        tests: [not_null, unique]
+
+  - name: stg_producto
+    description: "Dimension: productos unicos por canal extraidos de arrays de items en pedidos"
+    columns:
+      - name: producto_id
+        tests: [not_null, unique]
+      - name: canal
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['vtex', 'mercadolibre', 'garbarino']
+              severity: warn
+      - name: nombre
+        tests: [not_null]
+
+  - name: stg_pedido
+    description: "Fact: pedidos unificados de las 3 plataformas con surrogate key"
+    columns:
+      - name: pedido_id
+        tests: [not_null, unique]
+      - name: orden_id_origen
+        tests: [not_null]
+      - name: canal_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_canal')
+              field: canal_id
+      - name: status
+        tests: [not_null]
+      - name: monto_total
+        tests: [not_null]
+      - name: fecha_creacion
+        tests: [not_null]
+
+  - name: stg_item_pedido
+    description: "Fact: lineas de pedido, un registro por producto dentro de cada pedido"
+    columns:
+      - name: item_pedido_id
+        tests: [not_null]
+      - name: pedido_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_pedido')
+              field: pedido_id
+      - name: producto_id_origen
+        tests: [not_null]
+      - name: cantidad
+        tests: [not_null]
+      - name: precio_unitario
+        tests: [not_null]
+      - name: subtotal
+        tests: [not_null]
+
+  - name: stg_cliente_pedido
+    description: "Bridge: relacion entre clientes y sus pedidos por canal"
+    columns:
+      - name: cliente_id
+        tests: [not_null]
+      - name: pedido_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_pedido')
+              field: pedido_id
+      - name: fecha_pedido
+        tests: [not_null]
+      - name: monto_total
+        tests: [not_null]
+
+  - name: stg_cliente_canal
+    description: "Bridge: canales que usa cada cliente con metricas de actividad"
+    columns:
+      - name: cliente_id
+        tests: [not_null]
+      - name: canal_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_canal')
+              field: canal_id
+      - name: total_pedidos
+        tests: [not_null]
+
+  - name: stg_cliente_ubicacion_geo
+    description: "Bridge: clientes y ubicaciones geograficas de sus entregas"
+    columns:
+      - name: cliente_id
+        tests: [not_null]
+      - name: ubicacion_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ubicacion_geo')
+              field: ubicacion_id
+
+  - name: stg_canal_producto
+    description: "Bridge: productos vendidos por canal con metricas de revenue y unidades"
+    columns:
+      - name: canal_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_canal')
+              field: canal_id
+      - name: producto_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_producto')
+              field: producto_id
+      - name: total_pedidos
+        tests: [not_null]
+      - name: revenue_total
+        tests: [not_null]
