@@ -41,7 +41,8 @@ class PostgresExporter:
             count = 0
             for (tbl_name,) in tables:
                 df = self.duckdb_conn.execute(f"SELECT * FROM {schema}.{tbl_name}").fetchdf()
-                df.to_sql(tbl_name, engine, schema=schema, if_exists="replace", index=False)
+                with engine.begin() as conn:
+                    df.to_sql(tbl_name, conn, schema=schema, if_exists="replace", index=False)
                 count += 1
             results[schema] = count
 
