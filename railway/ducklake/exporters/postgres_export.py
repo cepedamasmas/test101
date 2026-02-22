@@ -24,9 +24,12 @@ class PostgresExporter:
         engine = self._get_engine()
 
         with engine.begin() as conn:
-            conn.execute(text("CREATE SCHEMA IF NOT EXISTS raw"))
-            conn.execute(text("CREATE SCHEMA IF NOT EXISTS staging"))
-            conn.execute(text("CREATE SCHEMA IF NOT EXISTS consume"))
+            conn.execute(text("DROP SCHEMA IF EXISTS raw CASCADE"))
+            conn.execute(text("DROP SCHEMA IF EXISTS staging CASCADE"))
+            conn.execute(text("DROP SCHEMA IF EXISTS consume CASCADE"))
+            conn.execute(text("CREATE SCHEMA raw"))
+            conn.execute(text("CREATE SCHEMA staging"))
+            conn.execute(text("CREATE SCHEMA consume"))
 
         results = {}
         for schema in ["raw", "staging", "consume"]:
