@@ -41,3 +41,5 @@ logs/
 htmlcov/
 .pytest_cache/
 .mypy_cache/
+docs/reporte_estado_proyecto.md
+docs/business-rules_implementacion.md

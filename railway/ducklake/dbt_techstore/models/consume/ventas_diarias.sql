@@ -15,6 +15,11 @@ WITH base AS (
         ON cp.pedido_id = p.pedido_id
     WHERE p.fecha_creacion IS NOT NULL
       AND p.monto_total > 0
+      -- RN-002: excluir pedidos sin ítems asociados
+      AND EXISTS (
+          SELECT 1 FROM {{ ref('stg_item_pedido') }} ip
+          WHERE ip.pedido_id = p.pedido_id
+      )
 )
 
 SELECT

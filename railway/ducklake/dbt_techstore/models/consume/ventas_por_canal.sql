@@ -15,5 +15,10 @@ FROM {{ ref('stg_pedido') }} p
 LEFT JOIN {{ ref('stg_cliente_pedido') }} cp
     ON cp.pedido_id = p.pedido_id
 WHERE p.monto_total > 0
+  -- RN-002: excluir pedidos sin ítems asociados
+  AND EXISTS (
+      SELECT 1 FROM {{ ref('stg_item_pedido') }} ip
+      WHERE ip.pedido_id = p.pedido_id
+  )
 GROUP BY p.canal
 ORDER BY revenue_total DESC
