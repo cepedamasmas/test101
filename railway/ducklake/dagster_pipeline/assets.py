@@ -19,7 +19,6 @@ from config import (
 from connectors import SFTPConnector
 from layers import RawLayer
 from exporters import DuckDBExporter, PostgresExporter
-from reporter import Reporter
 
 
 @asset(group_name="ingestion", description="Extrae ecomm_parquet del SFTP a RAW parquet")
@@ -97,13 +96,6 @@ def postgres_export(context: AssetExecutionContext) -> MaterializeResult:
                 context.log.info(f"PostgreSQL {schema}: {count} tablas exportadas")
         finally:
             pg.close()
-    finally:
-        conn.close()
-
-    # Reportes
-    conn = duckdb.connect(str(DUCKDB_PATH))
-    try:
-        Reporter(conn).print_all()
     finally:
         conn.close()
 
