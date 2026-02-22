@@ -45,9 +45,6 @@ class PostgresExporter:
         for schema in schemas:
             tables = self.duckdb_conn.execute(
                 f"SELECT table_name FROM information_schema.tables "
-                f"WHERE table_schema = '{schema}' "
-                f"UNION ALL "
-                f"SELECT table_name FROM information_schema.views "
                 f"WHERE table_schema = '{schema}'"
             ).fetchall()
 
