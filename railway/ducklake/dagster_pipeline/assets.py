@@ -7,7 +7,9 @@ Cada asset representa un paso del pipeline:
   4. postgres_export: Replica todo a PostgreSQL
 """
 
+import json
 import duckdb
+from datetime import datetime
 from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataValue
 from dagster_dbt import DbtCliResource
 
@@ -129,5 +131,54 @@ def postgres_export(context: AssetExecutionContext) -> MaterializeResult:
         metadata={
             "total_tables_exported": MetadataValue.int(total),
             "by_schema": MetadataValue.json(results),
+        }
+    )
+
+
+@asset(
+    group_name="diagnostics",
+    description="Prueba si el volumen de Railway persiste datos entre redeployments",
+)
+def volume_test(context: AssetExecutionContext) -> MaterializeResult:
+    """Escribe un archivo al volumen y en el próximo run verifica si persiste.
+
+    Correr dos veces (con un redeploy en el medio) para diagnosticar
+    si el volumen de Railway mantiene los datos entre deployments.
+    """
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    test_file = OUTPUT / "volume_test.json"
+
+    # Leer estado previo si existe
+    previous = None
+    if test_file.exists():
+        with open(test_file) as f:
+            previous = json.load(f)
+        context.log.info(f"VOLUMEN PERSISTE ✓ — archivo previo del: {previous['written_at']}")
+    else:
+        context.log.warning(f"SIN DATOS PREVIOS — primera vez o volumen no persiste: {test_file}")
+
+    # Escribir estado actual
+    now = datetime.now().isoformat()
+    state = {
+        "written_at": now,
+        "output_path": str(OUTPUT),
+        "duckdb_exists": DUCKDB_PATH.exists(),
+        "duckdb_size_bytes": DUCKDB_PATH.stat().st_size if DUCKDB_PATH.exists() else 0,
+        "datalake_exists": DATA.exists(),
+        "previous_write": previous["written_at"] if previous else None,
+    }
+    with open(test_file, "w") as f:
+        json.dump(state, f, indent=2)
+
+    context.log.info(f"Archivo de prueba escrito en: {test_file}")
+    context.log.info(f"DuckDB en volumen: {state['duckdb_exists']} ({state['duckdb_size_bytes']} bytes)")
+    context.log.info(f"Datalake dir existe: {state['datalake_exists']}")
+
+    return MaterializeResult(
+        metadata={
+            "test_file": MetadataValue.text(str(test_file)),
+            "volume_persisted": MetadataValue.bool(previous is not None),
+            "previous_write": MetadataValue.text(previous["written_at"] if previous else "NINGUNO"),
+            "duckdb_size_bytes": MetadataValue.int(state["duckdb_size_bytes"]),
         }
     )
