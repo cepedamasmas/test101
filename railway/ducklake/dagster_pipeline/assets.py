@@ -57,6 +57,7 @@ def duckdb_catalog(context: AssetExecutionContext) -> MaterializeResult:
     """Paso 2: Registra RAW parquets como vistas en DuckDB."""
     raw_tables = get_raw_tables(DATA)
 
+    DUCKDB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = duckdb.connect(str(DUCKDB_PATH))
     try:
         exporter = DuckDBExporter(conn, DATA)
@@ -87,6 +88,7 @@ def dbt_techstore_assets(context: AssetExecutionContext, dbt: DbtCliResource):
 )
 def postgres_export(context: AssetExecutionContext) -> MaterializeResult:
     """Paso 4: Replica todas las tablas a PostgreSQL."""
+    DUCKDB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = duckdb.connect(str(DUCKDB_PATH))
     try:
         pg = PostgresExporter(PG_CONFIG, conn)

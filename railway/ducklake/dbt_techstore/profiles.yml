@@ -4,4 +4,4 @@ techstore:
     prod:
       type: duckdb
       path: /app/output/techstore.duckdb
-      threads: 4
+      threads: 1
