@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Pre-instalar extensión postgres de DuckDB en build time (evita descarga en runtime)
+RUN python -c "import duckdb; conn = duckdb.connect(); conn.execute('INSTALL postgres')"
+
 # Copiar codigo modular
 COPY config.py .
 COPY connectors/ connectors/

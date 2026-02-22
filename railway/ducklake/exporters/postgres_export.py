@@ -1,11 +1,11 @@
-"""Exportador: replica tablas de DuckDB a PostgreSQL para acceso remoto."""
+"""Exportador: replica tablas de DuckDB a PostgreSQL via DuckDB postgres ATTACH."""
 
 import duckdb
 from sqlalchemy import create_engine, text
 
 
 class PostgresExporter:
-    """Exporta schemas raw/staging/consume de DuckDB a PostgreSQL."""
+    """Exporta raw/staging/consume de DuckDB a PostgreSQL via ATTACH nativo."""
 
     def __init__(self, pg_config: dict, duckdb_conn: duckdb.DuckDBPyConnection):
         self.pg_config = pg_config
@@ -19,20 +19,30 @@ class PostgresExporter:
             self._engine = create_engine(url)
         return self._engine
 
-    def export_all(self) -> dict[str, int]:
-        """Exporta todas las tablas de los 3 schemas a PostgreSQL."""
-        engine = self._get_engine()
+    def _attach(self):
+        cfg = self.pg_config
+        conn_str = (
+            f"host={cfg['host']} port={cfg['port']} "
+            f"dbname={cfg['database']} user={cfg['user']} password={cfg['password']}"
+        )
+        self.duckdb_conn.execute("LOAD postgres")
+        self.duckdb_conn.execute(f"ATTACH '{conn_str}' AS pg (TYPE POSTGRES)")
 
+    def export_all(self) -> dict[str, int]:
+        """Exporta raw, staging y consume a PostgreSQL via DuckDB ATTACH."""
+        schemas = ["raw", "staging", "consume"]
+
+        # DDL: drop y recrear schemas limpios
+        engine = self._get_engine()
         with engine.begin() as conn:
-            conn.execute(text("DROP SCHEMA IF EXISTS raw CASCADE"))
-            conn.execute(text("DROP SCHEMA IF EXISTS staging CASCADE"))
-            conn.execute(text("DROP SCHEMA IF EXISTS consume CASCADE"))
-            conn.execute(text("CREATE SCHEMA raw"))
-            conn.execute(text("CREATE SCHEMA staging"))
-            conn.execute(text("CREATE SCHEMA consume"))
+            for schema in schemas:
+                conn.execute(text(f"DROP SCHEMA IF EXISTS {schema} CASCADE"))
+                conn.execute(text(f"CREATE SCHEMA {schema}"))
+
+        self._attach()
 
         results = {}
-        for schema in ["raw", "staging", "consume"]:
+        for schema in schemas:
             tables = self.duckdb_conn.execute(
                 f"SELECT table_name FROM information_schema.tables "
                 f"WHERE table_schema = '{schema}' "
@@ -43,15 +53,20 @@ class PostgresExporter:
 
             count = 0
             for (tbl_name,) in tables:
-                df = self.duckdb_conn.execute(f"SELECT * FROM {schema}.{tbl_name}").fetchdf()
-                with engine.begin() as conn:
-                    df.to_sql(tbl_name, conn, schema=schema, if_exists="replace", index=False)
+                self.duckdb_conn.execute(
+                    f"CREATE TABLE pg.{schema}.{tbl_name} AS "
+                    f"SELECT * FROM {schema}.{tbl_name}"
+                )
                 count += 1
             results[schema] = count
 
         return results
 
     def close(self):
+        try:
+            self.duckdb_conn.execute("DETACH pg")
+        except Exception:
+            pass
         if self._engine:
             self._engine.dispose()
             self._engine = None
