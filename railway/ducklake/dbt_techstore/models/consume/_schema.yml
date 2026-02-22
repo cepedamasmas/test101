@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: ventas_por_canal
+    description: "KPIs de ventas agregados por canal (vtex, mercadolibre, garbarino)"
+    columns:
+      - name: canal
+      - name: total_pedidos
+      - name: clientes_unicos
+      - name: revenue_total
+      - name: ticket_promedio
+      - name: primer_pedido
+      - name: ultimo_pedido
+
+  - name: top_productos
+    description: "Ranking de productos por revenue y unidades, particionado por canal"
+    columns:
+      - name: canal
+      - name: nombre
+      - name: producto_id_origen
+      - name: categoria_id
+      - name: total_pedidos
+      - name: total_unidades
+      - name: revenue_total
+      - name: rank_revenue
+      - name: rank_unidades
+
+  - name: clientes_resumen
+    description: "Resumen de actividad por cliente: LTV, frecuencia, recencia (base para RFM)"
+    columns:
+      - name: cliente_id
+      - name: email
+      - name: nombre
+      - name: canal_origen
+      - name: total_pedidos
+      - name: ltv
+      - name: ticket_promedio
+      - name: primer_pedido
+      - name: ultimo_pedido
+      - name: canales_usados
+
+  - name: ventas_diarias
+    description: "Serie temporal diaria de pedidos y revenue por canal"
+    columns:
+      - name: fecha
+      - name: canal
+      - name: pedidos
+      - name: clientes_unicos
+      - name: revenue
+      - name: ticket_promedio
