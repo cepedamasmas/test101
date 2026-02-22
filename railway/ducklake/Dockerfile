@@ -25,6 +25,7 @@ COPY dbt_techstore/ dbt_techstore/
 RUN dbt parse --project-dir /app/dbt_techstore --profiles-dir /app/dbt_techstore
 
 # Copiar archivos de soporte
+COPY dagster.yaml .
 COPY start.sh .
 RUN chmod +x start.sh
 
