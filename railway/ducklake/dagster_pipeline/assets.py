@@ -55,7 +55,25 @@ def raw_ingestion(context: AssetExecutionContext) -> MaterializeResult:
 )
 def duckdb_catalog(context: AssetExecutionContext) -> MaterializeResult:
     """Paso 2: Registra RAW parquets como vistas en DuckDB."""
+    import glob as glob_module
+
     raw_tables = get_raw_tables(DATA)
+
+    # Diagnóstico: mostrar qué paths existe en el volumen
+    context.log.info(f"DATA dir: {DATA}")
+    context.log.info(f"DATA exists: {DATA.exists()}")
+    raw_base = DATA / "raw" / "sftp"
+    if raw_base.exists():
+        subdirs = [str(p) for p in raw_base.iterdir()]
+        context.log.info(f"Carpetas en raw/sftp: {subdirs}")
+    else:
+        context.log.warning(f"raw/sftp NO existe: {raw_base}")
+
+    # Mostrar cuántos parquets hay por tabla
+    for tbl_name, (source, folder) in raw_tables.items():
+        pattern = str(DATA / "raw" / source / folder / "*" / "*" / "*" / "data.parquet")
+        matches = glob_module.glob(pattern)
+        context.log.info(f"  {tbl_name}: {len(matches)} parquets ({pattern})")
 
     DUCKDB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = duckdb.connect(str(DUCKDB_PATH))
