@@ -5,6 +5,10 @@ config-version: 2
 profile: techstore
 
 model-paths: ["models"]
+macro-paths: ["macros"]
+
+on-run-start:
+  - "{{ create_raw_views() }}"
 
 models:
   dbt_techstore:

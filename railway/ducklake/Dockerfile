@@ -23,7 +23,7 @@ COPY dagster_pipeline/ dagster_pipeline/
 COPY reporter.py .
 COPY pipeline.py .
 
-# Copiar dbt project y generar manifest para dagster-dbt
+# Copiar dbt project (incluye macros) y generar manifest para dagster-dbt
 COPY dbt_techstore/ dbt_techstore/
 RUN dbt parse --project-dir /app/dbt_techstore --profiles-dir /app/dbt_techstore
 

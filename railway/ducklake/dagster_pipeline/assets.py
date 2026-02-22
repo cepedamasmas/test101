@@ -63,6 +63,11 @@ def duckdb_catalog(context: AssetExecutionContext) -> MaterializeResult:
         exporter = DuckDBExporter(conn, DATA)
         count = exporter.export_raw_views(raw_tables)
         context.log.info(f"{count} vistas RAW creadas en DuckDB")
+        if count == 0:
+            raise RuntimeError(
+                "0 parquets encontrados en el volumen. "
+                "Asegurate de correr raw_ingestion primero (full_pipeline_job)."
+            )
     finally:
         conn.close()
 
