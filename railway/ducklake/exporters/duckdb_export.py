@@ -14,13 +14,17 @@ class DuckDBExporter:
 
     def export_raw_views(self, raw_tables: dict[str, tuple[str, str]]) -> int:
         """Crea vistas en schema 'raw' apuntando a parquets con hive partitioning."""
+        import glob as glob_module
         self.conn.execute("CREATE SCHEMA IF NOT EXISTS raw")
         count = 0
         for tbl_name, (source, folder) in raw_tables.items():
-            glob = self.data_dir / "raw" / source / folder / "*" / "*" / "*" / "data.parquet"
+            pattern = self.data_dir / "raw" / source / folder / "*" / "*" / "*" / "data.parquet"
+            matches = glob_module.glob(str(pattern))
+            if not matches:
+                continue
             self.conn.execute(
                 f"CREATE OR REPLACE VIEW raw.{tbl_name} AS "
-                f"SELECT * FROM read_parquet('{glob}', hive_partitioning=true)"
+                f"SELECT * FROM read_parquet('{pattern}', hive_partitioning=true)"
             )
             count += 1
         return count
