@@ -11,7 +11,7 @@ Data Lake Framework con DuckDB. Alternativa eficiente a Snowflake, Databricks y 
 
 ## Propuesta de Valor
 
-- **90-95% ahorro** en costos de infraestructura
+- **90-95% ahorro** en costos de infraestructura 
 - **1-2 semanas** de implementación (vs 2-3 meses)
 - **Performance igual o mejor** para volúmenes típicos
 - **Zero vendor lock-in** — todo en Parquet estándar
