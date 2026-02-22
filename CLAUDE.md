@@ -12,7 +12,7 @@ Deployado en Railway con Dagster como orquestador.
   - Path: `data/raw/{source}/{table}/year=YYYY/month=MM/day=DD/data.parquet`
   - Ingesta via Python (connectors)
 - **STAGING (Silver)**: Limpieza, dedup, validación
-  - Transformaciones via **dbt** (modelos `stg_*.sql`)
+  - Transformaciones via **dbt** (modelos `stg_*.sql`) 
   - Materializado como tablas en DuckDB schema `staging`
 - **CONSUME (Gold)**: Tablas listas para BI/ML
   - Agregaciones via **dbt** (modelos en `consume/`)
