@@ -15,7 +15,7 @@ Deployado en Railway con Dagster como orquestador.
   - Transformaciones via **dbt** (modelos `stg_*.sql`) 
   - Materializado como tablas en DuckDB schema `staging`
 - **CONSUME (Gold)**: Tablas listas para BI/ML
-  - Agregaciones via **dbt** (modelos en `consume/`)
+  - Agregaciones via **dbt** (modelos en `consume/`) 
   - Materializado como tablas en DuckDB schema `consume`
 
 ## Stack
