@@ -1,9 +1,13 @@
 #!/bin/bash
 
 mkdir -p /app/output
-mkdir -p "${DAGSTER_HOME:-/app/output/dagster_home}"
+DAGSTER_HOME_DIR="${DAGSTER_HOME:-/app/output/dagster_home}"
+mkdir -p "$DAGSTER_HOME_DIR"
 chmod 777 /app/output
-chmod 777 "${DAGSTER_HOME:-/app/output/dagster_home}"
+chmod 777 "$DAGSTER_HOME_DIR"
+
+# Copiar dagster.yaml al DAGSTER_HOME para que Dagster use PostgreSQL storage
+cp /app/dagster.yaml "$DAGSTER_HOME_DIR/dagster.yaml" 2>/dev/null || true
 
 # --- Diagnóstico de volumen (aparece en Railway deployment logs) ---
 echo "=== VOLUME DIAGNOSTICS ==="
@@ -25,10 +29,10 @@ DAGSTER_USER="${DAGSTER_USER:-admin}"
 DAGSTER_PASSWORD="${DAGSTER_PASSWORD:-admin}"
 htpasswd -bc /etc/nginx/.htpasswd "$DAGSTER_USER" "$DAGSTER_PASSWORD"
 
-# Expandir $PORT en nginx.conf y arrancar nginx
+# Procesar nginx.conf con el PORT asignado por Railway (usar sed, no envsubst)
 PORT="${PORT:-3000}"
 echo "Arrancando nginx en puerto $PORT"
-envsubst '${PORT}' < /app/nginx.conf > /tmp/nginx.conf
+sed "s/\${PORT}/$PORT/g" /app/nginx.conf > /tmp/nginx.conf
 nginx -c /tmp/nginx.conf
 
 echo "Dagster UI disponible en el puerto $PORT (usuario: $DAGSTER_USER)"
