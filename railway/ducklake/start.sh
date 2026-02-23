@@ -30,7 +30,7 @@ DAGSTER_PASSWORD="${DAGSTER_PASSWORD:-admin}"
 htpasswd -bc /etc/nginx/.htpasswd "$DAGSTER_USER" "$DAGSTER_PASSWORD"
 
 # Procesar nginx.conf con el PORT asignado por Railway (usar sed, no envsubst)
-PORT="${PORT:-3000}"
+PORT=3000
 echo "Arrancando nginx en puerto $PORT"
 sed "s/\${PORT}/$PORT/g" /app/nginx.conf > /tmp/nginx.conf
 nginx -c /tmp/nginx.conf
