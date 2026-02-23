@@ -1,4 +1,9 @@
-"""Exportador: DuckDB → PostgreSQL via bulk COPY paralelo e incremental."""
+"""Exportador: DuckDB → PostgreSQL via bulk COPY paralelo e incremental.
+
+Flujo en dos fases:
+  1. Leer todo desde DuckDB (serial — una sola conexión, sin conflicto)
+  2. Escribir a PostgreSQL en paralelo (puro I/O de red, sin DuckDB)
+"""
 
 import io
 import concurrent.futures
@@ -14,8 +19,8 @@ class PostgresExporter:
 
     Estrategia:
     - Incremental: salta tablas cuyo row-count no cambió en PG.
-    - Paralelo: múltiples tablas simultáneas via ThreadPoolExecutor.
-    - Bulk load: psycopg2 COPY FROM STDIN, orders of magnitude más rápido que INSERT.
+    - Paralelo: writes a PG simultáneos via ThreadPoolExecutor.
+    - Bulk load: psycopg2 COPY FROM STDIN (orders of magnitude más rápido que INSERT).
     """
 
     DUCK_TO_PG: dict[str, str] = {
@@ -35,17 +40,9 @@ class PostgresExporter:
         "BLOB": "BYTEA",
     }
 
-    def __init__(
-        self,
-        pg_config: dict,
-        duckdb_conn: duckdb.DuckDBPyConnection,
-        duckdb_path: str | None = None,
-    ):
+    def __init__(self, pg_config: dict, duckdb_conn: duckdb.DuckDBPyConnection):
         self.pg_config = pg_config
         self.duckdb_conn = duckdb_conn
-        # Path del archivo .duckdb — necesario para abrir conexiones read-only por thread.
-        # Si es None (in-memory) el export corre en serie con la conexión compartida.
-        self._duckdb_path = duckdb_path
         self._engine = None
 
     def _get_engine(self):
@@ -67,12 +64,6 @@ class PostgresExporter:
             user=cfg["user"],
             password=cfg["password"],
         )
-
-    def _duck_connect(self) -> tuple[duckdb.DuckDBPyConnection, bool]:
-        """Devuelve (conn, should_close). Cada thread necesita su propia conexión."""
-        if self._duckdb_path:
-            return duckdb.connect(self._duckdb_path, read_only=True), True
-        return self.duckdb_conn, False  # in-memory: reutilizar (solo sin paralelo)
 
     def _pg_row_counts(self, schemas: list[str]) -> dict[str, int]:
         """Snapshot de {schema.table: row_count} en PostgreSQL para detección de cambios."""
@@ -97,9 +88,9 @@ class PostgresExporter:
             pass  # PG vacío o primer run → full export
         return counts
 
-    def _build_ddl(self, duck_conn: duckdb.DuckDBPyConnection, schema: str, table: str) -> str:
+    def _build_ddl(self, schema: str, table: str) -> str:
         """Genera CREATE TABLE DDL para PostgreSQL basado en el schema DuckDB."""
-        cols = duck_conn.execute(
+        cols = self.duckdb_conn.execute(
             "SELECT column_name, data_type FROM information_schema.columns "
             "WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position",
             [schema, table],
@@ -111,34 +102,15 @@ class PostgresExporter:
             col_defs.append(f'  "{col_name}" {pg_type}')
         return f'CREATE TABLE "{schema}"."{table}" (\n' + ",\n".join(col_defs) + "\n)"
 
-    def _export_table(
-        self, schema: str, table: str, pg_counts: dict[str, int]
+    def _write_table(
+        self,
+        schema: str,
+        table: str,
+        buf: io.BytesIO,
+        ddl: str,
+        pg_count: int | None,
     ) -> str:
-        """Exporta una tabla individual. Retorna: 'skip' | 'create' | 'update'."""
-        duck_conn, should_close = self._duck_connect()
-        try:
-            duck_count = duck_conn.execute(
-                f'SELECT COUNT(*) FROM "{schema}"."{table}"'
-            ).fetchone()[0]
-
-            key = f"{schema}.{table}"
-            pg_count = pg_counts.get(key)
-
-            # Incremental: skip si el row-count coincide
-            if pg_count is not None and pg_count == duck_count:
-                return "skip"
-
-            df = duck_conn.execute(f'SELECT * FROM "{schema}"."{table}"').df()
-            ddl = self._build_ddl(duck_conn, schema, table)
-        finally:
-            if should_close:
-                duck_conn.close()
-
-        # CSV en memoria con \N como marcador de NULL (convención PostgreSQL COPY)
-        buf = io.BytesIO()
-        df.to_csv(buf, index=False, na_rep=r"\N")
-        buf.seek(0)
-
+        """Worker thread: escribe un CSV buffer a PostgreSQL via COPY. Sin DuckDB."""
         pg_conn = self._pg_connect()
         try:
             pg_conn.autocommit = False
@@ -159,56 +131,74 @@ class PostgresExporter:
             raise
         finally:
             pg_conn.close()
-
         return action
 
     def export_all(self, workers: int = MAX_WORKERS) -> dict[str, dict]:
         """Exporta raw, staging y consume a PostgreSQL en paralelo con modo incremental.
+
+        Fase 1 (serial): lee todos los datos desde DuckDB y construye CSV buffers en RAM.
+        Fase 2 (paralelo): escribe los buffers a PostgreSQL sin tocar DuckDB.
 
         Returns:
             {schema: {"exported": int, "skipped": int, "failed": int}}
         """
         schemas = ["raw", "staging", "consume"]
 
-        # Modo incremental: crear schemas si no existen (no hacemos DROP CASCADE)
+        # Crear schemas en PG si no existen (modo incremental: no hacemos DROP CASCADE)
         engine = self._get_engine()
         with engine.begin() as conn:
             for schema in schemas:
                 conn.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{schema}"'))
 
-        # Row counts en PG actuales para detectar tablas sin cambios
+        # Snapshot de row-counts en PG para detectar tablas sin cambios
         pg_counts = self._pg_row_counts(schemas)
-
-        # Lista completa de (schema, table) desde DuckDB
-        work: list[tuple[str, str]] = []
-        for schema in schemas:
-            tables = self.duckdb_conn.execute(
-                "SELECT table_name FROM information_schema.tables "
-                f"WHERE table_schema = '{schema}'"
-            ).fetchall()
-            work.extend((schema, tbl) for (tbl,) in tables)
 
         results: dict[str, dict] = {
             s: {"exported": 0, "skipped": 0, "failed": 0} for s in schemas
         }
 
-        # Paralelo si tenemos path (conexiones read-only por thread), serie si in-memory
-        effective_workers = workers if self._duckdb_path else 1
+        # --- Fase 1: Leer desde DuckDB (serial, conexión única) ---
+        # Guarda (schema, tbl, csv_buf, ddl, pg_count) para las tablas que necesitan update
+        pending: list[tuple[str, str, io.BytesIO, str, int | None]] = []
 
+        for schema in schemas:
+            tables = self.duckdb_conn.execute(
+                "SELECT table_name FROM information_schema.tables "
+                f"WHERE table_schema = '{schema}'"
+            ).fetchall()
+
+            for (tbl,) in tables:
+                key = f"{schema}.{tbl}"
+                duck_count = self.duckdb_conn.execute(
+                    f'SELECT COUNT(*) FROM "{schema}"."{tbl}"'
+                ).fetchone()[0]
+                pg_count = pg_counts.get(key)
+
+                if pg_count is not None and pg_count == duck_count:
+                    results[schema]["skipped"] += 1
+                    continue
+
+                df = self.duckdb_conn.execute(f'SELECT * FROM "{schema}"."{tbl}"').df()
+                ddl = self._build_ddl(schema, tbl)
+
+                buf = io.BytesIO()
+                df.to_csv(buf, index=False, na_rep=r"\N")
+                buf.seek(0)
+
+                pending.append((schema, tbl, buf, ddl, pg_count))
+
+        # --- Fase 2: Escribir a PG en paralelo (solo I/O de red) ---
         errors: list[str] = []
-        with concurrent.futures.ThreadPoolExecutor(max_workers=effective_workers) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
             futures = {
-                executor.submit(self._export_table, schema, tbl, pg_counts): (schema, tbl)
-                for schema, tbl in work
+                executor.submit(self._write_table, schema, tbl, buf, ddl, pg_count): (schema, tbl)
+                for schema, tbl, buf, ddl, pg_count in pending
             }
             for future in concurrent.futures.as_completed(futures):
                 schema, tbl = futures[future]
                 try:
-                    action = future.result()
-                    if action == "skip":
-                        results[schema]["skipped"] += 1
-                    else:
-                        results[schema]["exported"] += 1
+                    future.result()
+                    results[schema]["exported"] += 1
                 except Exception as exc:
                     results[schema]["failed"] += 1
                     errors.append(f"{schema}.{tbl}: {exc}")

@@ -116,7 +116,7 @@ def postgres_export(context: AssetExecutionContext) -> MaterializeResult:
     DUCKDB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = duckdb.connect(str(DUCKDB_PATH))
     try:
-        pg = PostgresExporter(PG_CONFIG, conn, duckdb_path=str(DUCKDB_PATH))
+        pg = PostgresExporter(PG_CONFIG, conn)
         try:
             results = pg.export_all()
             total_exported = 0
