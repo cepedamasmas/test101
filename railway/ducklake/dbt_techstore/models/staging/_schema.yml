@@ -74,3 +74,47 @@ models:
       - name: producto_id
       - name: total_pedidos
       - name: revenue_total
+
+  - name: stg_envio_detalle
+    description: "Fact: detalle logistico de envios MeLi (type_6) con tracking, status y direcciones origen/destino con lat/lon"
+    columns:
+      - name: envio_id
+      - name: orden_id_origen
+      - name: logistic_type
+      - name: tracking_number
+      - name: origen_latitud
+      - name: origen_longitud
+      - name: destino_latitud
+      - name: destino_longitud
+
+  - name: stg_meli_pago_detalle
+    description: "Fact: transacciones de pago MercadoPago (type_8) con montos, comisiones y metodo de pago"
+    columns:
+      - name: pago_id
+      - name: orden_id_origen
+      - name: status
+      - name: monto_transaccion
+      - name: monto_neto_recibido
+      - name: tipo_pago
+      - name: cuotas
+
+  - name: stg_meli_pickup_detalle
+    description: "Fact: retiros en sucursal MeLi (meli_pickup) con datos de tienda (lat/lon) y persona que retira"
+    columns:
+      - name: pickup_id
+      - name: orden_id_origen
+      - name: tienda_id
+      - name: tienda_latitud
+      - name: tienda_longitud
+
+  - name: stg_geo_envio
+    description: "Fact geo: un registro por punto geografico de cada pedido (origen_vendedor / destino_comprador / retiro_sucursal). Diseñado para mapas."
+    columns:
+      - name: geo_envio_id
+      - name: tipo
+      - name: canal
+      - name: orden_id_origen
+      - name: ciudad
+      - name: provincia
+      - name: latitud
+      - name: longitud
