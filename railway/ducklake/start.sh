@@ -3,8 +3,8 @@
 mkdir -p /app/output
 DAGSTER_HOME_DIR="${DAGSTER_HOME:-/app/output/dagster_home}"
 mkdir -p "$DAGSTER_HOME_DIR"
-chmod 777 /app/output
-chmod 777 "$DAGSTER_HOME_DIR"
+chmod 755 /app/output
+chmod 755 "$DAGSTER_HOME_DIR"
 
 # Copiar dagster.yaml al DAGSTER_HOME para que Dagster use PostgreSQL storage
 cp /app/dagster.yaml "$DAGSTER_HOME_DIR/dagster.yaml" 2>/dev/null || true
@@ -26,7 +26,7 @@ python -c "import duckdb; duckdb.connect('${DUCKDB_PATH:-/app/output/lake.duckdb
 
 # Generar htpasswd con las credenciales de las variables de entorno
 DAGSTER_USER="${DAGSTER_USER:-admin}"
-DAGSTER_PASSWORD="${DAGSTER_PASSWORD:-admin}"
+DAGSTER_PASSWORD="${DAGSTER_PASSWORD:?Error: DAGSTER_PASSWORD no está configurado. Setear la variable de entorno antes de iniciar.}"
 htpasswd -bc /etc/nginx/.htpasswd "$DAGSTER_USER" "$DAGSTER_PASSWORD"
 
 # Procesar nginx.conf con el PORT asignado por Railway (usar sed, no envsubst)

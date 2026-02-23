@@ -29,19 +29,19 @@ DBT_PROJECT_DIR = Path(__file__).parent / "dbt_techstore"
 
 # --- SFTP ---
 SFTP_CONFIG = {
-    "host":     os.environ.get("SFTP_HOST", "sftp"),
+    "host":     os.environ["SFTP_HOST"],
     "port":     int(os.environ.get("SFTP_PORT", "22")),
-    "username": os.environ.get("SFTP_USER", "techstore"),
-    "password": os.environ.get("SFTP_PASSWORD", "techstore123"),
+    "username": os.environ["SFTP_USER"],
+    "password": os.environ["SFTP_PASSWORD"],
 }
 
 # --- PostgreSQL ---
 PG_CONFIG = {
-    "host":     os.environ.get("PG_HOST", "postgres"),
+    "host":     os.environ["PG_HOST"],
     "port":     int(os.environ.get("PG_PORT", "5432")),
-    "user":     os.environ.get("PG_USER", "techstore"),
-    "password": os.environ.get("PG_PASSWORD", "techstore123"),
-    "database": os.environ.get("PG_DATABASE", "techstore_lake"),
+    "user":     os.environ["PG_USER"],
+    "password": os.environ["PG_PASSWORD"],
+    "database": os.environ["PG_DATABASE"],
 }
 
 # --- SFTP folders: ecomm_parquet (Parquet particionados por dia) ---
