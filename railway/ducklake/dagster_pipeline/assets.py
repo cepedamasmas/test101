@@ -112,24 +112,28 @@ def dbt_techstore_assets(context: AssetExecutionContext, dbt: DbtCliResource):
     description="Exporta DuckDB a PostgreSQL para acceso remoto",
 )
 def postgres_export(context: AssetExecutionContext) -> MaterializeResult:
-    """Paso 4: Replica todas las tablas a PostgreSQL."""
+    """Paso 4: Replica todas las tablas a PostgreSQL (bulk COPY, paralelo, incremental)."""
     DUCKDB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = duckdb.connect(str(DUCKDB_PATH))
     try:
-        pg = PostgresExporter(PG_CONFIG, conn)
+        pg = PostgresExporter(PG_CONFIG, conn, duckdb_path=str(DUCKDB_PATH))
         try:
             results = pg.export_all()
-            for schema, count in results.items():
-                context.log.info(f"PostgreSQL {schema}: {count} tablas exportadas")
+            total_exported = 0
+            for schema, counts in results.items():
+                context.log.info(
+                    f"PostgreSQL {schema}: {counts['exported']} exportadas, "
+                    f"{counts['skipped']} sin cambios, {counts['failed']} fallidas"
+                )
+                total_exported += counts["exported"]
         finally:
             pg.close()
     finally:
         conn.close()
 
-    total = sum(results.values())
     return MaterializeResult(
         metadata={
-            "total_tables_exported": MetadataValue.int(total),
+            "total_tables_exported": MetadataValue.int(total_exported),
             "by_schema": MetadataValue.json(results),
         }
     )
