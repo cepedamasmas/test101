@@ -61,6 +61,32 @@ class RawLayer:
 
         return total_rows
 
+    def save(self, df: "pd.DataFrame", source: str, table_name: str) -> int:
+        """Guarda un DataFrame como Parquet en la capa RAW.
+
+        Usar con conectores Patrón A (dict[str, DataFrame]).
+        Para conectores Patrón B (generator de paths), usar save_from_path().
+
+        Args:
+            df: Datos a guardar.
+            source: Nombre del sistema fuente (mysql, sftp, api, etc.).
+            table_name: Nombre lógico de la tabla.
+
+        Returns:
+            Cantidad de filas guardadas.
+        """
+        import pandas as pd
+        import tempfile
+        import os
+
+        with tempfile.NamedTemporaryFile(suffix=".parquet", delete=False) as tmp:
+            tmp_path = tmp.name
+        try:
+            df.to_parquet(tmp_path, index=False, compression="snappy")
+            return self.save_from_path(tmp_path, source, table_name)
+        finally:
+            os.unlink(tmp_path)
+
     def get_path(self, source: str, table_name: str) -> str:
         """Retorna glob path para leer parquets con hive partitioning."""
         return str(self.data_dir / "raw" / source / table_name / "*" / "*" / "*" / "data.parquet")

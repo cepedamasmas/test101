@@ -1,8 +1,10 @@
-"""Pipeline TechStore - Orquestador principal.
+"""Orquestador principal del pipeline DuckLake.
 
 Puede ejecutarse de 2 formas:
-  1. Railway/Docker: python pipeline.py (ejecuta Dagster assets programaticamente)
-  2. Local con UI: dagster dev -m dagster_pipeline (levanta webserver Dagster)
+  1. Batch (Railway/Docker): python pipeline.py
+     Ejecuta los Dagster assets programáticamente y termina.
+  2. UI interactiva (local): dagster dev -m dagster_pipeline
+     Levanta el webserver de Dagster en http://localhost:3000
 """
 
 import sys
@@ -15,11 +17,10 @@ from dagster_pipeline.definitions import resources
 
 
 def main():
-    print("=" * 70)
-    print("  TECHSTORE ARGENTINA - Pipeline DuckLake")
+    print("=" * 60)
+    print("  DuckLake Pipeline")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("  Powered by: DuckDB + dbt + Dagster")
-    print("=" * 70)
+    print("=" * 60)
 
     # Fase 1: ingesta → catálogo (garantiza que las vistas RAW existan antes de dbt)
     result = materialize(
@@ -43,10 +44,10 @@ def main():
             print(f"    Step fallido: {step}")
         return 1
 
-    print(f"\n{'=' * 70}")
-    print("  Pipeline completado exitosamente!")
+    print(f"\n{'=' * 60}")
+    print("  Pipeline completado exitosamente.")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"{'=' * 70}")
+    print(f"{'=' * 60}")
     return 0
 
 

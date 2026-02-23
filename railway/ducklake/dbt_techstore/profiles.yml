@@ -3,5 +3,9 @@ techstore:
   outputs:
     prod:
       type: duckdb
-      path: /app/output/techstore.duckdb
-      threads: 1
+      path: "{{ env_var('DUCKDB_PATH', '/app/output/lake.duckdb') }}"
+      threads: 4
+    dev:
+      type: duckdb
+      path: "{{ env_var('DUCKDB_PATH', './output/lake.duckdb') }}"
+      threads: 4

@@ -1,4 +1,21 @@
-"""Configuración centralizada del pipeline TechStore."""
+"""Configuración centralizada del pipeline.
+
+Todas las variables se leen desde el entorno. Los defaults están pensados
+para el setup local con Docker (ver docker-compose.yml en docker/).
+
+Variables de entorno disponibles:
+    OUTPUT_DIR:    Path base donde se guardan Parquet y DuckDB (default: /app/output)
+    DUCKDB_PATH:   Path completo al archivo DuckDB (default: OUTPUT_DIR/lake.duckdb)
+    PG_HOST:       PostgreSQL host
+    PG_PORT:       PostgreSQL port (default: 5432)
+    PG_USER:       PostgreSQL user
+    PG_PASSWORD:   PostgreSQL password
+    PG_DATABASE:   PostgreSQL database name
+    SFTP_HOST:     SFTP host
+    SFTP_PORT:     SFTP port (default: 22)
+    SFTP_USER:     SFTP username
+    SFTP_PASSWORD: SFTP password
+"""
 
 import os
 from pathlib import Path
@@ -7,22 +24,22 @@ from pathlib import Path
 # --- Paths ---
 OUTPUT = Path(os.environ.get("OUTPUT_DIR", "/app/output"))
 DATA = OUTPUT / "datalake"
-DUCKDB_PATH = OUTPUT / "techstore.duckdb"
+DUCKDB_PATH = Path(os.environ.get("DUCKDB_PATH", str(OUTPUT / "lake.duckdb")))
 DBT_PROJECT_DIR = Path(__file__).parent / "dbt_techstore"
 
 # --- SFTP ---
 SFTP_CONFIG = {
-    "host": os.environ.get("SFTP_HOST", "sftp"),
-    "port": int(os.environ.get("SFTP_PORT", 22)),
+    "host":     os.environ.get("SFTP_HOST", "sftp"),
+    "port":     int(os.environ.get("SFTP_PORT", "22")),
     "username": os.environ.get("SFTP_USER", "techstore"),
     "password": os.environ.get("SFTP_PASSWORD", "techstore123"),
 }
 
 # --- PostgreSQL ---
 PG_CONFIG = {
-    "host": os.environ.get("PG_HOST", "postgres"),
-    "port": os.environ.get("PG_PORT", "5432"),
-    "user": os.environ.get("PG_USER", "techstore"),
+    "host":     os.environ.get("PG_HOST", "postgres"),
+    "port":     int(os.environ.get("PG_PORT", "5432")),
+    "user":     os.environ.get("PG_USER", "techstore"),
     "password": os.environ.get("PG_PASSWORD", "techstore123"),
     "database": os.environ.get("PG_DATABASE", "techstore_lake"),
 }
@@ -53,5 +70,13 @@ BASE_RAW_TABLES: dict[str, tuple[str, str]] = {
 
 
 def get_raw_tables(data_dir: Path) -> dict[str, tuple[str, str]]:
-    """Retorna todas las tablas RAW disponibles."""
+    """Retorna todas las tablas RAW registradas.
+
+    Args:
+        data_dir: Path al directorio de datos (reservado para futura detección
+                  dinámica desde el filesystem).
+
+    Returns:
+        Mapa de {nombre_tabla: (fuente, carpeta)}.
+    """
     return dict(BASE_RAW_TABLES)

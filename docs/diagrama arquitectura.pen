@@ -1,0 +1,1094 @@
+{
+  "version": "2.8",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "Frame",
+      "clip": true,
+      "width": 1440,
+      "fill": "#2C2416",
+      "layout": "vertical",
+      "gap": 72,
+      "padding": 80,
+      "children": [
+        {
+          "type": "frame",
+          "id": "myMiK",
+          "name": "Header",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 18,
+          "children": [
+            {
+              "type": "frame",
+              "id": "D4TTO",
+              "name": "logogroup",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "es1Lm",
+                  "name": "logotextv",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uvWTA",
+                      "name": "logon",
+                      "fill": "#E8DCC4",
+                      "content": "SEDIMENT DATA",
+                      "fontFamily": "Sora",
+                      "fontSize": 12,
+                      "fontWeight": "700",
+                      "letterSpacing": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "y31fJ",
+                      "name": "logos",
+                      "fill": "#D4764B",
+                      "content": "DATA ENGINEERING",
+                      "fontFamily": "Sora",
+                      "fontSize": 8,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "DcfoB",
+              "name": "ey",
+              "fill": "#00E5FF",
+              "content": "SEDIMENT",
+              "fontFamily": "Inter",
+              "fontSize": 10,
+              "fontWeight": "600",
+              "letterSpacing": 4
+            },
+            {
+              "type": "text",
+              "id": "Pt8G2",
+              "name": "tt",
+              "fill": "#E8DCC4",
+              "content": "Medallion Architecture",
+              "fontFamily": "Sora",
+              "fontSize": 64,
+              "fontWeight": "700",
+              "letterSpacing": -2
+            },
+            {
+              "type": "text",
+              "id": "zY6Fe",
+              "name": "sb",
+              "fill": "#A89B82",
+              "content": "Config-driven data lake · Bronze → Silver → Gold · DuckDB + dbt + Dagster",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal",
+              "letterSpacing": 0.2
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "UC2Q1",
+          "name": "Pipeline",
+          "width": "fill_container",
+          "gap": 8,
+          "children": [
+            {
+              "type": "frame",
+              "id": "PLS4r",
+              "name": "Fuentes",
+              "width": "fill_container",
+              "fill": "#2E2618",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "QjNcO",
+                  "name": "c1h",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gflJh",
+                      "name": "c1t",
+                      "fill": "#E8DCC4",
+                      "content": "Fuentes",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VE5nK",
+                      "name": "c1s",
+                      "fill": "#7A6E5A",
+                      "content": "Conectores plug-and-play",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "SSTtX",
+                  "name": "c1d",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "#3D3020"
+                },
+                {
+                  "type": "frame",
+                  "id": "BzvcT",
+                  "name": "c1items",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "8FMD5",
+                      "name": "c1i1",
+                      "fill": "#C4B89E",
+                      "content": "BD relacional (MySQL...)",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XODTM",
+                      "name": "c1i2",
+                      "fill": "#C4B89E",
+                      "content": "Archivos (SFTP, S3...)",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "9eI5P",
+                      "name": "c1i3",
+                      "fill": "#C4B89E",
+                      "content": "HTTP (REST APIs)",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AkNLN",
+              "name": "Arrow1",
+              "width": 40,
+              "height": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "4XMUv",
+                  "name": "a1t",
+                  "fill": "#7A6E5A",
+                  "content": "→",
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "4aOxL",
+              "name": "RAW",
+              "width": "fill_container",
+              "fill": "#322A1C",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "IaHGc",
+                  "name": "c2bw",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "EEiQF",
+                      "name": "c2b",
+                      "width": 26,
+                      "height": 26,
+                      "fill": "#2E3232",
+                      "cornerRadius": 13,
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gW6By",
+                          "name": "c2bt",
+                          "fill": "#7A9A9E",
+                          "content": "B",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "DE3D2",
+                      "name": "c2bl",
+                      "fill": "#7A9A9E",
+                      "content": "Bronze",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "fSHlW",
+                  "name": "c2t",
+                  "fill": "#E8DCC4",
+                  "content": "RAW",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "pbqL6",
+                  "name": "c2d",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "#3D3020"
+                },
+                {
+                  "type": "frame",
+                  "id": "XHvhx",
+                  "name": "c2items",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fV1vQ",
+                      "name": "c2i1",
+                      "fill": "#C4B89E",
+                      "content": "Almacenamiento columnar Parquet",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "4BkxR",
+                      "name": "c2i2",
+                      "fill": "#7A6E5A",
+                      "content": "Particionado year/month/day",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rvfiD",
+                      "name": "c2i3",
+                      "fill": "#C4B89E",
+                      "content": "Compresión optimizada · append-only",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "1Zajw",
+              "name": "Arrow2",
+              "width": 40,
+              "height": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "eZyPJ",
+                  "name": "a2t",
+                  "fill": "#7A6E5A",
+                  "content": "→",
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "duFOV",
+              "name": "DuckDB Catalog",
+              "width": "fill_container",
+              "fill": "#322A1C",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "aSMUC",
+                  "name": "c3h",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "MXXFE",
+                      "name": "c3t",
+                      "fill": "#E8DCC4",
+                      "content": "DuckDB Catalog",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HtsXs",
+                      "name": "c3s",
+                      "fill": "#7A6E5A",
+                      "content": "Serverless · zero-copy",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LBUUl",
+                  "name": "c3d",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "#3D3020"
+                },
+                {
+                  "type": "frame",
+                  "id": "DjBJR",
+                  "name": "c3items",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "JbhxU",
+                      "name": "c3i1",
+                      "fill": "#C4B89E",
+                      "content": "Vistas SQL sobre Parquet RAW",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "RH34M",
+                      "name": "c3i2",
+                      "fill": "#C4B89E",
+                      "content": "Sin ETL · sin mover datos",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YOZ6P",
+                      "name": "c3i3",
+                      "fill": "#C4B89E",
+                      "content": "Schema 'raw' listo para dbt",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "t6Geb",
+              "name": "Arrow3",
+              "width": 40,
+              "height": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GdoXE",
+                  "name": "a3t",
+                  "fill": "#7A6E5A",
+                  "content": "→",
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zeM5N",
+              "name": "dbt Models",
+              "width": "fill_container",
+              "fill": "#322A1C",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hk1HQ",
+                  "name": "c4a",
+                  "width": "fill_container",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "L474b",
+                      "name": "c4at",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "AHXVu",
+                          "name": "c4ab",
+                          "width": 22,
+                          "height": 22,
+                          "fill": "#3A2010",
+                          "cornerRadius": 11,
+                          "layout": "vertical",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "bxMtM",
+                              "name": "c4abt",
+                              "fill": "#D4764B",
+                              "content": "S",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "Px5aS",
+                          "name": "c4al",
+                          "fill": "#D4764B",
+                          "content": "Silver",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "iMNN8",
+                      "name": "c4atitle",
+                      "fill": "#E8DCC4",
+                      "content": "Staging",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "3keSd",
+                      "name": "c4adesc",
+                      "fill": "#A89B82",
+                      "content": "cast · dedup · null checks",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ypYBJ",
+                  "name": "c4b",
+                  "width": "fill_container",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "w20cU",
+                      "name": "c4bt",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "mBzfw",
+                          "name": "c4bb",
+                          "width": 22,
+                          "height": 22,
+                          "fill": "#1A2A28",
+                          "cornerRadius": 11,
+                          "layout": "vertical",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "19Qnv",
+                              "name": "c4bbt",
+                              "fill": "#00E5FF",
+                              "content": "G",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "27SXy",
+                          "name": "c4bl",
+                          "fill": "#00E5FF",
+                          "content": "Gold",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "LA6Y1",
+                      "name": "c4btitle",
+                      "fill": "#E8DCC4",
+                      "content": "Consume",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "8JiWQ",
+                      "name": "c4bdesc",
+                      "fill": "#A89B82",
+                      "content": "Métricas · KPIs · ML-ready",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "tr5lW",
+              "name": "Arrow4",
+              "width": 40,
+              "height": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "9S0fD",
+                  "name": "a4t",
+                  "fill": "#7A6E5A",
+                  "content": "→",
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "UYrZP",
+              "name": "PostgreSQL",
+              "width": "fill_container",
+              "fill": "#322A1C",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "1eDKI",
+                  "name": "c5h",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "IUT06",
+                      "name": "c5t",
+                      "fill": "#E8DCC4",
+                      "content": "PostgreSQL",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "2BXql",
+                      "name": "c5s",
+                      "fill": "#7A6E5A",
+                      "content": "Acceso externo configurable",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "O7OJf",
+                  "name": "c5d",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "#3D3020"
+                },
+                {
+                  "type": "frame",
+                  "id": "Z1CD6",
+                  "name": "c5items",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Nz17u",
+                      "name": "c5i1",
+                      "fill": "#C4B89E",
+                      "content": "BI y dashboards",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "RcQrO",
+                      "name": "c5i2",
+                      "fill": "#C4B89E",
+                      "content": "Apps y APIs",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WF7jb",
+                      "name": "c5i3",
+                      "fill": "#C4B89E",
+                      "content": "Local · Docker · Cloud",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "CbmV4",
+          "name": "Dagster Steps",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "N7z8M",
+              "name": "slabel",
+              "fill": "#00E5FF",
+              "content": "DAGSTER ASSETS",
+              "fontFamily": "Inter",
+              "fontSize": 10,
+              "fontWeight": "600",
+              "letterSpacing": 3
+            },
+            {
+              "type": "frame",
+              "id": "1OpUn",
+              "name": "srow",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "2Gb1W",
+                  "name": "s1",
+                  "width": "fill_container",
+                  "fill": "#322A1C",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "b1Tuz",
+                      "name": "s1n",
+                      "fill": "#00E5FF",
+                      "content": "01",
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ps8Ez",
+                      "name": "s1nm",
+                      "fill": "#E8DCC4",
+                      "content": "raw_ingestion",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6gUnV",
+                      "name": "s1d",
+                      "fill": "#A89B82",
+                      "content": "Extrae fuentes configuradas → Parquet RAW",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "2IfyI",
+                  "name": "s2",
+                  "width": "fill_container",
+                  "fill": "#322A1C",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "j3myz",
+                      "name": "s2n",
+                      "fill": "#00E5FF",
+                      "content": "02",
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "1hEkm",
+                      "name": "s2nm",
+                      "fill": "#E8DCC4",
+                      "content": "duckdb_catalog",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KKlZQ",
+                      "name": "s2d",
+                      "fill": "#A89B82",
+                      "content": "Registra Parquet como vistas SQL (schema 'raw')",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MIGxn",
+                  "name": "s3",
+                  "width": "fill_container",
+                  "fill": "#322A1C",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "DM46h",
+                      "name": "s3n",
+                      "fill": "#00E5FF",
+                      "content": "03",
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Klt9y",
+                      "name": "s3nm",
+                      "fill": "#E8DCC4",
+                      "content": "dbt build",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "x0rpf",
+                      "name": "s3d",
+                      "fill": "#A89B82",
+                      "content": "Corre modelos · tests declarativos · linaje visual",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "2GldW",
+                  "name": "s4",
+                  "width": "fill_container",
+                  "fill": "#322A1C",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    18,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "zK20y",
+                      "name": "s4n",
+                      "fill": "#00E5FF",
+                      "content": "04",
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "yzuDO",
+                      "name": "s4nm",
+                      "fill": "#E8DCC4",
+                      "content": "postgres_export",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "31wNm",
+                      "name": "s4d",
+                      "fill": "#A89B82",
+                      "content": "Exporta raw + staging + consume → PostgreSQL",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "l3zwh",
+          "name": "techrow",
+          "width": "fill_container",
+          "gap": 10,
+          "children": [
+            {
+              "type": "text",
+              "id": "M9lXU",
+              "name": "tl",
+              "fill": "#7A6E5A",
+              "content": "Stack:",
+              "fontFamily": "Inter",
+              "fontSize": 12,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "hfsuH",
+              "name": "t1",
+              "cornerRadius": 100,
+              "padding": [
+                5,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "PHV9F",
+                  "name": "t1t",
+                  "fill": "#D4764B",
+                  "content": "DuckDB",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "T4M1W",
+              "name": "t2",
+              "cornerRadius": 100,
+              "padding": [
+                5,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "4Tw7o",
+                  "name": "t2t",
+                  "fill": "#D4764B",
+                  "content": "dbt + dbt-duckdb",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "eSHZM",
+              "name": "t3",
+              "cornerRadius": 100,
+              "padding": [
+                5,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "W83C3",
+                  "name": "t3t",
+                  "fill": "#D4764B",
+                  "content": "Dagster",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qwzdx",
+              "name": "t4",
+              "cornerRadius": 100,
+              "padding": [
+                5,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "TwPl8",
+                  "name": "t4t",
+                  "fill": "#D4764B",
+                  "content": "Parquet",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "KYAPs",
+              "name": "t5",
+              "cornerRadius": 100,
+              "padding": [
+                5,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "0p3ub",
+                  "name": "t5t",
+                  "fill": "#D4764B",
+                  "content": "PostgreSQL",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "EnXqa",
+              "name": "t6",
+              "cornerRadius": 100,
+              "padding": [
+                5,
+                12
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "QCo2M",
+                  "name": "t6t",
+                  "fill": "#D4764B",
+                  "content": "Docker / Cloud",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
