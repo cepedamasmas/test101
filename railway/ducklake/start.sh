@@ -22,7 +22,7 @@ fi
 echo "=========================="
 
 # Pre-crear el archivo DuckDB para que dbt pueda conectarse desde el primer run
-python -c "import duckdb; duckdb.connect('/app/output/techstore.duckdb').close()" 2>/dev/null || true
+python -c "import duckdb; duckdb.connect('${DUCKDB_PATH:-/app/output/lake.duckdb}').close()" 2>/dev/null || true
 
 # Generar htpasswd con las credenciales de las variables de entorno
 DAGSTER_USER="${DAGSTER_USER:-admin}"
