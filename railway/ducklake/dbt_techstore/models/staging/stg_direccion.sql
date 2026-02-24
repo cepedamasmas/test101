@@ -6,7 +6,7 @@
 --   type_6 receiver_address → MeLi (JSON real, tiene calle/altura/lat/lon)
 --   vtex_pedido shippingData → VTEX (puede ser token anonimizado → campos NULL)
 --   garbarino_pedido billing_address → Garbarino (puede ser anonimizado → campos NULL)
--- Guard LIKE '{%': evita json_extract_string en tokens anonimizados como "direccion_000016".
+-- Guard LIKE check: evita json_extract_string en tokens anonimizados tipo "direccion_000016".
 
 WITH meli AS (
     SELECT DISTINCT

@@ -7,7 +7,7 @@
 --   MeLi: la dirección está en type_6.receiver_address (JSON real, join por order_id)
 --   VTEX: embebida en vtex_pedido.shippingData (puede ser token anonimizado)
 --   Garbarino: embebida en garbarino_pedido.billing_address (puede ser token anonimizado)
--- Guard LIKE '{%': evita json_extract_string en tokens anonimizados.
+-- Guard LIKE check: evita json_extract_string en tokens anonimizados tipo "direccion_000016".
 -- Dedup: se queda con el registro más reciente por orden_id_origen.
 -- Nota: monto_total de VTEX viene en centavos → se divide por 100.
 
