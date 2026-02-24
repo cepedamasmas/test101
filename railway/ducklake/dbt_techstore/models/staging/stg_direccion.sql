@@ -26,13 +26,13 @@ WITH meli AS (
 
 vtex AS (
     SELECT DISTINCT
-        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.street')     ELSE NULL END AS calle,
-        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.number')     ELSE NULL END AS altura,
-        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.complement') ELSE NULL END AS complemento,
-        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.city')       ELSE NULL END AS ciudad,
-        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.state')      ELSE NULL END AS provincia,
-        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.postalCode') ELSE NULL END AS cp,
-        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.country')    ELSE NULL END AS pais,
+        CASE WHEN shippingData LIKE '{' || '%' THEN json_extract_string(shippingData, '$.address.street')     ELSE NULL END AS calle,
+        CASE WHEN shippingData LIKE '{' || '%' THEN json_extract_string(shippingData, '$.address.number')     ELSE NULL END AS altura,
+        CASE WHEN shippingData LIKE '{' || '%' THEN json_extract_string(shippingData, '$.address.complement') ELSE NULL END AS complemento,
+        CASE WHEN shippingData LIKE '{' || '%' THEN json_extract_string(shippingData, '$.address.city')       ELSE NULL END AS ciudad,
+        CASE WHEN shippingData LIKE '{' || '%' THEN json_extract_string(shippingData, '$.address.state')      ELSE NULL END AS provincia,
+        CASE WHEN shippingData LIKE '{' || '%' THEN json_extract_string(shippingData, '$.address.postalCode') ELSE NULL END AS cp,
+        CASE WHEN shippingData LIKE '{' || '%' THEN json_extract_string(shippingData, '$.address.country')    ELSE NULL END AS pais,
         NULL::DOUBLE                                                             AS latitud,
         NULL::DOUBLE                                                             AS longitud,
         'vtex'::VARCHAR                                                          AS fuente
@@ -42,13 +42,13 @@ vtex AS (
 
 garbarino AS (
     SELECT DISTINCT
-        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.street')     ELSE NULL END AS calle,
-        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.number')     ELSE NULL END AS altura,
-        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.complement') ELSE NULL END AS complemento,
-        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.city')       ELSE NULL END AS ciudad,
-        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.state')      ELSE NULL END AS provincia,
-        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.zip')        ELSE NULL END AS cp,
-        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.country')    ELSE NULL END AS pais,
+        CASE WHEN billing_address LIKE '{' || '%' THEN json_extract_string(billing_address, '$.street')     ELSE NULL END AS calle,
+        CASE WHEN billing_address LIKE '{' || '%' THEN json_extract_string(billing_address, '$.number')     ELSE NULL END AS altura,
+        CASE WHEN billing_address LIKE '{' || '%' THEN json_extract_string(billing_address, '$.complement') ELSE NULL END AS complemento,
+        CASE WHEN billing_address LIKE '{' || '%' THEN json_extract_string(billing_address, '$.city')       ELSE NULL END AS ciudad,
+        CASE WHEN billing_address LIKE '{' || '%' THEN json_extract_string(billing_address, '$.state')      ELSE NULL END AS provincia,
+        CASE WHEN billing_address LIKE '{' || '%' THEN json_extract_string(billing_address, '$.zip')        ELSE NULL END AS cp,
+        CASE WHEN billing_address LIKE '{' || '%' THEN json_extract_string(billing_address, '$.country')    ELSE NULL END AS pais,
         NULL::DOUBLE                                                             AS latitud,
         NULL::DOUBLE                                                             AS longitud,
         'garbarino'::VARCHAR                                                     AS fuente

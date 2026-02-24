@@ -41,7 +41,7 @@ vtex AS (
         TRY_CAST(creationDate AS TIMESTAMP)                                     AS fecha_creacion,
         TRY_CAST(lastChange   AS TIMESTAMP)                                     AS fecha_actualizacion,
         NULL::TIMESTAMP                                                         AS fecha_cierre,
-        CASE WHEN shippingData LIKE '{%' THEN
+        CASE WHEN shippingData LIKE '{' || '%' THEN
             md5(
                 coalesce(json_extract_string(shippingData, '$.address.street'),     '') || '|' ||
                 coalesce(json_extract_string(shippingData, '$.address.number'),     '') || '|' ||
@@ -79,7 +79,7 @@ garbarino AS (
         TRY_CAST(created AS TIMESTAMP)                                          AS fecha_creacion,
         NULL::TIMESTAMP                                                         AS fecha_actualizacion,
         NULL::TIMESTAMP                                                         AS fecha_cierre,
-        CASE WHEN billing_address LIKE '{%' THEN
+        CASE WHEN billing_address LIKE '{' || '%' THEN
             md5(
                 coalesce(json_extract_string(billing_address, '$.street'),  '') || '|' ||
                 coalesce(json_extract_string(billing_address, '$.number'),  '') || '|' ||
