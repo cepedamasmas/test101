@@ -20,3 +20,5 @@ sources:
         description: "Pagos MercadoPago (~110k filas, diarios desde nov 2024)"
       - name: garbarino_pedido
         description: "Pedidos Garbarino (~43 filas, ene-mar 2020)"
+      - name: geo_coords
+        description: "Geocodificacion de direcciones: coords lat/lon enriquecidas con ciudad, provincia y poblacion"

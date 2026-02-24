@@ -44,7 +44,7 @@ PG_CONFIG = {
     "database": os.environ["PG_DATABASE"],
 }
 
-# --- SFTP folders: ecomm_parquet (Parquet particionados por dia) ---
+# --- SFTP folders: ecomm_parquet (Parquet particionados por dia) + geo (CSV) ---
 SFTP_FOLDERS = {
     "vtex_pedido":      {"remote": "/upload/ecomm_parquet/vtex_pedido",      "format": "parquet"},
     "meli_pedido":      {"remote": "/upload/ecomm_parquet/meli_pedido",      "format": "parquet"},
@@ -54,9 +54,10 @@ SFTP_FOLDERS = {
     "type_7":           {"remote": "/upload/ecomm_parquet/type_7",           "format": "parquet"},
     "type_8":           {"remote": "/upload/ecomm_parquet/type_8",           "format": "parquet"},
     "garbarino_pedido": {"remote": "/upload/ecomm_parquet/garbarino_pedido", "format": "parquet"},
+    "geo_coords":       {"remote": "/upload/geo",                            "format": "csv"},
 }
 
-# --- Tablas RAW (SFTP ecomm_parquet) ---
+# --- Tablas RAW (SFTP ecomm_parquet + geo) ---
 BASE_RAW_TABLES: dict[str, tuple[str, str]] = {
     "vtex_pedido":      ("sftp", "vtex_pedido"),
     "meli_pedido":      ("sftp", "meli_pedido"),
@@ -66,6 +67,7 @@ BASE_RAW_TABLES: dict[str, tuple[str, str]] = {
     "type_7":           ("sftp", "type_7"),
     "type_8":           ("sftp", "type_8"),
     "garbarino_pedido": ("sftp", "garbarino_pedido"),
+    "geo_coords":       ("sftp", "geo_coords"),
 }
 
 

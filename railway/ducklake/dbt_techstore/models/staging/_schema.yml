@@ -133,3 +133,32 @@ models:
       - name: provincia
       - name: latitud
       - name: longitud
+
+  - name: stg_geo_coords
+    description: "Dimension: coordenadas geocodificadas desde coords_enriched.csv. Una fila por direccion_id con lat/lon, ciudad/provincia matcheada y poblacion."
+    columns:
+      - name: direccion_id
+      - name: latitud
+      - name: longitud
+      - name: matched_city
+      - name: matched_provincia
+      - name: population
+      - name: match_type
+
+  - name: stg_direccion_geocodificada
+    description: "Dimension: stg_direccion enriquecida con lat/lon del archivo de geocodificacion. COALESCE prioriza coords originales (MeLi), luego las del CSV."
+    columns:
+      - name: direccion_id
+      - name: calle
+      - name: altura
+      - name: ciudad
+      - name: provincia
+      - name: cp
+      - name: pais
+      - name: latitud
+      - name: longitud
+      - name: fuente
+      - name: matched_city
+      - name: matched_provincia
+      - name: population
+      - name: match_type

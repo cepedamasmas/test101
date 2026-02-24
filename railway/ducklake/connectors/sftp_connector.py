@@ -1,10 +1,11 @@
-"""Conector SFTP para ingesta de carpetas Parquet."""
+"""Conector SFTP para ingesta de carpetas Parquet y CSV."""
 
 import json
 import os
 import tempfile
 from typing import Generator
 
+import pandas as pd
 import paramiko
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -181,6 +182,46 @@ class SFTPConnector(BaseConnector):
 
         return tmp_out_path
 
+    def _extract_csv_folder(self, remote_dir: str) -> str | None:
+        """Lee todos los CSV de una carpeta remota y los escribe a un parquet temporal.
+
+        Args:
+            remote_dir: Ruta remota de la carpeta en el SFTP.
+
+        Returns:
+            Path al parquet temporal con todos los datos, o None si está vacía.
+        """
+        filenames = [f for f in self._sftp.listdir(remote_dir) if f.endswith(".csv")]
+        if not filenames:
+            return None
+
+        tmp_csv_files: list[str] = []
+        try:
+            # Descargar todos los CSV a disco
+            for filename in filenames:
+                remote_path = f"{remote_dir}/{filename}"
+                with tempfile.NamedTemporaryFile(suffix=".csv", delete=False) as tmp:
+                    tmp_path = tmp.name
+                self._sftp.get(remote_path, tmp_path)
+                tmp_csv_files.append(tmp_path)
+
+            # Leer y concatenar
+            dfs = [pd.read_csv(p) for p in tmp_csv_files]
+            df = pd.concat(dfs, ignore_index=True) if len(dfs) > 1 else dfs[0]
+
+            # Escribir a parquet temporal
+            with tempfile.NamedTemporaryFile(suffix=".parquet", delete=False) as tmp_out:
+                tmp_out_path = tmp_out.name
+            df.to_parquet(tmp_out_path, index=False)
+        finally:
+            for p in tmp_csv_files:
+                try:
+                    os.unlink(p)
+                except OSError:
+                    pass
+
+        return tmp_out_path
+
     def extract(self) -> Generator[tuple[str, str], None, None]:
         """Genera (table_name, tmp_parquet_path) de a una tabla a la vez.
 
@@ -188,7 +229,11 @@ class SFTPConnector(BaseConnector):
         """
         self._connect()
         for table_name, folder_cfg in self.folders.items():
-            tmp_path = self._extract_folder(folder_cfg["remote"])
+            fmt = folder_cfg.get("format", "parquet")
+            if fmt == "csv":
+                tmp_path = self._extract_csv_folder(folder_cfg["remote"])
+            else:
+                tmp_path = self._extract_folder(folder_cfg["remote"])
             if tmp_path is None:
                 continue
             try:
