@@ -8,6 +8,7 @@ Cada asset representa un paso del pipeline:
 """
 
 import json
+import shutil
 import duckdb
 from datetime import datetime
 from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataValue
@@ -27,6 +28,14 @@ from exporters import DuckDBExporter, PostgresExporter
 def raw_ingestion(context: AssetExecutionContext) -> MaterializeResult:
     """Paso 1: Ingesta de ecomm_parquet SFTP a la capa RAW."""
     OUTPUT.mkdir(parents=True, exist_ok=True)
+
+    # Demo pipeline: siempre es la misma data — limpiar RAW antes de reingestar
+    # para evitar acumulación de duplicados y OOM en pasos posteriores.
+    sftp_raw_dir = DATA / "raw" / "sftp"
+    if sftp_raw_dir.exists():
+        shutil.rmtree(sftp_raw_dir)
+        context.log.info(f"RAW limpiada: {sftp_raw_dir}")
+
     raw = RawLayer(DATA)
     total_rows = {}
 
