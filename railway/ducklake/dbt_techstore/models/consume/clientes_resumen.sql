@@ -3,7 +3,12 @@
 -- Resumen de actividad por cliente: LTV, frecuencia, recencia y canal preferido.
 -- Útil para segmentación RFM y campañas de retención.
 
-WITH canal_preferido AS (
+WITH pedidos_con_items AS (
+    -- RN-002: set de pedidos que tienen al menos 1 ítem (hash join, O(n))
+    SELECT DISTINCT pedido_id FROM {{ ref('stg_item_pedido') }}
+),
+
+canal_preferido AS (
     -- RN-004: canal con más pedidos; empate se rompe por mayor monto acumulado
     SELECT
         cliente_id,
@@ -38,11 +43,8 @@ SELECT
 FROM {{ ref('stg_cliente') }} c
 LEFT JOIN {{ ref('stg_cliente_pedido') }} cp
     ON cp.cliente_id = c.cliente_id
-    -- RN-002: solo contabilizar pedidos con ítems asociados
-    AND EXISTS (
-        SELECT 1 FROM {{ ref('stg_item_pedido') }} ip
-        WHERE ip.pedido_id = cp.pedido_id
-    )
+INNER JOIN pedidos_con_items pci
+    ON pci.pedido_id = cp.pedido_id
 LEFT JOIN {{ ref('stg_cliente_canal') }} cc
     ON cc.cliente_id = c.cliente_id
 LEFT JOIN canal_preferido cpref
