@@ -26,8 +26,22 @@ models:
       - name: canal
       - name: nombre
 
+  - name: stg_direccion
+    description: "Dimension: direcciones de entrega unicas con calle, altura, ciudad, provincia, cp, lat/lon cuando disponible"
+    columns:
+      - name: direccion_id
+      - name: calle
+      - name: altura
+      - name: ciudad
+      - name: provincia
+      - name: cp
+      - name: pais
+      - name: latitud
+      - name: longitud
+      - name: fuente
+
   - name: stg_pedido
-    description: "Fact: pedidos unificados de las 3 plataformas con surrogate key"
+    description: "Fact: pedidos unificados de las 3 plataformas con surrogate key y FK a stg_direccion"
     columns:
       - name: pedido_id
       - name: orden_id_origen
@@ -35,6 +49,7 @@ models:
       - name: status
       - name: monto_total
       - name: fecha_creacion
+      - name: direccion_id
 
   - name: stg_item_pedido
     description: "Fact: lineas de pedido, un registro por producto dentro de cada pedido"
