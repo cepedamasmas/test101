@@ -3,10 +3,10 @@
 -- Dimensión de direcciones de entrega únicas.
 -- direccion_id: md5(calle|altura|ciudad|cp|pais) — misma lógica que en stg_pedido.
 -- Fuentes:
---   type_6 receiver_address → MeLi (más completa: calle, altura, complemento, lat/lon)
---   vtex_pedido shippingData → VTEX (ciudad/provincia/cp, calle si la tiene)
---   garbarino_pedido billing_address → Garbarino (43 filas, datos de facturación)
--- QUALIFY: si la misma dirección aparece en varias fuentes, prioriza la que tiene lat/lon.
+--   type_6 receiver_address → MeLi (JSON real, tiene calle/altura/lat/lon)
+--   vtex_pedido shippingData → VTEX (puede ser token anonimizado → campos NULL)
+--   garbarino_pedido billing_address → Garbarino (puede ser anonimizado → campos NULL)
+-- Guard LIKE '{%': evita json_extract_string en tokens anonimizados como "direccion_000016".
 
 WITH meli AS (
     SELECT DISTINCT
@@ -26,13 +26,13 @@ WITH meli AS (
 
 vtex AS (
     SELECT DISTINCT
-        json_extract_string(shippingData, '$.address.street')                    AS calle,
-        json_extract_string(shippingData, '$.address.number')                    AS altura,
-        json_extract_string(shippingData, '$.address.complement')                AS complemento,
-        json_extract_string(shippingData, '$.address.city')                      AS ciudad,
-        json_extract_string(shippingData, '$.address.state')                     AS provincia,
-        json_extract_string(shippingData, '$.address.postalCode')                AS cp,
-        json_extract_string(shippingData, '$.address.country')                   AS pais,
+        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.street')     ELSE NULL END AS calle,
+        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.number')     ELSE NULL END AS altura,
+        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.complement') ELSE NULL END AS complemento,
+        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.city')       ELSE NULL END AS ciudad,
+        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.state')      ELSE NULL END AS provincia,
+        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.postalCode') ELSE NULL END AS cp,
+        CASE WHEN shippingData LIKE '{%' THEN json_extract_string(shippingData, '$.address.country')    ELSE NULL END AS pais,
         NULL::DOUBLE                                                             AS latitud,
         NULL::DOUBLE                                                             AS longitud,
         'vtex'::VARCHAR                                                          AS fuente
@@ -42,13 +42,13 @@ vtex AS (
 
 garbarino AS (
     SELECT DISTINCT
-        json_extract_string(billing_address, '$.street')                         AS calle,
-        json_extract_string(billing_address, '$.number')                         AS altura,
-        json_extract_string(billing_address, '$.complement')                     AS complemento,
-        json_extract_string(billing_address, '$.city')                           AS ciudad,
-        json_extract_string(billing_address, '$.state')                          AS provincia,
-        json_extract_string(billing_address, '$.zip')                            AS cp,
-        json_extract_string(billing_address, '$.country')                        AS pais,
+        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.street')     ELSE NULL END AS calle,
+        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.number')     ELSE NULL END AS altura,
+        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.complement') ELSE NULL END AS complemento,
+        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.city')       ELSE NULL END AS ciudad,
+        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.state')      ELSE NULL END AS provincia,
+        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.zip')        ELSE NULL END AS cp,
+        CASE WHEN billing_address LIKE '{%' THEN json_extract_string(billing_address, '$.country')    ELSE NULL END AS pais,
         NULL::DOUBLE                                                             AS latitud,
         NULL::DOUBLE                                                             AS longitud,
         'garbarino'::VARCHAR                                                     AS fuente

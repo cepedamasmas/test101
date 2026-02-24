@@ -3,10 +3,11 @@
 -- Fact table central: pedidos unificados de las 3 plataformas.
 -- pedido_id: surrogate key md5(canal|orden_id_origen)
 -- canal_id: obtenido via join a stg_canal
--- direccion_id: FK a stg_direccion (NULL si no hay datos de entrega registrados)
---   MeLi: la dirección está en type_6.receiver_address (join por order_id)
---   VTEX: la dirección está embebida en vtex_pedido.shippingData
---   Garbarino: la dirección está embebida en garbarino_pedido.billing_address
+-- direccion_id: FK a stg_direccion (NULL si address es token anonimizado o no hay datos)
+--   MeLi: la dirección está en type_6.receiver_address (JSON real, join por order_id)
+--   VTEX: embebida en vtex_pedido.shippingData (puede ser token anonimizado)
+--   Garbarino: embebida en garbarino_pedido.billing_address (puede ser token anonimizado)
+-- Guard LIKE '{%': evita json_extract_string en tokens anonimizados.
 -- Dedup: se queda con el registro más reciente por orden_id_origen.
 -- Nota: monto_total de VTEX viene en centavos → se divide por 100.
 
@@ -14,7 +15,7 @@ WITH canal AS (
     SELECT canal_id, canal FROM {{ ref('stg_canal') }}
 ),
 
--- Direcciones MeLi desde type_6, dedup por order_id (versión más reciente)
+-- Direcciones MeLi desde type_6 (JSON real), dedup por order_id
 meli_dir AS (
     SELECT
         order_id::VARCHAR AS orden_id_origen,
@@ -40,13 +41,15 @@ vtex AS (
         TRY_CAST(creationDate AS TIMESTAMP)                                     AS fecha_creacion,
         TRY_CAST(lastChange   AS TIMESTAMP)                                     AS fecha_actualizacion,
         NULL::TIMESTAMP                                                         AS fecha_cierre,
-        md5(
-            coalesce(json_extract_string(shippingData, '$.address.street'),     '') || '|' ||
-            coalesce(json_extract_string(shippingData, '$.address.number'),     '') || '|' ||
-            coalesce(json_extract_string(shippingData, '$.address.city'),       '') || '|' ||
-            coalesce(json_extract_string(shippingData, '$.address.postalCode'), '') || '|' ||
-            coalesce(json_extract_string(shippingData, '$.address.country'),   'AR')
-        )                                                                       AS direccion_id
+        CASE WHEN shippingData LIKE '{%' THEN
+            md5(
+                coalesce(json_extract_string(shippingData, '$.address.street'),     '') || '|' ||
+                coalesce(json_extract_string(shippingData, '$.address.number'),     '') || '|' ||
+                coalesce(json_extract_string(shippingData, '$.address.city'),       '') || '|' ||
+                coalesce(json_extract_string(shippingData, '$.address.postalCode'), '') || '|' ||
+                coalesce(json_extract_string(shippingData, '$.address.country'),   'AR')
+            )
+        ELSE NULL END                                                           AS direccion_id
     FROM {{ source('raw', 'vtex_pedido') }}
     QUALIFY ROW_NUMBER() OVER (PARTITION BY orderId ORDER BY lastChange DESC) = 1
 ),
@@ -61,7 +64,7 @@ meli AS (
         TRY_CAST(date_created  AS TIMESTAMP)                                    AS fecha_creacion,
         TRY_CAST(last_updated  AS TIMESTAMP)                                    AS fecha_actualizacion,
         TRY_CAST(date_closed   AS TIMESTAMP)                                    AS fecha_cierre,
-        NULL::VARCHAR                                                           AS direccion_id  -- se completa via LEFT JOIN con meli_dir
+        NULL::VARCHAR                                                           AS direccion_id  -- se resuelve via LEFT JOIN con meli_dir
     FROM {{ source('raw', 'meli_pedido') }}
     QUALIFY ROW_NUMBER() OVER (PARTITION BY id ORDER BY last_updated DESC) = 1
 ),
@@ -76,13 +79,15 @@ garbarino AS (
         TRY_CAST(created AS TIMESTAMP)                                          AS fecha_creacion,
         NULL::TIMESTAMP                                                         AS fecha_actualizacion,
         NULL::TIMESTAMP                                                         AS fecha_cierre,
-        md5(
-            coalesce(json_extract_string(billing_address, '$.street'),  '') || '|' ||
-            coalesce(json_extract_string(billing_address, '$.number'),  '') || '|' ||
-            coalesce(json_extract_string(billing_address, '$.city'),    '') || '|' ||
-            coalesce(json_extract_string(billing_address, '$.zip'),     '') || '|' ||
-            coalesce(json_extract_string(billing_address, '$.country'), 'AR')
-        )                                                                       AS direccion_id
+        CASE WHEN billing_address LIKE '{%' THEN
+            md5(
+                coalesce(json_extract_string(billing_address, '$.street'),  '') || '|' ||
+                coalesce(json_extract_string(billing_address, '$.number'),  '') || '|' ||
+                coalesce(json_extract_string(billing_address, '$.city'),    '') || '|' ||
+                coalesce(json_extract_string(billing_address, '$.zip'),     '') || '|' ||
+                coalesce(json_extract_string(billing_address, '$.country'), 'AR')
+            )
+        ELSE NULL END                                                           AS direccion_id
     FROM {{ source('raw', 'garbarino_pedido') }}
     QUALIFY ROW_NUMBER() OVER (PARTITION BY id ORDER BY created DESC) = 1
 ),
