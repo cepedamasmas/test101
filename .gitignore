@@ -43,3 +43,4 @@ htmlcov/
 .mypy_cache/
 docs/reporte_estado_proyecto.md
 docs/business-rules_implementacion.md
+docs/consumption-layer.md
