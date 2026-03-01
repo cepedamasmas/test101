@@ -15,8 +15,8 @@ WITH meli_destino AS (
         json_extract_string(receiver_address, '$.state.name')                   AS provincia,
         json_extract_string(receiver_address, '$.country.id')                   AS pais_codigo,
         json_extract_string(receiver_address, '$.zip_code')                     AS codigo_postal,
-        TRY_CAST(json_extract_string(receiver_address, '$.latitude')  AS DOUBLE) AS latitud,
-        TRY_CAST(json_extract_string(receiver_address, '$.longitude') AS DOUBLE) AS longitud
+        NULLIF(TRY_CAST(json_extract_string(receiver_address, '$.latitude')  AS DOUBLE), 0) AS latitud,
+        NULLIF(TRY_CAST(json_extract_string(receiver_address, '$.longitude') AS DOUBLE), 0) AS longitud
     FROM {{ source('raw', 'type_6') }}
     WHERE receiver_address IS NOT NULL
 ),
@@ -27,8 +27,8 @@ meli_origen AS (
         json_extract_string(sender_address, '$.state.name')                     AS provincia,
         json_extract_string(sender_address, '$.country.id')                     AS pais_codigo,
         json_extract_string(sender_address, '$.zip_code')                       AS codigo_postal,
-        TRY_CAST(json_extract_string(sender_address, '$.latitude')  AS DOUBLE)  AS latitud,
-        TRY_CAST(json_extract_string(sender_address, '$.longitude') AS DOUBLE)  AS longitud
+        NULLIF(TRY_CAST(json_extract_string(sender_address, '$.latitude')  AS DOUBLE), 0) AS latitud,
+        NULLIF(TRY_CAST(json_extract_string(sender_address, '$.longitude') AS DOUBLE), 0) AS longitud
     FROM {{ source('raw', 'type_6') }}
     WHERE sender_address IS NOT NULL
 ),
@@ -51,8 +51,8 @@ pickup_tienda AS (
         json_extract_string(store_info, '$.location.address.state')             AS provincia,
         'AR'::VARCHAR                                                           AS pais_codigo,
         json_extract_string(store_info, '$.location.address.zip_code')          AS codigo_postal,
-        TRY_CAST(json_extract_string(store_info, '$.location.latitude')  AS DOUBLE) AS latitud,
-        TRY_CAST(json_extract_string(store_info, '$.location.longitude') AS DOUBLE) AS longitud
+        NULLIF(TRY_CAST(json_extract_string(store_info, '$.location.latitude')  AS DOUBLE), 0) AS latitud,
+        NULLIF(TRY_CAST(json_extract_string(store_info, '$.location.longitude') AS DOUBLE), 0) AS longitud
     FROM {{ source('raw', 'meli_pickup') }}
     WHERE store_info IS NOT NULL
 ),

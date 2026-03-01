@@ -17,8 +17,8 @@ WITH meli AS (
         json_extract_string(receiver_address, '$.state.name')                    AS provincia,
         json_extract_string(receiver_address, '$.zip_code')                      AS cp,
         json_extract_string(receiver_address, '$.country.id')                    AS pais,
-        TRY_CAST(json_extract_string(receiver_address, '$.latitude')  AS DOUBLE) AS latitud,
-        TRY_CAST(json_extract_string(receiver_address, '$.longitude') AS DOUBLE) AS longitud,
+        NULLIF(TRY_CAST(json_extract_string(receiver_address, '$.latitude')  AS DOUBLE), 0) AS latitud,
+        NULLIF(TRY_CAST(json_extract_string(receiver_address, '$.longitude') AS DOUBLE), 0) AS longitud,
         'mercadolibre'::VARCHAR                                                  AS fuente
     FROM {{ source('raw', 'type_6') }}
     WHERE receiver_address IS NOT NULL
