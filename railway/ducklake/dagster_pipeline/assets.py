@@ -111,7 +111,12 @@ def duckdb_catalog(context: AssetExecutionContext) -> MaterializeResult:
 )
 def dbt_techstore_assets(context: AssetExecutionContext, dbt: DbtCliResource):
     """Paso 3: Transforma RAW a staging y consume via dbt."""
-    dbt.cli(["run"]).wait()
+    invocation = dbt.cli(["run"])
+    for event in invocation.stream_raw_events():
+        info = event.raw_event.get("info", {})
+        if info.get("level") in ("error", "warn"):
+            context.log.error(f"dbt | {info.get('name', '')} | {info.get('msg', '')}")
+    invocation.wait()
 
 
 @asset(
