@@ -116,8 +116,26 @@ class PostgresExporter:
             pg_conn.autocommit = False
             with pg_conn.cursor() as cur:
                 if pg_count is not None:
-                    cur.execute(f'TRUNCATE TABLE "{schema}"."{table}"')
-                    action = "update"
+                    # Verificar si el schema cambió (nuevas columnas, etc.)
+                    cur.execute(
+                        "SELECT column_name FROM information_schema.columns "
+                        "WHERE table_schema = %s AND table_name = %s "
+                        "ORDER BY ordinal_position",
+                        (schema, table),
+                    )
+                    pg_cols = [r[0] for r in cur.fetchall()]
+                    duck_cols = [
+                        line.strip().strip(",").strip().split()[0].strip('"')
+                        for line in ddl.splitlines()
+                        if line.strip().startswith('"')
+                    ]
+                    if pg_cols != duck_cols:
+                        cur.execute(f'DROP TABLE "{schema}"."{table}"')
+                        cur.execute(ddl)
+                        action = "recreate"
+                    else:
+                        cur.execute(f'TRUNCATE TABLE "{schema}"."{table}"')
+                        action = "update"
                 else:
                     cur.execute(ddl)
                     action = "create"
