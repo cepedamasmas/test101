@@ -63,6 +63,7 @@ SELECT
     pais_codigo,
     AVG(latitud)                        AS latitud,
     AVG(longitud)                       AS longitud,
+    AVG(latitud)::VARCHAR || ',' || AVG(longitud)::VARCHAR AS geo_point,
     MAX(population)                     AS population,
     COUNT(DISTINCT cliente_id)          AS clientes_unicos,
     COUNT(DISTINCT pedido_id)           AS total_pedidos,
