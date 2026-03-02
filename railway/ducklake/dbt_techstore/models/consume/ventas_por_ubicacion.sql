@@ -17,29 +17,28 @@ WITH ubicacion_principal AS (
     ) = 1
 ),
 
--- Enriquecimiento por ciudad: población + lat/lon geocodificadas como fallback
--- cuando stg_ubicacion_geo no tiene coordenadas (clientes VTEX/Garbarino sin lat/lon en JSON).
-enriquecimiento_ciudad AS (
+-- Población por ciudad desde stg_direccion_geocodificada.
+poblacion_por_ciudad AS (
     SELECT
         LOWER(ciudad)   AS ciudad_key,
-        MAX(population) AS population,
-        AVG(latitud)    AS latitud_geo,
-        AVG(longitud)   AS longitud_geo
+        MAX(population) AS population
     FROM {{ ref('stg_direccion_geocodificada') }}
-    WHERE ciudad IS NOT NULL
+    WHERE population IS NOT NULL
+      AND ciudad IS NOT NULL
     GROUP BY LOWER(ciudad)
 ),
 
--- Resolución de coordenadas antes del GROUP BY para evitar filas duplicadas
--- por distintos ubicacion_id de la misma ciudad con distinto lat/lon.
+-- Resolución antes del GROUP BY: evita filas duplicadas por distintos
+-- ubicacion_id (distintos CP) de la misma ciudad con distinto lat/lon.
+-- Las coordenadas ya vienen enriquecidas desde stg_ubicacion_geo.
 base AS (
     SELECT
         ug.ciudad,
         ug.provincia,
         ug.pais_codigo,
-        COALESCE(ug.latitud,  ec.latitud_geo)  AS latitud,
-        COALESCE(ug.longitud, ec.longitud_geo) AS longitud,
-        ec.population,
+        ug.latitud,
+        ug.longitud,
+        pop.population,
         up.cliente_id,
         cp.pedido_id,
         cp.monto_total
@@ -53,8 +52,8 @@ base AS (
             SELECT 1 FROM {{ ref('stg_item_pedido') }} ip
             WHERE ip.pedido_id = cp.pedido_id
         )
-    LEFT JOIN enriquecimiento_ciudad ec
-        ON LOWER(ug.ciudad) = ec.ciudad_key
+    LEFT JOIN poblacion_por_ciudad pop
+        ON LOWER(ug.ciudad) = pop.ciudad_key
     WHERE ug.ciudad IS NOT NULL
 )
 

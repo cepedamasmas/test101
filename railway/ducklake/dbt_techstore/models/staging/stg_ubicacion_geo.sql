@@ -7,7 +7,9 @@
 --   vtex_pedido shippingData → destinos VTEX (sin lat/lon)
 --   meli_pickup store_info   → tiendas de retiro MeLi (lat/lon disponibles)
 -- ubicacion_id: surrogate key md5(ciudad|codigo_postal|pais_codigo)
--- QUALIFY: si hay duplicados, prioriza el registro que tenga lat/lon.
+-- Coordenadas: lat/lon del JSON cuando disponibles (MeLi/pickup);
+--   fallback a stg_direccion_geocodificada (promedio geocodificado por ciudad).
+--   Fuente canónica de coordenadas para todos los modelos consume.
 
 WITH meli_destino AS (
     SELECT DISTINCT
@@ -62,23 +64,50 @@ unificado AS (
     UNION ALL SELECT * FROM meli_origen
     UNION ALL SELECT * FROM vtex_geo
     UNION ALL SELECT * FROM pickup_tienda
+),
+
+-- Dedup: una fila por (ciudad, codigo_postal, pais_codigo).
+-- Prioriza registros con lat/lon del JSON (MeLi/pickup) sobre los sin coordenadas (VTEX).
+deduped AS (
+    SELECT
+        md5(
+            coalesce(ciudad, '')        || '|' ||
+            coalesce(codigo_postal, '') || '|' ||
+            coalesce(pais_codigo, 'AR')
+        )               AS ubicacion_id,
+        ciudad,
+        provincia,
+        pais_codigo,
+        codigo_postal,
+        latitud,
+        longitud
+    FROM unificado
+    WHERE ciudad IS NOT NULL OR codigo_postal IS NOT NULL
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY ciudad, codigo_postal, pais_codigo
+        ORDER BY latitud NULLS LAST
+    ) = 1
+),
+
+-- Coordenadas geocodificadas por ciudad desde stg_direccion_geocodificada.
+-- Actúa como fallback cuando el JSON no trae lat/lon (VTEX, Garbarino).
+coord_ciudad AS (
+    SELECT
+        LOWER(ciudad)   AS ciudad_key,
+        AVG(latitud)    AS latitud_geo,
+        AVG(longitud)   AS longitud_geo
+    FROM {{ ref('stg_direccion_geocodificada') }}
+    WHERE ciudad IS NOT NULL
+    GROUP BY LOWER(ciudad)
 )
 
 SELECT
-    md5(
-        coalesce(ciudad, '')        || '|' ||
-        coalesce(codigo_postal, '') || '|' ||
-        coalesce(pais_codigo, 'AR')
-    )               AS ubicacion_id,
-    ciudad,
-    provincia,
-    pais_codigo,
-    codigo_postal,
-    latitud,
-    longitud
-FROM unificado
-WHERE ciudad IS NOT NULL OR codigo_postal IS NOT NULL
-QUALIFY ROW_NUMBER() OVER (
-    PARTITION BY ciudad, codigo_postal, pais_codigo
-    ORDER BY latitud NULLS LAST
-) = 1
+    d.ubicacion_id,
+    d.ciudad,
+    d.provincia,
+    d.pais_codigo,
+    d.codigo_postal,
+    COALESCE(d.latitud,  c.latitud_geo)  AS latitud,
+    COALESCE(d.longitud, c.longitud_geo) AS longitud
+FROM deduped d
+LEFT JOIN coord_ciudad c ON LOWER(d.ciudad) = c.ciudad_key
