@@ -77,7 +77,8 @@ deduped AS (
         )               AS ubicacion_id,
         ciudad,
         provincia,
-        pais_codigo,
+        -- Homologar: ISO 3166-1 alpha-3 → alpha-2
+        CASE pais_codigo WHEN 'ARG' THEN 'AR' ELSE pais_codigo END AS pais_codigo,
         codigo_postal,
         latitud,
         longitud

@@ -60,7 +60,7 @@ base AS (
 SELECT
     ciudad,
     provincia,
-    pais_codigo,
+    CASE pais_codigo WHEN 'AR' THEN 'Argentina' ELSE pais_codigo END AS pais,
     AVG(latitud)                        AS latitud,
     AVG(longitud)                       AS longitud,
     AVG(latitud)::VARCHAR || ',' || AVG(longitud)::VARCHAR AS geo_point,
