@@ -105,7 +105,10 @@ coord_ciudad AS (
 SELECT
     d.ubicacion_id,
     d.ciudad,
-    d.provincia,
+    replace(replace(replace(replace(replace(
+        UPPER(d.provincia),
+        'Á', 'A'), 'É', 'E'), 'Í', 'I'), 'Ó', 'O'), 'Ú', 'U')
+                                                             AS provincia,
     d.pais_codigo,
     d.codigo_postal,
     COALESCE(d.latitud,  c.latitud_geo)  AS latitud,
