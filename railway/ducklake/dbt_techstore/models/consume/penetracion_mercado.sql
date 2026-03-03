@@ -45,7 +45,7 @@ percentiles AS (
 SELECT
     b.ciudad,
     b.provincia,
-    b.pais_codigo,
+    b.pais,
     b.latitud,
     b.longitud,
     b.population,
