@@ -34,7 +34,10 @@ poblacion_por_ciudad AS (
 base AS (
     SELECT
         ug.ciudad,
-        ug.provincia,
+        replace(replace(replace(replace(replace(
+            UPPER(ug.provincia),
+            'Á', 'A'), 'É', 'E'), 'Í', 'I'), 'Ó', 'O'), 'Ú', 'U')
+                                                         AS provincia,
         ug.pais_codigo,
         ug.latitud,
         ug.longitud,
