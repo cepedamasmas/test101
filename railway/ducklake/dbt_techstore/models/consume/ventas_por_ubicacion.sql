@@ -33,10 +33,25 @@ poblacion_por_ciudad AS (
 -- Las coordenadas ya vienen enriquecidas desde stg_ubicacion_geo.
 base AS (
     SELECT
-        ug.ciudad,
         replace(replace(replace(replace(replace(
-            UPPER(ug.provincia),
-            'Á', 'A'), 'É', 'E'), 'Í', 'I'), 'Ó', 'O'), 'Ú', 'U')
+        replace(replace(replace(replace(replace(
+        replace(replace(replace(replace(replace(
+        replace(replace(replace(replace(replace(
+            ug.ciudad,
+            '\U00C1','A'),'\U00C9','E'),'\U00CD','I'),'\U00D3','O'),'\U00DA','U'),
+            '\U00E1','a'),'\U00E9','e'),'\U00ED','i'),'\U00F3','o'),'\U00FA','u'),
+            '\u00c1','A'),'\u00c9','E'),'\u00cd','I'),'\u00d3','O'),'\u00da','U'),
+            '\u00e1','a'),'\u00e9','e'),'\u00ed','i'),'\u00f3','o'),'\u00fa','u')
+                                                         AS ciudad,
+        UPPER(replace(replace(replace(replace(replace(
+               replace(replace(replace(replace(replace(
+               replace(replace(replace(replace(replace(
+               replace(replace(replace(replace(replace(
+                   ug.provincia,
+                   '\U00C1','a'),'\U00C9','e'),'\U00CD','i'),'\U00D3','o'),'\U00DA','u'),
+                   '\U00E1','a'),'\U00E9','e'),'\U00ED','i'),'\U00F3','o'),'\U00FA','u'),
+                   '\u00c1','a'),'\u00c9','e'),'\u00cd','i'),'\u00d3','o'),'\u00da','u'),
+                   '\u00e1','a'),'\u00e9','e'),'\u00ed','i'),'\u00f3','o'),'\u00fa','u'))
                                                          AS provincia,
         ug.pais_codigo,
         ug.latitud,
